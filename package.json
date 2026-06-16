@@ -1,0 +1,12 @@
+{
+  "name": "showcase-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "vertice": "npm run dev --workspace=apps/vertice",
+    "build:vertice": "npm run build --workspace=apps/vertice"
+  }
+}

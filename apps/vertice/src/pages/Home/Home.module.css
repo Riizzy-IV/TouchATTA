@@ -1,0 +1,89 @@
+/* ── Cena principal ──────────────────────────────────────────────────────── */
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #071820;
+}
+
+/* ── Vídeo de fundo fullscreen ───────────────────────────────────────────── */
+.hero {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.heroVideo2 {
+  opacity: 0;
+}
+
+/* ── Logo flutuante sobre o vídeo ────────────────────────────────────────── */
+.brand {
+  position: absolute;
+  left: 28%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.logoImg {
+  width: clamp(180px, 22vw, 340px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 2px 20px rgba(0, 0, 0, 0.4));
+}
+
+/* ── Navegação vertical ──────────────────────────────────────────────────── */
+.nav {
+  position: absolute;
+  top: 28%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-left: 14px;
+}
+
+/* ── Logo Zimbel no rodapé ───────────────────────────────────────────────── */
+.footer {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.zimbelLogo {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1;
+}
+
+.zimbelSub {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 7.5px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  color: rgba(255, 255, 255, 0.28);
+  text-transform: uppercase;
+}
+

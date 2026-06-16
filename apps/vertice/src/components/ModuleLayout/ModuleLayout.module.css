@@ -1,0 +1,157 @@
+/* ── Cena do módulo ──────────────────────────────────────────────────────── */
+.scene {
+  position: fixed;
+  inset: 0;
+  background: #071820;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Barra superior ──────────────────────────────────────────────────────── */
+.topBar {
+  flex-shrink: 0;
+  height: 64px;
+  background: linear-gradient(90deg, #071820 0%, #0d3a48 60%, #1a7888 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 20px 0 24px;
+  gap: 0;
+  border-bottom: 1px solid rgba(42, 154, 170, 0.18);
+}
+
+/* ── Branding VÉRTICE ANÁLIA FRANCO ─────────────────────────────────────── */
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  margin-right: 32px;
+  flex-shrink: 0;
+}
+
+.brandName {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.brandSub {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  color: rgba(150, 215, 228, 0.75);
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+/* ── Divisor vertical ────────────────────────────────────────────────────── */
+.divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(42, 154, 170, 0.3);
+  margin-right: 28px;
+  flex-shrink: 0;
+}
+
+/* ── Abas de navegação ───────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 14px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: rgba(130, 200, 215, 0.5);
+  white-space: nowrap;
+  border-radius: 3px;
+  transition: color 0.18s, background 0.18s;
+  position: relative;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background: #2a9aaa;
+  transform: scaleX(0);
+  transition: transform 0.18s ease;
+  border-radius: 1px;
+}
+
+.tab:hover,
+.tab:active {
+  color: rgba(180, 230, 240, 0.85);
+}
+
+.tabActive {
+  color: rgba(220, 245, 250, 0.95);
+}
+
+.tabActive::after {
+  transform: scaleX(1);
+}
+
+/* ── Botão fechar (X) ────────────────────────────────────────────────────── */
+.closeBtn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(42, 154, 170, 0.25);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+.closeBtn:hover,
+.closeBtn:active {
+  background: rgba(26, 120, 136, 0.25);
+  border-color: rgba(42, 154, 170, 0.6);
+}
+
+.closeBtn svg {
+  width: 18px;
+  height: 18px;
+  stroke: rgba(150, 220, 230, 0.85);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.closeBtn:hover svg,
+.closeBtn:active svg {
+  stroke: rgba(200, 245, 250, 1);
+}
+
+/* ── Área de conteúdo ────────────────────────────────────────────────────── */
+.content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}

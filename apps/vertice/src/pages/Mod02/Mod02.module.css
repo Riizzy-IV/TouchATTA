@@ -1,0 +1,645 @@
+/* ── Conveniências — keyframes ───────────────────────────────────────────── */
+@keyframes convPanelIn {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes convItemIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes convCarouselIn {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes convBgVideoIn {
+  from { opacity: 0; }
+  to   { opacity: 0.38; }
+}
+
+/* ── Layout Conveniências ─────────────────────────────────────────────────── */
+.conveniencias {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.convBgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  animation: convBgVideoIn 1s ease 0.1s forwards;
+}
+
+.conveniencias > *:not(.convBgVideo) {
+  position: relative;
+  z-index: 1;
+}
+
+.infoPanel {
+  flex-shrink: 0;
+  width: 280px;
+  padding: 40px 32px 40px 36px;
+  background: linear-gradient(160deg, #071820 0%, #0d3a48 60%, #134858 100%);
+  border-right: 1px solid rgba(42, 154, 170, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  animation: convPanelIn 0.6s ease 0.2s forwards;
+}
+
+.sectionTitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: convItemIn 0.5s ease 0.5s forwards;
+}
+
+.sectionDesc {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgba(150, 215, 228, 0.75);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: convItemIn 0.5s ease 0.65s forwards;
+}
+
+.highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.highlights li {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(100, 190, 210, 0.75);
+  padding-left: 14px;
+  position: relative;
+  opacity: 0;
+  animation: convItemIn 0.4s ease forwards;
+}
+
+.highlights li:nth-child(1) { animation-delay: 0.80s; }
+.highlights li:nth-child(2) { animation-delay: 0.92s; }
+.highlights li:nth-child(3) { animation-delay: 1.04s; }
+.highlights li:nth-child(4) { animation-delay: 1.16s; }
+.highlights li:nth-child(5) { animation-delay: 1.28s; }
+
+.highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #2a9aaa;
+}
+
+.carouselArea {
+  flex: 1;
+  position: relative;
+  background: transparent;
+  opacity: 0;
+  animation: convCarouselIn 0.7s ease 0.4s forwards;
+}
+
+/* ── Mapa ────────────────────────────────────────────────────────────────── */
+.mapaWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mapaFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  filter: saturate(0.7) brightness(0.85);
+}
+
+/* escurece só os tiles, sem afetar o pin */
+.mapaWrapper :global(.leaflet-tile-pane) {
+  filter: saturate(0.6) brightness(0.75);
+}
+
+.mapaPin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.mapaPinDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #2a9aaa;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 4px rgba(42, 154, 170, 0.3);
+}
+
+.mapaPinLabel {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+  background: rgba(7, 24, 32, 0.85);
+  border: 1px solid rgba(42, 154, 170, 0.4);
+  border-radius: 3px;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.mapaDistances {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.mapaDistItem {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(42, 154, 170, 0.9);
+  background: rgba(7, 24, 32, 0.75);
+  border: 1px solid rgba(42, 154, 170, 0.25);
+  border-radius: 3px;
+  padding: 4px 10px;
+}
+
+/* ── Pin logo customizado ────────────────────────────────────────────────── */
+.logoPin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoPinBox {
+  background: rgba(7, 24, 32, 0.93);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.logoPinImg {
+  width: 90px;
+  height: auto;
+  display: block;
+}
+
+.logoPinArrow {
+  width: 0;
+  height: 0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-top: 11px solid rgba(7, 24, 32, 0.93);
+}
+
+.logoPinDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  margin-top: 3px;
+  box-shadow: 0 0 0 3px rgba(7, 24, 32, 0.6);
+}
+
+/* ── Localização 360° ────────────────────────────────────────────────────── */
+.loc360Wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.loc360Frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.loc360Overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 24px;
+  background: linear-gradient(transparent, rgba(7, 24, 32, 0.7));
+  pointer-events: none;
+  z-index: 10;
+}
+
+.loc360Label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes loc360Spin {
+  to { transform: rotate(360deg); }
+}
+
+.loc360Preload {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: #071820;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.loc360PreloadOut {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loc360Spinner {
+  width: 52px;
+  height: 52px;
+  border: 4px solid rgba(92, 200, 216, 0.2);
+  border-top-color: #5cc8d8;
+  border-radius: 50%;
+  animation: loc360Spin 0.9s linear infinite;
+}
+
+.loc360PreloadLabel {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: rgba(92, 200, 216, 0.8);
+}
+
+/* ── Guia do Bairro — keyframes ──────────────────────────────────────────── */
+@keyframes guiaFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes guiaBrandEnter {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes guiaTabEnter {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Guia do Bairro ──────────────────────────────────────────────────────── */
+.guiaWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background: transparent;
+  overflow: hidden;
+}
+
+.guiaBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
+  animation: guiaFadeIn 0.8s ease forwards;
+}
+
+.guiaBgOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 14, 20, 0.55);
+  z-index: 1;
+  pointer-events: none;
+  animation: guiaFadeIn 0.8s ease forwards;
+}
+
+/* ── Painel da marca — overlay superior esquerdo ────────────────────────── */
+.guiaBrand {
+  position: absolute;
+  top: 28px;
+  left: 36px;
+  width: 200px;
+  z-index: 3;
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+  background: transparent;
+  opacity: 0;
+  animation: guiaBrandEnter 0.6s ease 0.2s forwards;
+}
+
+.guiaBrandBox {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.guiaBrandName {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1;
+}
+
+.guiaBrandSub {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 8.5px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  color: rgba(42, 154, 170, 0.8);
+  text-transform: uppercase;
+}
+
+.guiaBrandTag {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Área de colunas ─────────────────────────────────────────────────────── */
+.guiaCols {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  z-index: 2;
+  gap: 3px;
+  background: rgba(4, 9, 14, 0.3);
+}
+
+/* ── Coluna individual ───────────────────────────────────────────────────── */
+.guiaCol {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ── Painel expansível — sobe de baixo ──────────────────────────────────── */
+.guiaPanel {
+  position: absolute;
+  bottom: 90px;
+  left: 0;
+  right: 0;
+  height: 62%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(4, 16, 24, 0.88);
+  border-top: 1px solid rgba(42, 154, 170, 0.18);
+  transform: translateY(110%);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.guiaPanelOpen {
+  transform: translateY(0);
+}
+
+/* ── Cabeçalho do painel ─────────────────────────────────────────────────── */
+.guiaPanelHead {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 12px 12px;
+  border-bottom: 1px solid rgba(42, 154, 170, 0.12);
+  gap: 6px;
+}
+
+.guiaPanelTitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: rgba(42, 154, 170, 0.9);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ── Lista do painel ─────────────────────────────────────────────────────── */
+.guiaPanelList {
+  flex: 1;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(42, 154, 170, 0.15) transparent;
+}
+
+.guiaPanelItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 7px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.12s;
+}
+
+.guiaPanelItem:hover {
+  background: rgba(42, 154, 170, 0.06);
+}
+
+.guiaPanelItemName {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: rgba(190, 225, 235, 0.75);
+  line-height: 1.35;
+  flex: 1;
+}
+
+.guiaPanelCarIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.guiaPanelItemMin {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(42, 154, 170, 0.8);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.guiaPanelItemMin small {
+  font-size: 8.5px;
+  font-weight: 400;
+  color: rgba(42, 154, 170, 0.55);
+  margin-left: 1px;
+}
+
+/* ── Aba fixa na base ────────────────────────────────────────────────────── */
+.guiaTab {
+  flex-shrink: 0;
+  height: 90px;
+  width: 100%;
+  border: none;
+  border-top: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px 10px;
+  background: #1e8fa8;
+  filter: brightness(0.72);
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+  overflow: hidden;
+  transition: background 0.2s, border-color 0.2s, filter 0.2s;
+}
+
+.guiaTab:hover {
+  background: #1e8fa8;
+  filter: brightness(0.88);
+}
+
+.guiaTabActive {
+  background: #1e8fa8;
+  border-top-color: rgba(200, 245, 255, 0.9);
+  filter: brightness(1);
+}
+
+.guiaTabLabel {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  line-height: 1.4;
+  transition: color 0.2s;
+}
+
+.guiaTab:hover .guiaTabLabel {
+  color: #fff;
+}
+
+.guiaTabActive .guiaTabLabel {
+  color: #fff;
+}
+
+.lottieIcon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+/* ── Stagger de entrada das abas ─────────────────────────────────────────── */
+.guiaCol:nth-child(1) .guiaTab { opacity: 0; animation: guiaTabEnter 0.45s ease 0.4s  forwards; }
+.guiaCol:nth-child(2) .guiaTab { opacity: 0; animation: guiaTabEnter 0.45s ease 0.56s forwards; }
+.guiaCol:nth-child(3) .guiaTab { opacity: 0; animation: guiaTabEnter 0.45s ease 0.72s forwards; }
+.guiaCol:nth-child(4) .guiaTab { opacity: 0; animation: guiaTabEnter 0.45s ease 0.88s forwards; }
+.guiaCol:nth-child(5) .guiaTab { opacity: 0; animation: guiaTabEnter 0.45s ease 1.04s forwards; }
+.guiaCol:nth-child(6) .guiaTab { opacity: 0; animation: guiaTabEnter 0.45s ease 1.20s forwards; }
+
+/* ── Placeholder ─────────────────────────────────────────────────────────── */
+.placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.placeholderLabel {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(100, 190, 210, 0.55);
+}
+
+.placeholder small {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(80, 150, 165, 0.4);
+  letter-spacing: 1px;
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@showcase/core",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./index.js",
+  "peerDependencies": {
+    "react": ">=18",
+    "react-router-dom": ">=6",
+    "gsap": ">=3"
+  }
+}

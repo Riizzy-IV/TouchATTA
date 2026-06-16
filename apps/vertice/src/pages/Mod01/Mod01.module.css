@@ -1,0 +1,520 @@
+/* ── Page ─────────────────────────────────────────────────────────────────── */
+.page {
+  position: fixed;
+  inset: 0;
+  background: #071820;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.header {
+  flex-shrink: 0;
+  height: 52px;
+  background: #050f14;
+  border-bottom: 1px solid rgba(42, 154, 170, 0.15);
+  display: flex;
+  align-items: center;
+  padding: 0 20px 0 24px;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brandName {
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1;
+}
+
+.brandSub {
+  font-size: 6.5px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: rgba(100, 190, 210, 0.6);
+  text-transform: uppercase;
+}
+
+.badge {
+  background: rgba(42, 154, 170, 0.18);
+  border: 1px solid rgba(42, 154, 170, 0.35);
+  clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 100%, 0% 100%);
+  padding: 7px 28px 7px 22px;
+}
+
+.badgeText {
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 2.5px;
+  color: rgba(150, 220, 230, 0.9);
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+.closeBtn {
+  margin-left: auto;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: 1px solid rgba(42, 154, 170, 0.25);
+  color: rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+.closeBtn:hover {
+  background: rgba(42, 154, 170, 0.12);
+  border-color: rgba(42, 154, 170, 0.5);
+  color: #fff;
+}
+
+/* ── Main layout ──────────────────────────────────────────────────────────── */
+.main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ── Left panel ───────────────────────────────────────────────────────────── */
+.leftPanel {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.bgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(7, 24, 32, 0.25) 0%,
+    rgba(7, 24, 32, 0.55) 70%,
+    rgba(5, 15, 20, 0.85) 100%
+  );
+}
+
+.bgCaption {
+  position: absolute;
+  bottom: 36px;
+  left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bgCaptionTitle {
+  font-size: 28px;
+  font-weight: 200;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1;
+}
+
+.bgCaptionSub {
+  font-size: 9.5px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: rgba(100, 210, 220, 0.65);
+  text-transform: lowercase;
+}
+
+/* ── Right panel ──────────────────────────────────────────────────────────── */
+.rightPanel {
+  width: clamp(360px, 38%, 460px);
+  flex-shrink: 0;
+  background: #050f14;
+  border-left: 1px solid rgba(42, 154, 170, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────────────────── */
+.tabs {
+  flex-shrink: 0;
+  display: flex;
+  border-bottom: 1px solid rgba(42, 154, 170, 0.1);
+}
+
+.tab {
+  flex: 1;
+  height: 46px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: rgba(100, 170, 190, 0.4);
+  cursor: pointer;
+  transition: color 0.18s, border-color 0.18s;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.tab:hover {
+  color: rgba(150, 210, 230, 0.75);
+}
+
+.tabActive {
+  color: rgba(42, 154, 170, 1);
+  border-bottom-color: rgba(42, 154, 170, 0.9);
+}
+
+/* ── Content ──────────────────────────────────────────────────────────────── */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 30px 36px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(42, 154, 170, 0.18) transparent;
+}
+
+/* ── Section ──────────────────────────────────────────────────────────────── */
+.section {
+  margin-bottom: 28px;
+}
+
+.sectionTitle {
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: rgba(42, 154, 170, 0.65);
+  text-transform: uppercase;
+  margin: 0 0 14px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(42, 154, 170, 0.1);
+}
+
+/* ── Row ──────────────────────────────────────────────────────────────────── */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 14px;
+}
+
+.label {
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: rgba(100, 190, 210, 0.4);
+  text-transform: uppercase;
+}
+
+.value {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.82);
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+
+/* ── Stats grid ───────────────────────────────────────────────────────────── */
+.statsGrid {
+  display: flex;
+  gap: 0;
+  margin-bottom: 18px;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 8px 12px;
+  border: 1px solid rgba(42, 154, 170, 0.14);
+  border-right: none;
+  background: rgba(42, 154, 170, 0.04);
+}
+
+.stat:last-child {
+  border-right: 1px solid rgba(42, 154, 170, 0.14);
+}
+
+.statNum {
+  font-size: 30px;
+  font-weight: 200;
+  color: rgba(42, 154, 170, 0.9);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 7.5px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.38);
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+/* ── Floor blocks ─────────────────────────────────────────────────────────── */
+.floorBlock {
+  margin-bottom: 16px;
+}
+
+.floorLabel {
+  display: block;
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(42, 154, 170, 0.6);
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.floorList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.floorItem {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.62);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.floorItem::before {
+  content: '·';
+  position: absolute;
+  left: 4px;
+  color: rgba(42, 154, 170, 0.45);
+}
+
+/* ── Unidades ─────────────────────────────────────────────────────────────── */
+.unidadesNote {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: rgba(100, 190, 210, 0.4);
+  text-transform: uppercase;
+  margin: 0 0 18px 0;
+}
+
+.unidades {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.unitCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px 10px 10px;
+  background: rgba(42, 154, 170, 0.04);
+  border: 1px solid rgba(42, 154, 170, 0.1);
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  text-align: left;
+  width: 100%;
+}
+
+.unitCard:hover {
+  border-color: rgba(42, 154, 170, 0.28);
+  background: rgba(42, 154, 170, 0.08);
+}
+
+.unitImg {
+  width: 100px;
+  height: 72px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #071820;
+  display: block;
+}
+
+.unitInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.unitLabel {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.unitArea {
+  font-size: 22px;
+  font-weight: 200;
+  color: rgba(42, 154, 170, 0.9);
+  line-height: 1.1;
+}
+
+.unitArea em {
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(42, 154, 170, 0.6);
+}
+
+.unitHint {
+  font-size: 8.5px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: rgba(42, 154, 170, 0.4);
+  margin-top: 2px;
+  transition: color 0.15s;
+}
+
+.unitCard:hover .unitHint {
+  color: rgba(42, 154, 170, 0.75);
+}
+
+/* ── Lazer ────────────────────────────────────────────────────────────────── */
+.lazerHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(42, 154, 170, 0.1);
+}
+
+.lazerCount {
+  font-size: 42px;
+  font-weight: 200;
+  color: rgba(42, 154, 170, 0.85);
+  line-height: 1;
+}
+
+.lazerCountLabel {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+}
+
+.lazerList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lazerItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(42, 154, 170, 0.07);
+}
+
+.lazerNum {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgba(42, 154, 170, 0.35);
+  font-variant-numeric: tabular-nums;
+  min-width: 22px;
+}
+
+.lazerName {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.3px;
+}
+
+/* ── Lightbox ─────────────────────────────────────────────────────────────── */
+.lightboxOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 15, 20, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(4px);
+}
+
+.lightboxInner {
+  background: #050f14;
+  border: 1px solid rgba(42, 154, 170, 0.2);
+  max-width: 90vw;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.lightboxHeader {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(42, 154, 170, 0.12);
+}
+
+.lightboxTitle {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.lightboxArea {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(42, 154, 170, 0.85);
+  margin-left: 4px;
+}
+
+.lightboxClose {
+  margin-left: auto;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: 1px solid rgba(42, 154, 170, 0.2);
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+}
+
+.lightboxClose:hover {
+  background: rgba(42, 154, 170, 0.12);
+  color: #fff;
+}
+
+.lightboxImg {
+  max-height: calc(88vh - 52px);
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}

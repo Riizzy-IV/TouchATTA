@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m ' *)",
+      "Bash(vercel --prod)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\win\\Desktop\\SHOW CASE TESTE\\showcase\\public\\img\\solar"
+    ]
+  }
+}

@@ -1,0 +1,100 @@
+.btn {
+  display: flex;
+  align-items: stretch;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: not-allowed;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideIn 0.4s ease forwards;
+  transition: transform 0.18s ease, filter 0.18s ease;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.55);
+  width: auto;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.btn.active { cursor: pointer; }
+
+.btn.active:hover,
+.btn.active:active {
+  transform: translateX(6px);
+  filter: brightness(1.12);
+}
+
+/* ── Painel esquerdo — ícone ─────────────────────────────────────────────── */
+.iconWrap {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  background: #0c1b2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.iconWrap svg {
+  width: 30px;
+  height: 30px;
+  stroke: #5cc8d8;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  position: relative;
+  z-index: 1;
+}
+
+/* Anéis pulsantes */
+.ring {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(92, 200, 216, 0.22);
+  animation: pulse 2.8s infinite ease;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(0.2); opacity: 1; }
+  40%  { transform: scale(2);   opacity: 0; }
+  100% { transform: scale(2);   opacity: 0; }
+}
+
+/* ── Painel direito — label ──────────────────────────────────────────────── */
+.label {
+  background: #c4a870;
+  color: #0c1b2e;
+  writing-mode: vertical-rl;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-transform: uppercase;
+  padding: 0 6px;
+  width: 30px;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  transition: background 0.18s;
+}
+
+.btn.active:hover .label,
+.btn.active:active .label {
+  background: #d4b880;
+}

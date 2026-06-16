@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Setorização — Especificação Visual</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0a0f14;
+    color: #ccc;
+    padding: 40px;
+    line-height: 1.6;
+  }
+  h1 { color: #2a9aaa; font-size: 20px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; }
+  h2 { color: #7dd4dc; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin: 32px 0 12px; border-bottom: 1px solid rgba(42,154,170,0.2); padding-bottom: 8px; }
+  p  { font-size: 13px; color: rgba(200,220,225,0.7); margin-bottom: 8px; }
+  .sub { color: rgba(42,154,170,0.6); font-size: 11px; letter-spacing: 1px; margin-bottom: 24px; }
+  .note { background: rgba(42,154,170,0.08); border-left: 3px solid rgba(42,154,170,0.4); padding: 10px 14px; font-size: 12px; color: rgba(180,230,235,0.75); margin: 12px 0; }
+  .asset-needed { background: rgba(255,180,60,0.08); border-left: 3px solid rgba(255,180,60,0.4); padding: 10px 14px; font-size: 12px; color: rgba(255,210,120,0.85); margin: 12px 0; }
+
+  /* ── Mockup ── */
+  .mockup-wrap { margin: 24px 0 40px; }
+  .mockup-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(42,154,170,0.5); margin-bottom: 8px; }
+
+  .screen {
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 16/9;
+    background: #071820;
+    border: 1px solid rgba(42,154,170,0.2);
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* coluna esquerda — render do edifício */
+  .col-building {
+    width: 42%;
+    height: 100%;
+    background: #0d2530;
+    border-right: 1px solid rgba(42,154,170,0.1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .building-placeholder {
+    width: 55%;
+    height: 70%;
+    background: linear-gradient(160deg, #1a4050 0%, #0d2a38 60%, #071820 100%);
+    border: 1px dashed rgba(42,154,170,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(42,154,170,0.4);
+    text-align: center;
+    padding: 12px;
+  }
+  .callout-line {
+    position: absolute;
+    right: 0;
+    top: 38%;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25) 40%, rgba(255,255,255,0.5));
+  }
+  .zoom-btn {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.4);
+    color: rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  /* coluna centro — lista de zonas */
+  .col-zones {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px 12px;
+    gap: 5px;
+  }
+  .zone-row {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 8px 14px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(200,225,230,0.65);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .zone-row.active {
+    background: rgba(42,154,170,0.15);
+    border-color: rgba(42,154,170,0.35);
+    color: rgba(150,230,240,0.95);
+  }
+  .zone-row.active::before {
+    content: '▸ ';
+    color: rgba(42,154,170,0.8);
+  }
+
+  /* coluna direita — nav lateral */
+  .col-nav {
+    width: 52px;
+    height: 100%;
+    background: #050f14;
+    border-left: 1px solid rgba(42,154,170,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  .nav-tab {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(42,154,170,0.08);
+    cursor: pointer;
+    position: relative;
+  }
+  .nav-tab.active {
+    background: rgba(42,154,170,0.12);
+    border-left: 2px solid rgba(42,154,170,0.6);
+  }
+  .nav-tab span {
+    font-size: 7px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(100,190,210,0.6);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+  }
+  .nav-tab.active span { color: rgba(42,154,170,1); }
+  .nav-icon {
+    width: 14px;
+    height: 14px;
+    opacity: 0.45;
+    margin-top: 2px;
+  }
+
+  /* diagrama de pavimentos */
+  .pav-diagram {
+    position: absolute;
+    bottom: 10px;
+    right: 58px;
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    font-size: 7px;
+    color: rgba(150,215,228,0.5);
+    letter-spacing: 0.5px;
+  }
+  .pav-label { margin-bottom: 4px; text-align: center; font-size: 6px; letter-spacing: 1px; }
+  .pav-block {
+    width: 28px;
+    height: 6px;
+    background: rgba(42,154,170,0.15);
+    border: 1px solid rgba(42,154,170,0.25);
+    margin: 1px 0;
+  }
+  .pav-block.active { background: rgba(42,154,170,0.45); border-color: rgba(42,154,170,0.6); }
+
+  /* ── Estado 2: zona selecionada ── */
+  .screen2 .col-building { background: #0d2530; }
+  .building-highlight {
+    position: absolute;
+    top: 22%;
+    left: 28%;
+    width: 30%;
+    height: 28%;
+    background: rgba(42,154,170,0.18);
+    border: 1px solid rgba(42,154,170,0.5);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(42,154,170,0.3); }
+    50%      { box-shadow: 0 0 0 6px rgba(42,154,170,0); }
+  }
+
+  /* ── Tabela de assets ── */
+  table { width: 100%; max-width: 700px; border-collapse: collapse; margin: 16px 0; font-size: 12px; }
+  th { background: rgba(42,154,170,0.12); color: rgba(150,230,240,0.9); padding: 8px 12px; text-align: left; letter-spacing: 1px; font-size: 11px; }
+  td { padding: 8px 12px; border-bottom: 1px solid rgba(42,154,170,0.08); color: rgba(200,220,225,0.7); }
+  td.req { color: rgba(255,200,80,0.8); }
+  td.opt { color: rgba(130,200,130,0.7); }
+</style>
+</head>
+<body>
+
+<h1>Setorização — Especificação Visual</h1>
+<p class="sub">Vértice Anália Franco · Módulo PROJETO · Aba SETORIZAÇÃO</p>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<h2>1. Estado padrão — nenhuma zona selecionada</h2>
+<p>Render do edifício à esquerda, lista de zonas ao centro, navegação à direita.</p>
+
+<div class="mockup-wrap">
+  <div class="mockup-label">Mockup — visão geral</div>
+  <div class="screen">
+
+    <!-- edifício -->
+    <div class="col-building">
+      <div class="building-placeholder">RENDER<br>DO EDIFÍCIO<br>(asset necessário)</div>
+      <div class="callout-line"></div>
+      <div class="zoom-btn">+</div>
+    </div>
+
+    <!-- zonas -->
+    <div class="col-zones">
+      <div class="zone-row active">Unidades Residenciais</div>
+      <div class="zone-row">Lazer Residencial</div>
+      <div class="zone-row">Studios</div>
+      <div class="zone-row">Lazer Studios</div>
+      <div class="zone-row">Acesso e Lobby</div>
+      <div class="zone-row">Área Comercial</div>
+      <div class="zone-row">Estacionamento</div>
+    </div>
+
+    <!-- nav -->
+    <div class="col-nav">
+      <div class="nav-tab"><span>Ficha Técnica</span></div>
+      <div class="nav-tab active"><span>Setorização</span></div>
+      <div class="nav-tab"><span>Implantação</span></div>
+      <div class="nav-tab"><span>Orientação Solar</span></div>
+      <div class="nav-tab"><span>Diferenciais</span></div>
+    </div>
+
+    <!-- pavimentos -->
+    <div class="pav-diagram">
+      <div class="pav-label">7° AO<br>26° PAV.</div>
+      <div class="pav-block active"></div>
+      <div class="pav-block active"></div>
+      <div class="pav-block active"></div>
+      <div class="pav-block"></div>
+      <div class="pav-block"></div>
+      <div class="pav-block"></div>
+      <div class="pav-block"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<h2>2. Estado ativo — zona clicada</h2>
+<p>Ao clicar numa zona: a área correspondente no edifício acende (highlight), uma linha conecta o edifício à row selecionada, e o diagrama de pavimentos indica quais andares pertencem à zona.</p>
+
+<div class="mockup-wrap">
+  <div class="mockup-label">Mockup — zona "Unidades Residenciais" selecionada</div>
+  <div class="screen screen2">
+
+    <div class="col-building">
+      <div class="building-placeholder">RENDER<br>DO EDIFÍCIO</div>
+      <div class="building-highlight"></div>
+      <div class="callout-line"></div>
+      <div class="zoom-btn">+</div>
+    </div>
+
+    <div class="col-zones">
+      <div class="zone-row active">Unidades Residenciais</div>
+      <div class="zone-row">Lazer Residencial</div>
+      <div class="zone-row">Studios</div>
+      <div class="zone-row">Lazer Studios</div>
+      <div class="zone-row">Acesso e Lobby</div>
+      <div class="zone-row">Área Comercial</div>
+      <div class="zone-row">Estacionamento</div>
+    </div>
+
+    <div class="col-nav">
+      <div class="nav-tab"><span>Ficha Técnica</span></div>
+      <div class="nav-tab active"><span>Setorização</span></div>
+      <div class="nav-tab"><span>Implantação</span></div>
+      <div class="nav-tab"><span>Orientação Solar</span></div>
+      <div class="nav-tab"><span>Diferenciais</span></div>
+    </div>
+
+    <div class="pav-diagram">
+      <div class="pav-label">7° AO<br>26° PAV.</div>
+      <div class="pav-block active"></div>
+      <div class="pav-block active"></div>
+      <div class="pav-block active"></div>
+      <div class="pav-block active"></div>
+      <div class="pav-block active"></div>
+      <div class="pav-block"></div>
+      <div class="pav-block"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<h2>3. Interações</h2>
+<table>
+  <tr><th>Ação</th><th>Resultado</th></tr>
+  <tr><td>Clicar numa zona da lista</td><td>Área no render acende com highlight · linha conecta ao edifício · diagrama de pavimentos atualiza</td></tr>
+  <tr><td>Hover numa zona</td><td>Row ilumina suavemente (preview)</td></tr>
+  <tr><td>Botão "+"</td><td>Zoom no render do edifício (opcional)</td></tr>
+  <tr><td>Clicar em zona já ativa</td><td>Desseleciona, volta ao estado neutro</td></tr>
+</table>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<h2>4. Assets necessários — pedir ao escritório 3D</h2>
+
+<div class="asset-needed">⚠ Esses arquivos precisam vir do escritório antes de implementar</div>
+
+<table>
+  <tr><th>Asset</th><th>Formato ideal</th><th>Obrigatório?</th></tr>
+  <tr>
+    <td>Render frontal do edifício (sem destaque)</td>
+    <td>JPG/PNG — fundo transparente ou escuro</td>
+    <td class="req">Obrigatório</td>
+  </tr>
+  <tr>
+    <td>Render por zona destacada (1 imagem por zona)</td>
+    <td>JPG/PNG — mesma pose, área iluminada/colorida</td>
+    <td class="req">Obrigatório (abordagem mais fiel)</td>
+  </tr>
+  <tr>
+    <td><em>OU</em> SVG com áreas mapeadas sobre o render</td>
+    <td>SVG com polígonos por zona (overlay)</td>
+    <td class="opt">Alternativa ao item acima</td>
+  </tr>
+  <tr>
+    <td>Lista de zonas com nome, pavimentos e descrição</td>
+    <td>Planilha ou documento de texto</td>
+    <td class="req">Obrigatório</td>
+  </tr>
+  <tr>
+    <td>Diagrama de corte/pavimentos</td>
+    <td>PNG/SVG — esquema vertical do edifício</td>
+    <td class="opt">Opcional</td>
+  </tr>
+</table>
+
+<div class="note">
+  💡 <strong>Abordagem recomendada para o escritório:</strong><br>
+  Peça N renders do mesmo ângulo frontal do edifício — um neutro (base) e um por zona, onde cada zona aparece iluminada/destacada com uma cor distinta (ex: teal para residencial, laranja para comercial). Isso permite trocar a imagem ao clicar na lista, sem SVG complexo.
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<h2>5. Estrutura de dados esperada</h2>
+<pre style="background:#060d12;border:1px solid rgba(42,154,170,0.2);padding:16px;font-size:12px;color:#7dd4dc;overflow-x:auto">
+const ZONAS = [
+  {
+    id: 'residencial',
+    label: 'UNIDADES RESIDENCIAIS',
+    pavimentos: '7° ao 26° pav.',
+    imgDestaque: '/img/setor/destaque_residencial.jpg',
+  },
+  {
+    id: 'lazer-res',
+    label: 'LAZER RESIDENCIAL',
+    pavimentos: '4° pav.',
+    imgDestaque: '/img/setor/destaque_lazer_res.jpg',
+  },
+  // ... demais zonas
+];
+</pre>
+
+</body>
+</html>

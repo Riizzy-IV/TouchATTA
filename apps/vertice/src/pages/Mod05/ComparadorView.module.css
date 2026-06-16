@@ -1,0 +1,241 @@
+.root {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #040e15;
+  overflow: hidden;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* ── Canvas ──────────────────────────────────────────────────────────────── */
+.canvas {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 60% 40%, rgba(10, 40, 55, 0.8) 0%, #040e15 70%);
+}
+
+.emptyHint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: rgba(42, 154, 170, 0.18);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.8;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Instructions ────────────────────────────────────────────────────────── */
+.instructions {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.instrItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.instrIcon {
+  width: 40px;
+  height: 40px;
+  opacity: 0.7;
+}
+
+.instrText {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(42, 154, 170, 0.55);
+  text-align: center;
+  text-transform: uppercase;
+  max-width: 72px;
+  line-height: 1.4;
+}
+
+/* ── Canvas card ─────────────────────────────────────────────────────────── */
+.canvasCard {
+  position: absolute;
+  width: 240px;
+  background: transparent;
+  border-radius: 4px;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  z-index: 10;
+}
+
+.canvasCardImg {
+  width: 100%;
+  display: block;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.canvasCardLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  background: rgba(4, 14, 20, 0.82);
+  border-top: 1px solid rgba(42, 154, 170, 0.2);
+  border-radius: 0 0 4px 4px;
+}
+
+.canvasCardName {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #0a2a35;
+  text-transform: uppercase;
+}
+
+.canvasCardArea {
+  font-size: 9px;
+  font-weight: 600;
+  color: #2a9aaa;
+}
+
+/* ── Ghost card (drag from dock) ─────────────────────────────────────────── */
+.ghostCard {
+  position: fixed;
+  width: 240px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.75;
+  transform: scale(0.9);
+  transform-origin: top left;
+  border-radius: 4px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Dock ────────────────────────────────────────────────────────────────── */
+.dock {
+  height: 150px;
+  flex-shrink: 0;
+  background: rgba(3, 10, 15, 0.97);
+  border-top: 1px solid rgba(42, 154, 170, 0.12);
+  display: flex;
+  align-items: stretch;
+}
+
+.dockScroll {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  padding: 0 20px;
+}
+
+.dockScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.dockGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.dockGroupLabel {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(42, 154, 170, 0.4);
+  text-transform: uppercase;
+  padding: 0 10px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.separator {
+  width: 1px;
+  height: 90px;
+  background: rgba(42, 154, 170, 0.12);
+  margin: 0 10px;
+  flex-shrink: 0;
+}
+
+.dockCard {
+  flex-shrink: 0;
+  width: 86px;
+  height: 118px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  cursor: pointer;
+  border: 1px solid rgba(42, 154, 170, 0.1);
+  border-radius: 4px;
+  background: rgba(8, 24, 34, 0.9);
+  overflow: hidden;
+  transition: border-color 0.15s, background 0.15s, opacity 0.2s;
+  position: relative;
+}
+
+.dockCard:hover {
+  border-color: rgba(42, 154, 170, 0.45);
+  background: rgba(12, 36, 50, 1);
+}
+
+.dockCardActive {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+  border-style: dashed;
+}
+
+.dockCardImg {
+  flex: 1;
+  width: 100%;
+  object-fit: contain;
+  padding: 6px 5px 2px;
+  display: block;
+  background: transparent;
+}
+
+.dockCardInfo {
+  padding: 4px 6px 5px;
+  background: rgba(3, 10, 15, 0.85);
+  text-align: center;
+  border-top: 1px solid rgba(42, 154, 170, 0.08);
+}
+
+.dockCardName {
+  display: block;
+  font-size: 6.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(180, 220, 230, 0.75);
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.dockCardArea {
+  display: block;
+  font-size: 7px;
+  font-weight: 600;
+  color: rgba(42, 154, 170, 0.85);
+  margin-top: 1px;
+}
