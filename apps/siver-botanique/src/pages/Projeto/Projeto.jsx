@@ -118,7 +118,7 @@ const TOP_TABS = [
 ];
 
 export default function Projeto() {
-  const { closeModule } = useTransition();
+  const { closeModule, startTransition } = useTransition();
   const [activeTopTab, setActiveTopTab] = useState('ficha-tecnica');
   const [activeTab, setActiveTab] = useState('empreendimento');
   const { drawerRef, open: openDrawer, close: closeDrawer } = useNavDrawer();
@@ -151,7 +151,7 @@ export default function Projeto() {
 
       {/* ── Top bar ── */}
       <header className={styles.topBar}>
-        <img src="/img/logo.png" className={styles.logoSmall} draggable={false} />
+        <img src="/img/logo.png" className={styles.logoSmall} draggable={false} onClick={() => startTransition('/', '')} style={{ cursor: 'pointer' }} />
         <nav className={styles.topTabs}>
           {TOP_TABS.map(t => (
             <button
@@ -173,9 +173,9 @@ export default function Projeto() {
       {/* ── Área abaixo do menu ── */}
       <div className={styles.body}>
 
-        <div className={styles.bgImage} />
-
         {activeTopTab === 'ficha-tecnica' ? (
+          <>
+          <div className={styles.bgImage} />
           <div className={styles.panel} ref={panelRef}>
             <img src="/videos/05 Guidance.gif" className={styles.lottieCorner} draggable={false} />
             <div className={styles.tabsRow} ref={tabsRef}>
@@ -203,6 +203,7 @@ export default function Projeto() {
               ))}
             </div>
           </div>
+          </>
         ) : (
           <div className={styles.emBreve}>
             <span className={styles.emBreveLabel}>EM BREVE</span>

@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import { MdDirectionsBike, MdDirectionsWalk } from 'react-icons/md';
+import { LuStore, LuMap, LuGlobe, LuBookOpen } from 'react-icons/lu';
 import { gsap } from 'gsap';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
@@ -57,37 +59,10 @@ function MapaView() {
   );
 }
 
-const IconConveniences = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-    <path d="M9 22V12h6v10"/>
-    <path d="M3 9h18"/>
-  </svg>
-);
-
-const IconMap = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
-    <line x1="8" y1="2" x2="8" y2="18"/>
-    <line x1="16" y1="6" x2="16" y2="22"/>
-  </svg>
-);
-
-const IconLoc360 = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10"/>
-    <path d="M12 2a14.5 14.5 0 000 20M12 2a14.5 14.5 0 010 20"/>
-    <path d="M2 12h20"/>
-    <path d="M2 7h20M2 17h20" strokeOpacity="0.4"/>
-  </svg>
-);
-
-const IconGuide = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
-    <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
-  </svg>
-);
+const IconConveniences = () => <LuStore size={14} />;
+const IconMap          = () => <LuMap size={14} />;
+const IconLoc360       = () => <LuGlobe size={14} />;
+const IconGuide        = () => <LuBookOpen size={14} />;
 
 const IconHome = () => (
   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -96,23 +71,8 @@ const IconHome = () => (
   </svg>
 );
 
-const IconWalk = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor">
-    <circle cx="13" cy="4" r="1.8" />
-    <path d="M10.2 9.4L7.5 22h1.9l1.7-7.2 2.4 2.3V22H15v-6.5l-2.3-2.2.7-3.3C15 11.5 17 12.5 19 12.5v-2c-1.7 0-3.3-.9-4-2.2l-1-1.5c-.4-.6-1-.9-1.7-.9-.3 0-.6.1-.8.1L6 8.5V13h2v-3.3l2.2-.9-.2.1z" />
-  </svg>
-);
-
-const IconBike = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="5.5" cy="17" r="3.2" />
-    <circle cx="18.5" cy="17" r="3.2" />
-    <circle cx="15" cy="5.5" r="1" fill="currentColor" stroke="none" />
-    <path d="M15 6.5l-3.5 10.5H5.5" />
-    <path d="M15 6.5l3.5 10.5" />
-    <path d="M11.5 17H9L7 10h6" />
-  </svg>
-);
+const IconWalk = () => <MdDirectionsWalk size={22} />;
+const IconBike = () => <MdDirectionsBike size={22} />;
 
 const PLACES = [
   { id: 1, name: 'Supermercado Atacadão',  category: 'Mercado',     walk: 5,    bike: 2, photo: '/img/fachada.png' },
@@ -124,11 +84,11 @@ const PLACES = [
   { id: 7, name: 'Academia Smart Fit',      category: 'Esporte',     walk: 6,    bike: 3, photo: '/img/fachada.png' },
 ];
 
-const CARD_W   = 520;
+const CARD_W   = 460;
 const CARD_GAP = 20;
 
 export default function Localizacao() {
-  const { closeModule } = useTransition();
+  const { closeModule, startTransition } = useTransition();
   const { drawerRef, open: openDrawer, close: closeDrawer } = useNavDrawer();
   const [activeTab, setActiveTab] = useState('conveniences');
 
@@ -213,7 +173,7 @@ export default function Localizacao() {
 
       {/* ── Top bar ── */}
       <header className={styles.topBar} ref={topBarRef}>
-        <img src="/img/logo.png" className={styles.logoSmall} draggable={false} />
+        <img src="/img/logo.png" className={styles.logoSmall} draggable={false} onClick={() => startTransition('/', '')} style={{ cursor: 'pointer' }} />
         <nav className={styles.tabs}>
           <button className={`${styles.tab} ${activeTab === 'conveniences' ? styles.tabActive : ''}`}
             onClick={() => setActiveTab('conveniences')}><IconConveniences />Conveniências</button>
