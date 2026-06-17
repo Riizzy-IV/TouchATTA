@@ -107,12 +107,12 @@ export default function Home() {
 
       {/* Hero image — full background, right-aligned */}
       <div ref={heroRef} className={styles.hero}>
-        <img src="/img/hero.png" alt="" className={styles.heroImg} />
+        <img src="/img/hero.avif" alt="" className={styles.heroImg} />
         <div className={styles.heroGradient} />
       </div>
 
       {/* Strelitzia — canto inferior direito sobre o hero */}
-      <img ref={strelitziaRef} src="/img/strelitzia.png" alt="" className={styles.strelitzia} />
+      <img ref={strelitziaRef} src="/img/strelitzia.avif" alt="" className={styles.strelitzia} />
 
 
       {/* Left cream panel */}
@@ -128,14 +128,14 @@ export default function Home() {
         />
 
         {/* Fachada fantasma sobre as nuvens */}
-        <img src="/img/fachada.png" alt="" className={styles.fachada} />
+        <img src="/img/fachada.avif" alt="" className={styles.fachada} />
 
         {/* Orange top accent line */}
         <div className={styles.accentLine} />
 
         {/* Logo */}
         <div ref={logoRef} className={styles.brand}>
-          <img src="/img/logo.png" alt="Siver Botanique" className={styles.logoImg} />
+          <img src="/img/logo.avif" alt="Siver Botanique" className={styles.logoImg} />
           <p className={styles.tagline}>2 DORMS &nbsp;•&nbsp; VARANDA GRILL &nbsp;•&nbsp; VAGA</p>
         </div>
 
@@ -156,7 +156,7 @@ export default function Home() {
 
         {/* Footer */}
         <div ref={footerRef} className={styles.footer}>
-          <img src="/img/sivercon.png" alt="Sivercon" className={styles.siverconLogo} />
+          <img src="/img/sivercon.avif" alt="Sivercon" className={styles.siverconLogo} />
         </div>
       </div>
 

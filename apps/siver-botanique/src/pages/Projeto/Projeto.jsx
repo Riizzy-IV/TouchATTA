@@ -151,7 +151,7 @@ export default function Projeto() {
 
       {/* ── Top bar ── */}
       <header className={styles.topBar}>
-        <img src="/img/logo.png" className={styles.logoSmall} draggable={false} onClick={() => startTransition('/', '')} style={{ cursor: 'pointer' }} />
+        <img src="/img/logo.avif" className={styles.logoSmall} draggable={false} onClick={() => startTransition('/', '')} style={{ cursor: 'pointer' }} />
         <nav className={styles.topTabs}>
           {TOP_TABS.map(t => (
             <button

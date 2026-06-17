@@ -23,7 +23,7 @@ const logoPinIcon = L.divIcon({
         box-shadow:0 4px 24px rgba(0,0,0,0.55);
         border-radius:4px;
       ">
-        <img src="/img/logo-branco.png" alt="Siver Botanique" style="width:90px;height:auto;display:block;" />
+        <img src="/img/logo-branco.avif" alt="Siver Botanique" style="width:90px;height:auto;display:block;" />
       </div>
       <div style="
         width:0;height:0;
@@ -75,13 +75,13 @@ const IconWalk = () => <MdDirectionsWalk size={22} />;
 const IconBike = () => <MdDirectionsBike size={22} />;
 
 const PLACES = [
-  { id: 1, name: 'Supermercado Atacadão',  category: 'Mercado',     walk: 5,    bike: 2, photo: '/img/fachada.png' },
-  { id: 2, name: 'Padaria Artesanal',       category: 'Alimentação', walk: 3,    bike: 1, photo: '/img/fachada.png' },
-  { id: 3, name: 'Farmácia Pague Menos',    category: 'Saúde',       walk: 4,    bike: 2, photo: '/img/fachada.png' },
-  { id: 4, name: 'Escola Municipal',        category: 'Educação',    walk: 8,    bike: 4, photo: '/img/fachada.png' },
-  { id: 5, name: 'Parque Linear',           category: 'Lazer',       walk: 10,   bike: 5, photo: '/img/fachada.png' },
-  { id: 6, name: 'Shopping Center',         category: 'Shopping',    walk: null, bike: 8, photo: '/img/fachada.png' },
-  { id: 7, name: 'Academia Smart Fit',      category: 'Esporte',     walk: 6,    bike: 3, photo: '/img/fachada.png' },
+  { id: 1, name: 'Supermercado Atacadão',  category: 'Mercado',     walk: 5,    bike: 2, photo: '/img/fachada.avif' },
+  { id: 2, name: 'Padaria Artesanal',       category: 'Alimentação', walk: 3,    bike: 1, photo: '/img/fachada.avif' },
+  { id: 3, name: 'Farmácia Pague Menos',    category: 'Saúde',       walk: 4,    bike: 2, photo: '/img/fachada.avif' },
+  { id: 4, name: 'Escola Municipal',        category: 'Educação',    walk: 8,    bike: 4, photo: '/img/fachada.avif' },
+  { id: 5, name: 'Parque Linear',           category: 'Lazer',       walk: 10,   bike: 5, photo: '/img/fachada.avif' },
+  { id: 6, name: 'Shopping Center',         category: 'Shopping',    walk: null, bike: 8, photo: '/img/fachada.avif' },
+  { id: 7, name: 'Academia Smart Fit',      category: 'Esporte',     walk: 6,    bike: 3, photo: '/img/fachada.avif' },
 ];
 
 const CARD_W   = 460;
@@ -173,7 +173,7 @@ export default function Localizacao() {
 
       {/* ── Top bar ── */}
       <header className={styles.topBar} ref={topBarRef}>
-        <img src="/img/logo.png" className={styles.logoSmall} draggable={false} onClick={() => startTransition('/', '')} style={{ cursor: 'pointer' }} />
+        <img src="/img/logo.avif" className={styles.logoSmall} draggable={false} onClick={() => startTransition('/', '')} style={{ cursor: 'pointer' }} />
         <nav className={styles.tabs}>
           <button className={`${styles.tab} ${activeTab === 'conveniences' ? styles.tabActive : ''}`}
             onClick={() => setActiveTab('conveniences')}><IconConveniences />Conveniências</button>
