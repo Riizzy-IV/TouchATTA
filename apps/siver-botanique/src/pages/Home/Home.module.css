@@ -78,7 +78,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 46%;
+  width: 51%;
   height: 100%;
   background: linear-gradient(160deg, #f7f2ea 0%, #f0ebe0 100%);
   clip-path: ellipse(95% 100% at 0% 50%);
@@ -153,6 +153,7 @@
   padding: 0 32px;
   position: relative;
   z-index: 1;
+  transform: translateX(-2.5vw);
 }
 
 .logoImg {
@@ -170,6 +171,7 @@
   color: #5a4a38;
   opacity: 0.75;
   text-align: center;
+  width: 100%;
 }
 
 /* ── Nav buttons ───────────────────────────────────────────────────────────── */
@@ -182,6 +184,7 @@
   padding: 0 20px;
   position: relative;
   z-index: 1;
+  transform: translateX(-2.5vw);
 }
 
 
@@ -193,6 +196,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1;
+  transform: translateX(-2.5vw);
 }
 
 .siverconLogo {
