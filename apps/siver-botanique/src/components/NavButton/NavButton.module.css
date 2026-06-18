@@ -43,6 +43,7 @@
   border: 1.5px solid rgba(13, 36, 22, 0.35);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
