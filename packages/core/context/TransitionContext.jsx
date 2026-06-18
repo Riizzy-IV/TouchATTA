@@ -22,59 +22,51 @@ export function TransitionProvider({ children, logoSrc, overlayColor = '#e8f0f3'
     );
   }, []);
 
-  const startTransition = useCallback((route) => {
+  const runTransition = useCallback((route, fadeInDuration, fadeOutDelay, fadeOutDuration) => {
     setVisible(true);
     requestAnimationFrame(() => {
       const el = overlayRef.current;
       if (!el) return;
+
+      const goToRoute = () => {
+        navigate(route);
+        gsap.to(el, {
+          opacity: 0,
+          duration: fadeOutDuration,
+          delay: fadeOutDelay,
+          ease: 'power2.inOut',
+          onComplete: () => setVisible(false),
+        });
+      };
+
       gsap.fromTo(el,
         { opacity: 0 },
         {
           opacity: 1,
-          duration: 0.45,
+          duration: fadeInDuration,
           ease: 'power2.inOut',
           onStart: animateLogo,
           onComplete: () => {
-            navigate(route);
-            gsap.to(el, {
-              opacity: 0,
-              duration: 0.5,
-              delay: 0.3,
-              ease: 'power2.inOut',
-              onComplete: () => setVisible(false),
-            });
+            const logo = logoRef.current;
+            if (logo && logo.tagName === 'VIDEO') {
+              if (logo.ended) goToRoute();
+              else logo.addEventListener('ended', goToRoute, { once: true });
+            } else {
+              goToRoute();
+            }
           },
         }
       );
     });
   }, [navigate, animateLogo]);
 
+  const startTransition = useCallback((route) => {
+    runTransition(route, 0.45, 0.3, 0.5);
+  }, [runTransition]);
+
   const closeModule = useCallback(() => {
-    setVisible(true);
-    requestAnimationFrame(() => {
-      const el = overlayRef.current;
-      if (!el) return;
-      gsap.fromTo(el,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 0.35,
-          ease: 'power2.inOut',
-          onStart: animateLogo,
-          onComplete: () => {
-            navigate('/');
-            gsap.to(el, {
-              opacity: 0,
-              duration: 0.45,
-              delay: 0.2,
-              ease: 'power2.inOut',
-              onComplete: () => setVisible(false),
-            });
-          },
-        }
-      );
-    });
-  }, [navigate, animateLogo]);
+    runTransition('/', 0.35, 0.2, 0.45);
+  }, [runTransition]);
 
   return (
     <TransitionContext.Provider value={{ startTransition, closeModule }}>
@@ -89,17 +81,33 @@ export function TransitionProvider({ children, logoSrc, overlayColor = '#e8f0f3'
           opacity: 0,
         }}>
           {logoSrc && (
-            <img
-              ref={logoRef}
-              src={logoSrc}
-              draggable={false}
-              style={{
-                width: 'clamp(260px, 28vw, 460px)',
-                opacity: 0,
-                mixBlendMode: 'multiply',
-                userSelect: 'none',
-              }}
-            />
+            /\.(webm|mp4)$/i.test(logoSrc) ? (
+              <video
+                ref={logoRef}
+                src={logoSrc}
+                autoPlay
+                muted
+                playsInline
+                style={{
+                  width: 'clamp(260px, 28vw, 460px)',
+                  opacity: 0,
+                  mixBlendMode: 'multiply',
+                  userSelect: 'none',
+                }}
+              />
+            ) : (
+              <img
+                ref={logoRef}
+                src={logoSrc}
+                draggable={false}
+                style={{
+                  width: 'clamp(260px, 28vw, 460px)',
+                  opacity: 0,
+                  mixBlendMode: 'multiply',
+                  userSelect: 'none',
+                }}
+              />
+            )
           )}
         </div>
       )}

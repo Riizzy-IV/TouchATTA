@@ -135,7 +135,13 @@ export default function Home() {
 
         {/* Logo */}
         <div ref={logoRef} className={styles.brand}>
-          <img src="/img/logo.avif" alt="Siver Botanique" className={styles.logoImg} />
+          <video
+            src="/img/LOGO SIVER v4-small.webm"
+            className={styles.logoImg}
+            autoPlay
+            muted
+            playsInline
+          />
           <p className={styles.tagline}>2 DORMS &nbsp;•&nbsp; VARANDA GRILL &nbsp;•&nbsp; VAGA</p>
         </div>
 
