@@ -33,6 +33,8 @@ export default function ScaleWrapper({ children }) {
         flexShrink: 0,
         transformOrigin: 'center center',
         transform: `scale(${scale})`,
+        outline: '1px solid rgba(13, 36, 22, 0.18)',
+        boxShadow: '0 0 40px rgba(0, 0, 0, 0.12)',
       }}>
         {children}
       </div>

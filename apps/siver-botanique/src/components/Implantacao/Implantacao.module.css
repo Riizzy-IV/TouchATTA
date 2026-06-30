@@ -1,0 +1,182 @@
+.wrapper {
+  position: absolute;
+  inset: 0;
+  background: #2a3530;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  clip-path: inset(0);
+}
+
+.wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/fachada-cena-02.avif');
+  background-size: cover;
+  background-position: center right;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.imageArea,
+.panel {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Imagem ─────────────────────────────────────────────────────────────── */
+.imageArea {
+  position: relative;
+  width: 60%;
+  aspect-ratio: 2538 / 1427;
+  flex-shrink: 0;
+  margin-left: 24px;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ── Pins ───────────────────────────────────────────────────────────────── */
+.pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 6px 6px 6px 0px;
+  background: rgba(55, 72, 62, 0.88);
+  color: #f5f0e8;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+  z-index: 10;
+  border: none;
+  padding: 0;
+  line-height: 1;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.45);
+  overflow: hidden;
+}
+
+.pinRing {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(245, 240, 232, 0.55);
+  animation: pinPulse 3s infinite ease;
+  pointer-events: none;
+}
+
+@keyframes pinPulse {
+  0%   { transform: scale(0.3); opacity: 1; }
+  50%  { transform: scale(1);   opacity: 0; }
+  100% { transform: scale(1);   opacity: 0; }
+}
+
+.pin:hover {
+  background: rgba(240, 200, 120, 0.95);
+  color: #0d2416;
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.pin:active {
+  transform: translate(-50%, -50%) scale(0.92) !important;
+  transition: transform 0.08s ease;
+}
+
+.pinActive {
+  background: #f0c878 !important;
+  color: #0d2416 !important;
+  transform: translate(-50%, -50%) scale(1.15) !important;
+}
+
+/* ── Painel ─────────────────────────────────────────────────────────────── */
+.panel {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 48px;
+  background: rgb(55, 72, 62);
+  overflow: hidden;
+}
+
+.panelTitle {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 42px;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin: 0 0 28px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+
+.listRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.listRow:hover {
+  opacity: 0.8;
+}
+
+.chip {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px 6px 6px 0px;
+  background: rgba(88, 130, 100, 0.7);
+  color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.15s;
+}
+
+.listRowActive .chip {
+  background: #f0c878;
+  color: #0d2416;
+}
+
+.listLabel {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.85);
+  line-height: 1.3;
+}
+
+.listRowActive .listLabel {
+  color: #f0c878;
+}

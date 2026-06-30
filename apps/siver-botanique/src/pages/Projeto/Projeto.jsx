@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { useTransition } from '@showcase/core';
 import NavDrawer, { useNavDrawer } from '../../components/NavDrawer/NavDrawer';
+import SolarOrientacao from '../../components/SolarOrientacao/SolarOrientacao';
+import Fachada360 from '../../components/Fachada360/Fachada360';
+import Implantacao from '../../components/Implantacao/Implantacao';
 import styles from './Projeto.module.css';
 
 const IconClose = () => (
@@ -113,7 +116,6 @@ const TOP_TABS = [
   { id: 'fachada-interativa',   label: 'fachada interativa' },
   { id: 'desmonte-isometrico',  label: 'desmonte isométrico' },
   { id: 'orientacao-solar',     label: 'orientação solar' },
-  { id: 'tour-virtual',         label: 'tour virtual' },
   { id: 'diferenciais',         label: 'diferenciais' },
 ];
 
@@ -128,21 +130,24 @@ export default function Projeto() {
   const tabsRef     = useRef(null);
 
   useEffect(() => {
+    if (activeTopTab !== 'ficha-tecnica') return;
+    if (!panelRef.current) return;
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
       tl
         .fromTo(panelRef.current,
-          { x: 80, opacity: 0 },
-          { x: 0, opacity: 1, duration: 0.6 })
+          { x: 120, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.65 })
         .fromTo(
           tabsRef.current ? Array.from(tabsRef.current.children) : [],
           { y: -10, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.4, stagger: 0.08 },
-          '-=0.3'
+          '-=0.35'
         );
     }, sceneRef);
     return () => ctx.revert();
-  }, []);
+  }, [activeTopTab]);
 
   const tab = TABS.find(t => t.id === activeTab);
 
@@ -204,6 +209,12 @@ export default function Projeto() {
             </div>
           </div>
           </>
+        ) : activeTopTab === 'orientacao-solar' ? (
+          <SolarOrientacao />
+        ) : activeTopTab === 'fachada-interativa' ? (
+          <Fachada360 />
+        ) : activeTopTab === 'implantacao' ? (
+          <Implantacao />
         ) : (
           <div className={styles.emBreve}>
             <span className={styles.emBreveLabel}>EM BREVE</span>

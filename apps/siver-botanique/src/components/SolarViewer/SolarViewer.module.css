@@ -1,0 +1,122 @@
+.viewer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  background: #000;
+}
+
+.viewer:active {
+  cursor: grabbing;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.5);
+  z-index: 5;
+  background: #000;
+}
+
+/* ── Ícones sunrise / sol / lua (imagem original do Tess) ───────────────── */
+.iconsRow {
+  position: absolute;
+  left: 50%;
+  bottom: 110px;
+  transform: translateX(-50%);
+  width: calc(100% - 56px);
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 6;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5));
+}
+
+/* ── Badge "Toque e Arraste" ─────────────────────────────────────────────── */
+.hint {
+  position: absolute;
+  left: 28px;
+  bottom: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 18px;
+  background: rgba(80, 115, 76, 0.9);
+  border-radius: 4px;
+  color: #f5f0e8;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.hint span {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── Slider horizontal sobre a imagem ───────────────────────────────────── */
+.track {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 30px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  z-index: 6;
+  cursor: pointer;
+}
+
+.track::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(245, 240, 232, 0.35);
+  transform: translateY(-50%);
+}
+
+.trackFill {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(245, 240, 232, 0.85);
+  transform: translateY(-50%);
+}
+
+.trackHandle {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f5f0e8;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.25);
+}

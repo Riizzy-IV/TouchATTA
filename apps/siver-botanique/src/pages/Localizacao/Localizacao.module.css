@@ -54,44 +54,54 @@
 
 .tabs {
   display: flex;
-  gap: 32px;
+  gap: 6px;
 }
 
 .tab {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 5px 20px;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 0;
   border-radius: 2px;
-  border: 1px solid rgba(13, 36, 22, 0.2);
-  background: transparent;
+  border: none;
+  background: rgba(13, 36, 22, 0.08);
   color: rgba(13, 36, 22, 0.5);
   font-family: 'Manrope', sans-serif;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  transition: color 0.2s, background 0.2s;
+  width: 148px;
+  flex-shrink: 0;
 }
 
 .tab svg {
-  width: 13px;
-  height: 13px;
+  width: 26px;
+  height: 26px;
   flex-shrink: 0;
-  opacity: 0.7;
+  opacity: 0.65;
 }
 
 .tab:hover {
-  color: rgba(13, 36, 22, 0.75);
-  border-color: rgba(13, 36, 22, 0.35);
+  background: rgba(13, 36, 22, 0.14);
+  color: rgba(13, 36, 22, 0.8);
+}
+
+.tab:hover svg {
+  opacity: 0.9;
 }
 
 .tabActive {
   background: #0d2416;
   color: #f0ebe0 !important;
-  border-color: transparent;
-  font-weight: 600;
+}
+
+.tabActive svg {
+  opacity: 1 !important;
 }
 
 .closeBtn {
@@ -333,6 +343,14 @@
   object-fit: contain;
 }
 
+/* ── Tour 360° ───────────────────────────────────────────────────────────── */
+.tour360 {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: #000;
+}
+
 /* ── Em Breve ────────────────────────────────────────────────────────────── */
 .emBreve {
   position: absolute;
@@ -374,4 +392,47 @@
 
 .mapaWrapper :global(.leaflet-tile-pane) {
   filter: saturate(0.65) brightness(0.9);
+}
+
+.gmapsToggle {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  background: rgba(13, 36, 22, 0.88);
+  color: #f5f0e8;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.gmapsToggle:hover,
+.gmapsToggle:active {
+  background: rgba(240, 200, 120, 0.95);
+  color: #0d2416;
+}
+
+.gmapsToggleActive {
+  background: rgba(240, 200, 120, 0.9);
+  color: #0d2416;
+}
+
+.gmapsToggleActive:hover,
+.gmapsToggleActive:active {
+  background: rgba(13, 36, 22, 0.88);
+  color: #f5f0e8;
 }

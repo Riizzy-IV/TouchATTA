@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { MdDirectionsBike, MdDirectionsWalk } from 'react-icons/md';
-import { LuStore, LuMap, LuGlobe, LuBookOpen } from 'react-icons/lu';
+import { FaStore, FaMapMarkedAlt, FaStreetView, FaMapSigns } from 'react-icons/fa';
 import { gsap } from 'gsap';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
@@ -42,27 +42,53 @@ const logoPinIcon = L.divIcon({
   iconAnchor: [61, 92],
 });
 
+const GMAPS_EMBED = `https://maps.google.com/maps?q=${SIVER_LAT},${SIVER_LNG}&z=16&output=embed`;
+
 function MapaView() {
+  const [useGmaps, setUseGmaps] = useState(false);
+
   return (
     <div className={styles.mapaWrapper}>
-      <MapContainer
-        center={[SIVER_LAT, SIVER_LNG]}
-        zoom={16}
-        style={{ width: '100%', height: '100%' }}
-        zoomControl={false}
-        attributionControl={false}
+      {useGmaps ? (
+        <iframe
+          src={GMAPS_EMBED}
+          width="100%"
+          height="100%"
+          style={{ border: 'none', display: 'block' }}
+          allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Localização Siver Botanique"
+        />
+      ) : (
+        <MapContainer
+          center={[SIVER_LAT, SIVER_LNG]}
+          zoom={16}
+          style={{ width: '100%', height: '100%' }}
+          zoomControl={false}
+          attributionControl={false}
+        >
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <Marker position={[SIVER_LAT, SIVER_LNG]} icon={logoPinIcon} />
+        </MapContainer>
+      )}
+
+      <button
+        className={`${styles.gmapsToggle} ${useGmaps ? styles.gmapsToggleActive : ''}`}
+        onClick={() => setUseGmaps(v => !v)}
       >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Marker position={[SIVER_LAT, SIVER_LNG]} icon={logoPinIcon} />
-      </MapContainer>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+        {useGmaps ? 'Mapa padrão' : 'Google Maps'}
+      </button>
     </div>
   );
 }
 
-const IconConveniences = () => <LuStore size={14} />;
-const IconMap          = () => <LuMap size={14} />;
-const IconLoc360       = () => <LuGlobe size={14} />;
-const IconGuide        = () => <LuBookOpen size={14} />;
+const IconConveniences = () => <FaStore size={26} />;
+const IconMap          = () => <FaMapMarkedAlt size={26} />;
+const IconLoc360       = () => <FaStreetView size={27} />;
+const IconGuide        = () => <FaMapSigns size={26} />;
 
 const IconHome = () => (
   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -277,11 +303,18 @@ export default function Localizacao() {
       {/* Mapa — filho direto do scene para cobrir topBar também */}
       {activeTab === 'map' && <MapaView />}
 
-      {/* Localização 360° */}
+      {/* Localização 360° — placeholder temporário (tour do Vértice) até termos o tour do Siver Botanique */}
       {activeTab === 'loc360' && (
-        <div className={styles.emBreve}>
-          <span className={styles.emBreveLabel}>EM BREVE</span>
-          <p className={styles.emBreveSubtitle}>LOCALIZAÇÃO 360°</p>
+        <div className={styles.tour360}>
+          <iframe
+            src="https://tour.meupasseiovirtual.com/view/aRH3SqOsnal"
+            width="100%"
+            height="100%"
+            style={{ border: 'none' }}
+            referrerPolicy="origin"
+            allow="fullscreen *; autoplay *; screen-wake-lock *; geolocation *; accelerometer *; gyroscope *; xr-spatial-tracking *; vr *; web-share *;"
+            allowFullScreen
+          />
         </div>
       )}
 
