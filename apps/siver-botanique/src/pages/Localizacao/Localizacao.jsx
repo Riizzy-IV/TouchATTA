@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { MdDirectionsBike, MdDirectionsWalk } from 'react-icons/md';
+import { MdDirectionsCar, MdDirectionsWalk } from 'react-icons/md';
 import { FaStore, FaMapMarkedAlt, FaStreetView, FaMapSigns } from 'react-icons/fa';
 import { gsap } from 'gsap';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
@@ -101,13 +101,12 @@ const IconWalk = () => <MdDirectionsWalk size={22} />;
 const IconBike = () => <MdDirectionsBike size={22} />;
 
 const PLACES = [
-  { id: 1, name: 'Supermercado Atacadão',  category: 'Mercado',     walk: 5,    bike: 2, photo: '/img/fachada.avif' },
-  { id: 2, name: 'Padaria Artesanal',       category: 'Alimentação', walk: 3,    bike: 1, photo: '/img/fachada.avif' },
-  { id: 3, name: 'Farmácia Pague Menos',    category: 'Saúde',       walk: 4,    bike: 2, photo: '/img/fachada.avif' },
-  { id: 4, name: 'Escola Municipal',        category: 'Educação',    walk: 8,    bike: 4, photo: '/img/fachada.avif' },
-  { id: 5, name: 'Parque Linear',           category: 'Lazer',       walk: 10,   bike: 5, photo: '/img/fachada.avif' },
-  { id: 6, name: 'Shopping Center',         category: 'Shopping',    walk: null, bike: 8, photo: '/img/fachada.avif' },
-  { id: 7, name: 'Academia Smart Fit',      category: 'Esporte',     walk: 6,    bike: 3, photo: '/img/fachada.avif' },
+  { id: 2, name: 'Academia Smart Fit',         category: 'Academia',   walk: 4,    bike: 1, photo: '/img/conv-smartfit.jpg' },
+  { id: 3, name: 'Farmácia Pague Menos',       category: 'Saúde',      walk: 8,    bike: 2, photo: '/img/conv-paguemenos.jpg' },
+  { id: 7, name: 'Auto Posto Recreio',         category: 'Gasolina',   walk: 8,    bike: 2, photo: '/img/conv-posto.jpg' },
+  { id: 8, name: 'Escola Municipal Benedicto Cleto', category: 'Educação', walk: 11, bike: 2, photo: '/img/conv-escola.jpg' },
+  { id: 6, name: 'Shopping Cidade Sorocaba',   category: 'Shopping',   walk: 20,   bike: 5, photo: '/img/conv-shopping.webp' },
+  { id: 1, name: 'Supermercado Atacadão',      category: 'Mercado',    walk: 20,   bike: 5, photo: '/img/conv-atacadao.jpg' },
 ];
 
 const CARD_W   = 460;
@@ -202,13 +201,13 @@ export default function Localizacao() {
         <img src="/img/logo.avif" className={styles.logoSmall} draggable={false} onClick={() => startTransition('/', '')} style={{ cursor: 'pointer' }} />
         <nav className={styles.tabs}>
           <button className={`${styles.tab} ${activeTab === 'conveniences' ? styles.tabActive : ''}`}
-            onClick={() => setActiveTab('conveniences')}><IconConveniences />Conveniências</button>
+            onClick={() => setActiveTab('conveniences')}>conveniências</button>
           <button className={`${styles.tab} ${activeTab === 'map' ? styles.tabActive : ''}`}
-            onClick={() => setActiveTab('map')}><IconMap />Mapa</button>
+            onClick={() => setActiveTab('map')}>mapa</button>
           <button className={`${styles.tab} ${activeTab === 'loc360' ? styles.tabActive : ''}`}
-            onClick={() => setActiveTab('loc360')}><IconLoc360 />Localização 360°</button>
+            onClick={() => setActiveTab('loc360')}>localização 360°</button>
           <button className={`${styles.tab} ${activeTab === 'guide' ? styles.tabActive : ''}`}
-            onClick={() => setActiveTab('guide')}><IconGuide />Guia de Bairro</button>
+            onClick={() => setActiveTab('guide')}>guia de bairro</button>
         </nav>
         <button className={styles.closeBtn} onClick={openDrawer}>
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
@@ -270,7 +269,7 @@ export default function Localizacao() {
                     <div className={styles.cardSidebar}>
                       <div className={styles.sidebarDists}>
                         <div className={styles.sidebarDist}>
-                          <IconBike />
+                          <MdDirectionsCar size={20} />
                           <b>{p.bike}</b>
                           <span>min</span>
                         </div>

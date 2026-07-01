@@ -115,7 +115,6 @@ const TOP_TABS = [
   { id: 'ficha-tecnica',        label: 'ficha técnica' },
   { id: 'implantacao',          label: 'implantação' },
   { id: 'fachada-interativa',   label: 'fachada interativa' },
-  { id: 'desmonte-isometrico',  label: 'desmonte isométrico' },
   { id: 'orientacao-solar',     label: 'orientação solar' },
   { id: 'diferenciais',         label: 'diferenciais' },
 ];

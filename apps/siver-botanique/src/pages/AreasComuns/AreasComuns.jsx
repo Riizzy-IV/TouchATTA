@@ -52,7 +52,7 @@ export default function AreasComuns() {
           <video
             ref={videoRef}
             className={styles.video}
-            src="/videos/volei.mp4"
+            src="/videos/volei-2-opt.mp4"
             autoPlay
             muted
             playsInline

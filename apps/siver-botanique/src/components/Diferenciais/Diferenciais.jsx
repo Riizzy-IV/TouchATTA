@@ -41,7 +41,7 @@ const SECTIONS = [
     title: 'SUSTENTABILIDADE',
     panelColor: '#4d6e50',
     titleColor: '#2c4430',
-    photo: '/img/floral-botanical.avif',
+    photo: '/img/piscina-01.avif',
     photo2: '/img/outdoor.avif',
     items: [
       { icon: <FaTint size={28} />,       text: 'Reservatório de reuso de água pluvial para irrigação e limpeza' },
@@ -104,10 +104,9 @@ export default function Diferenciais() {
               )}
             </div>
 
-            {/* Painel direito — fotos */}
+            {/* Painel direito — foto */}
             <div className={styles.right}>
-              <img src={sec.photo}  alt="" className={styles.photo} draggable={false} />
-              <img src={sec.photo2} alt="" className={styles.photo} draggable={false} />
+              <img src={sec.photo} alt="" className={styles.photo} draggable={false} />
               {!isActive && <div className={styles.overlay} />}
             </div>
           </div>
