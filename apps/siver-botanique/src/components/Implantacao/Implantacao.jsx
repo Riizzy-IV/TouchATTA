@@ -12,8 +12,16 @@ const ITEMS = [
   { id: 9, label: 'Torre Residencial',     x: 57, y: 63 },
 ];
 
+const IconClose = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
+
 export default function Implantacao() {
-  const [active, setActive] = useState(null);
+  const [active, setActive]   = useState(null);
+  const [popup, setPopup]     = useState(null);
 
   const wrapperRef  = useRef(null);
   const imageRef    = useRef(null);
@@ -21,48 +29,60 @@ export default function Implantacao() {
   const titleRef    = useRef(null);
   const listRowRefs = useRef([]);
   const pinRefs     = useRef([]);
+  const popupRef    = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-      // 1. imagem entra da esquerda
       tl.fromTo(imageRef.current,
         { x: -100, opacity: 0 },
         { x: 0, opacity: 1, duration: 0.7, ease: 'power3.out' }
       )
-
-      // 2. painel entra com fade + y
       .fromTo(panelRef.current,
         { y: 24, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.55 },
         '-=0.4'
       )
-
-      // 3. título sobe
       .fromTo(titleRef.current,
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.45 },
         '-=0.3'
       )
-
-      // 4. lista em stagger
       .fromTo(listRowRefs.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.4, stagger: 0.09 },
         '-=0.25'
       )
-
-      // 5. pins pop com stagger
       .fromTo(pinRefs.current,
         { scale: 0, opacity: 0 },
         { scale: 1, opacity: 1, duration: 0.35, stagger: 0.06, ease: 'back.out(1.8)' },
         '-=0.5'
       );
     }, wrapperRef);
-
     return () => ctx.revert();
   }, []);
+
+  const openPopup = (item) => {
+    setPopup(item);
+  };
+
+  useEffect(() => {
+    if (popup && popupRef.current) {
+      gsap.fromTo(popupRef.current,
+        { opacity: 0, scale: 0.88, y: 20 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.35, ease: 'back.out(1.4)' }
+      );
+    }
+  }, [popup]);
+
+  const closePopup = (e) => {
+    e.stopPropagation();
+    if (!popupRef.current) { setPopup(null); return; }
+    gsap.to(popupRef.current, {
+      opacity: 0, scale: 0.9, y: 12, duration: 0.2, ease: 'power2.in',
+      onComplete: () => setPopup(null),
+    });
+  };
 
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
@@ -83,6 +103,7 @@ export default function Implantacao() {
             style={{ left: `${item.x}%`, top: `${item.y}%` }}
             onPointerEnter={() => setActive(item.id)}
             onPointerLeave={() => setActive(null)}
+            onClick={() => openPopup(item)}
           >
             <span className={styles.pinRing} />
             {item.id}
@@ -101,6 +122,7 @@ export default function Implantacao() {
               className={`${styles.listRow} ${active === item.id ? styles.listRowActive : ''}`}
               onPointerEnter={() => setActive(item.id)}
               onPointerLeave={() => setActive(null)}
+              onClick={() => openPopup(item)}
             >
               <span className={styles.chip}>{item.id}</span>
               <span className={styles.listLabel}>{item.label}</span>
@@ -108,6 +130,29 @@ export default function Implantacao() {
           ))}
         </div>
       </div>
+
+      {/* Popup */}
+      {popup && (
+        <div className={styles.popupBackdrop} onClick={closePopup}>
+          <div
+            className={styles.popup}
+            ref={popupRef}
+            onClick={e => e.stopPropagation()}
+          >
+            <div className={styles.popupHeader}>
+              <span className={styles.popupChip}>{popup.id}</span>
+              <span className={styles.popupTitle}>{popup.label}</span>
+              <button className={styles.popupClose} onClick={closePopup}>
+                <IconClose />
+              </button>
+            </div>
+            <div className={styles.popupImage}>
+              <span className={styles.emBreveLabel}>EM BREVE</span>
+              <p className={styles.emBreveText}>{popup.label.toUpperCase()}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

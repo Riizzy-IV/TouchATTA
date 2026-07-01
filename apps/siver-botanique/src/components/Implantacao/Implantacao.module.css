@@ -180,3 +180,107 @@
 .listRowActive .listLabel {
   color: #f0c878;
 }
+
+/* ── Popup ──────────────────────────────────────────────────────────────── */
+.popupBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.popup {
+  width: calc(100% - 120px);
+  height: calc(100% - 100px);
+  background: #0d1810;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+}
+
+.popupHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: #182218;
+  flex-shrink: 0;
+}
+
+.popupChip {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 5px 5px 5px 0;
+  background: #f0c878;
+  color: #0d2416;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popupTitle {
+  flex: 1;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.85);
+}
+
+.popupClose {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 3px;
+  color: rgba(245, 240, 232, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  transition: all 0.15s;
+}
+
+.popupClose:hover {
+  background: rgba(255,255,255,0.15);
+  color: #f5f0e8;
+}
+
+.popupImage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #111a14;
+}
+
+.emBreveLabel {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: rgba(245, 240, 232, 0.35);
+  text-transform: uppercase;
+}
+
+.emBreveText {
+  font-family: 'Manrope', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: rgba(245, 240, 232, 0.1);
+  text-transform: uppercase;
+  margin: 0;
+}

@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import { useTransition } from '@showcase/core';
+import { FaHome } from 'react-icons/fa';
 import styles from './NavDrawer.module.css';
 
 const IconClose = () => (
@@ -14,12 +15,7 @@ const NAV_MODULES = [
   {
     route: '/',
     label: 'Home',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-        <polyline points="9 22 9 12 15 12 15 22"/>
-      </svg>
-    ),
+    icon: <FaHome size={22} />,
   },
   {
     route: '/modulo/02',

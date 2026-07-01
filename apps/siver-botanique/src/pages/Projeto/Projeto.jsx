@@ -5,6 +5,7 @@ import NavDrawer, { useNavDrawer } from '../../components/NavDrawer/NavDrawer';
 import SolarOrientacao from '../../components/SolarOrientacao/SolarOrientacao';
 import Fachada360 from '../../components/Fachada360/Fachada360';
 import Implantacao from '../../components/Implantacao/Implantacao';
+import Diferenciais from '../../components/Diferenciais/Diferenciais';
 import styles from './Projeto.module.css';
 
 const IconClose = () => (
@@ -215,6 +216,8 @@ export default function Projeto() {
           <Fachada360 />
         ) : activeTopTab === 'implantacao' ? (
           <Implantacao />
+        ) : activeTopTab === 'diferenciais' ? (
+          <Diferenciais />
         ) : (
           <div className={styles.emBreve}>
             <span className={styles.emBreveLabel}>EM BREVE</span>

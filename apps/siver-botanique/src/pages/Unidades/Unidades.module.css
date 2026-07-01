@@ -1,0 +1,119 @@
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  clip-path: inset(0);
+  display: flex;
+  flex-direction: column;
+  background: #f5f0e8;
+}
+
+/* ── Top Bar ─────────────────────────────────────────────────────────────── */
+.topBar {
+  height: 100px;
+  min-height: 100px;
+  width: 100%;
+  background: #f5f0e8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.logoSmall {
+  height: 196px;
+  width: auto;
+  mix-blend-mode: multiply;
+}
+
+.topTabs {
+  display: flex;
+  gap: 28px;
+  flex: 1;
+  justify-content: center;
+}
+
+.topTab {
+  background: transparent;
+  border: none;
+  color: rgba(13, 36, 22, 0.38);
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 4px 0;
+  border-bottom: 1.5px solid transparent;
+  white-space: nowrap;
+}
+
+.topTab:hover {
+  color: rgba(13, 36, 22, 0.65);
+}
+
+.topTabActive {
+  color: #0d2416 !important;
+  border-bottom-color: #0d2416;
+}
+
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 1.5px solid rgba(13, 36, 22, 0.2);
+  border-radius: 3px;
+  color: rgba(13, 36, 22, 0.5);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.closeBtn:hover {
+  color: #0d2416;
+  border-color: rgba(13, 36, 22, 0.45);
+}
+
+/* ── Body ────────────────────────────────────────────────────────────────── */
+.body {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Em Breve ────────────────────────────────────────────────────────────── */
+.emBreve {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #f5f0e8;
+}
+
+.emBreveLabel {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: rgba(13, 36, 22, 0.3);
+  text-transform: uppercase;
+}
+
+.emBreveSubtitle {
+  font-family: 'Manrope', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: rgba(13, 36, 22, 0.12);
+  text-transform: uppercase;
+  margin: 0;
+}
