@@ -8,6 +8,7 @@ import Localizacao from './pages/Localizacao/Localizacao';
 import Projeto from './pages/Projeto/Projeto';
 import AreasComuns from './pages/AreasComuns/AreasComuns';
 import Unidades from './pages/Unidades/Unidades';
+import Construtora from './pages/Construtora/Construtora';
 
 export default function App() {
   const [started, setStarted] = useState(false);
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/modulo/03" element={<Projeto />} />
           <Route path="/modulo/04" element={<AreasComuns />} />
           <Route path="/modulo/05" element={<Unidades />} />
+          <Route path="/construtora" element={<Construtora />} />
         </Routes>
       </TransitionProvider>
     </ScaleWrapper>

@@ -162,7 +162,13 @@ export default function Home() {
 
         {/* Footer */}
         <div ref={footerRef} className={styles.footer}>
-          <img src="/img/sivercon.avif" alt="Sivercon" className={styles.siverconLogo} />
+          <img
+            src="/img/sivercon.avif"
+            alt="Sivercon"
+            className={styles.siverconLogo}
+            style={{ cursor: 'pointer' }}
+            onClick={() => startTransition('/construtora', '')}
+          />
         </div>
       </div>
 
