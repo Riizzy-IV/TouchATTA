@@ -44,7 +44,7 @@ export default function Splash({ onStart }) {
   return (
     <div className={styles.root} ref={rootRef}>
       <div className={styles.center}>
-        <p className={styles.eyebrow} ref={logoRef}>SEJA BEM VINDO AO ATTA TOUCH</p>
+        <p className={styles.eyebrow} ref={logoRef}>Seja bem-vindo ao Touch Atta</p>
 
         <div className={styles.brand} ref={btnRef}>
           <img src="/img/Logo Siver.avif" alt="Siver Botanique" className={styles.logo} />
@@ -56,7 +56,7 @@ export default function Splash({ onStart }) {
 
         <p className={styles.hint} ref={labelRef}>
           PARA UMA MELHOR EXPERIÊNCIA DE NAVEGAÇÃO<br />
-          ESTE ATTA TOUCH SERÁ EXECUTADO EM TELA CHEIA.
+          ESTE TOUCH ATTA SERÁ EXECUTADO EM TELA CHEIA.
         </p>
       </div>
     </div>

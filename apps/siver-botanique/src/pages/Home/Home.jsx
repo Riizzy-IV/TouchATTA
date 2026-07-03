@@ -42,7 +42,7 @@ const IconUnidades = () => (
 );
 
 const MODULES = [
-  { id: '01', label: 'VÍDEO',        icon: <IconVideo />,       isVideo: true,  videoSrc: '' },
+  { id: '01', label: 'VÍDEO',        icon: <IconVideo />,       isVideo: true,  videoSrc: '/videos/sivercon.mp4' },
   { id: '02', label: 'LOCALIZAÇÃO',  icon: <IconLocalizacao />, isVideo: false, route: '/modulo/02' },
   { id: '03', label: 'PROJETO',      icon: <IconProjeto />,     isVideo: false, route: '/modulo/03' },
   { id: '04', label: 'ÁREAS COMUNS', icon: <IconAreas />,       isVideo: false, route: '/modulo/04' },
