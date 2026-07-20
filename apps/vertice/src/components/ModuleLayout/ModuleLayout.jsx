@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { useTransition } from '@showcase/core';
+import { useLocation } from 'react-router-dom';
+import { useTransition } from '../../context/TransitionContext';
+import NavDrawer, { useNavDrawer } from '../NavDrawer/NavDrawer';
 import styles from './ModuleLayout.module.css';
 
 const IconX = () => (
@@ -11,6 +13,8 @@ const IconX = () => (
 
 export default function ModuleLayout({ tabs = [], defaultTab, children }) {
   const { closeModule } = useTransition();
+  const { pathname } = useLocation();
+  const { drawerRef, open: openDrawer, close: closeDrawer } = useNavDrawer();
   const [activeTab, setActiveTab] = useState(defaultTab ?? tabs[0] ?? '');
 
   const activeContent = typeof children === 'function'
@@ -21,8 +25,7 @@ export default function ModuleLayout({ tabs = [], defaultTab, children }) {
     <div className={styles.scene}>
       <header className={styles.topBar}>
         <div className={styles.brand} onClick={closeModule} style={{ cursor: 'pointer' }}>
-          <span className={styles.brandName}>VĒRTICE</span>
-          <span className={styles.brandSub}>ANÁLIA FRANCO</span>
+          <img src="/img/logo-branca.svg" alt="Vértice Anália Franco" className={styles.brandLogo} />
         </div>
 
         {tabs.length > 0 && (
@@ -42,10 +45,12 @@ export default function ModuleLayout({ tabs = [], defaultTab, children }) {
           </>
         )}
 
-        <button className={styles.closeBtn} onClick={closeModule} aria-label="Fechar">
+        <button className={styles.closeBtn} onClick={openDrawer} aria-label="Abrir menu">
           <IconX />
         </button>
       </header>
+
+      <NavDrawer drawerRef={drawerRef} onClose={closeDrawer} currentRoute={pathname} />
 
       <div className={styles.content}>
         {activeContent}

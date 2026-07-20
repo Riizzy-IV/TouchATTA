@@ -3,11 +3,125 @@ import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import lottie from 'lottie-web';
+import { gsap } from 'gsap';
 import clickRaw from '../../assets/click.json';
 import ModuleLayout from '../../components/ModuleLayout/ModuleLayout';
-import CardCarousel from '../../components/CardCarousel/CardCarousel';
-import PanoramicaView from './PanoramicaView';
 import styles from './Mod02.module.css';
+
+const IconCar  = () => <img src="/SVG/car.svg"  alt="carro" className={styles.cardDistIconImg} />;
+const IconWalk = () => <img src="/SVG/walk.svg" alt="a pé"  className={styles.cardDistIconImg} />;
+
+function parseMinutes(str) {
+  return str ? str.replace(/[^0-9]/g, '') : '–';
+}
+
+const CARD_W   = 360;
+const CARD_GAP = 18;
+
+/* ── Faixa de cards arrastável (mesmo padrão do Siver) ──────────────────── */
+function CardsStrip({ items }) {
+  const stripRef     = useRef(null);
+  const cardRefs     = useRef([]);
+  const swipeHintRef = useRef(null);
+
+  const dragging = useRef(false);
+  const lastX    = useRef(0);
+  const stripX   = useRef(0);
+  const velX     = useRef(0);
+
+  useEffect(() => {
+    gsap.fromTo(
+      cardRefs.current.filter(Boolean),
+      { x: 60, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.5, stagger: 0.07, ease: 'power3.out' }
+    );
+    gsap.fromTo(
+      swipeHintRef.current,
+      { x: -50, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.45, ease: 'back.out(1.4)', delay: 0.3 }
+    );
+  }, []);
+
+  const getMinX = () => {
+    if (!stripRef.current) return 0;
+    const cw    = stripRef.current.parentElement?.offsetWidth ?? 580;
+    const total = items.length * CARD_W + (items.length - 1) * CARD_GAP;
+    return Math.min(0, cw - total);
+  };
+
+  const getScale = () => {
+    const parent = stripRef.current?.parentElement;
+    if (!parent) return 1;
+    const rect = parent.getBoundingClientRect();
+    return rect.width / parent.offsetWidth || 1;
+  };
+
+  const onDown = (e) => {
+    dragging.current = true;
+    lastX.current    = e.clientX;
+    velX.current     = 0;
+    stripRef.current?.setPointerCapture(e.pointerId);
+    gsap.killTweensOf(stripRef.current);
+  };
+
+  const onMove = (e) => {
+    if (!dragging.current) return;
+    const scale    = getScale();
+    const dx       = (e.clientX - lastX.current) / scale;
+    velX.current   = dx;
+    lastX.current  = e.clientX;
+    const next     = Math.max(getMinX(), Math.min(0, stripX.current + dx));
+    stripX.current = next;
+    gsap.set(stripRef.current, { x: next });
+  };
+
+  const onUp = () => {
+    if (!dragging.current) return;
+    dragging.current = false;
+    const target = Math.max(getMinX(), Math.min(0, stripX.current + velX.current * 5));
+    gsap.to(stripRef.current, {
+      x: target, duration: 0.55, ease: 'power3.out',
+      onUpdate: () => { stripX.current = gsap.getProperty(stripRef.current, 'x'); },
+    });
+  };
+
+  return (
+    <div
+      className={styles.strip}
+      ref={stripRef}
+      onPointerDown={onDown}
+      onPointerMove={onMove}
+      onPointerUp={onUp}
+      onPointerLeave={onUp}
+    >
+      {items.map((item, i) => (
+        <div key={item.id} className={styles.card} ref={el => (cardRefs.current[i] = el)}>
+          <div className={styles.cardPhoto} style={{ backgroundImage: `url(${item.photo})` }} />
+          <div className={styles.cardSidebar}>
+            <div className={styles.sidebarDists}>
+              <div className={styles.sidebarDist}>
+                <IconCar />
+                <b>{parseMinutes(item.car)}</b>
+                <span>min</span>
+              </div>
+              <div className={styles.sidebarDist}>
+                <IconWalk />
+                <b>{parseMinutes(item.walk)}</b>
+                <span>min</span>
+              </div>
+            </div>
+            <span className={styles.sidebarName}>{item.name}</span>
+          </div>
+        </div>
+      ))}
+
+      {/* Swipe hint — dentro do strip, move junto com os cards */}
+      <div className={styles.swipeHint} ref={swipeHintRef}>
+        <img src="/img/swipe-helper3.gif" alt="" draggable={false} />
+      </div>
+    </div>
+  );
+}
 
 const IconCarGuia = () => (
   <svg viewBox="0 0 512 512" className={styles.guiaPanelCarIcon}>
@@ -40,7 +154,6 @@ function ClickIcon() {
 
 const TABS = [
   'CONVENIÊNCIAS',
-  'PANORÂMICA',
   'MAPA',
   'LOCALIZAÇÃO 360°',
   'GUIA DO BAIRRO',
@@ -151,7 +264,7 @@ function ConvenienciasView() {
         muted
         playsInline
       />
-      <div className={styles.infoPanel}>
+      <div className={styles.textBlock}>
         <h2 className={styles.sectionTitle}>ANÁLIA FRANCO</h2>
         <p className={styles.sectionDesc}>
           Um dos bairros mais valorizados de São Paulo, a Anália Franco
@@ -168,7 +281,7 @@ function ConvenienciasView() {
         </ul>
       </div>
       <div className={styles.carouselArea}>
-        <CardCarousel items={CONVENIENCES} />
+        <CardsStrip items={CONVENIENCES} />
       </div>
     </div>
   );
@@ -381,7 +494,6 @@ export default function Mod02() {
     <ModuleLayout tabs={TABS} defaultTab="CONVENIÊNCIAS">
       {(activeTab) => {
         if (activeTab === 'CONVENIÊNCIAS') return <ConvenienciasView />;
-        if (activeTab === 'PANORÂMICA') return <PanoramicaView />;
         if (activeTab === 'MAPA') return <MapaView />;
         if (activeTab === 'LOCALIZAÇÃO 360°') return <Loc360View />;
         if (activeTab === 'GUIA DO BAIRRO') return <GuiaBairroView />;

@@ -26,7 +26,7 @@
 }
 
 .sectionTitle {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 24px;
   font-weight: 300;
   letter-spacing: 0.28em;
@@ -36,7 +36,7 @@
 }
 
 .sectionDesc {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 12.5px;
   font-weight: 400;
   line-height: 1.75;
@@ -54,7 +54,7 @@
 }
 
 .highlights li {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1.2px;
@@ -146,7 +146,7 @@
   position: absolute;
   top: 14px;
   right: 16px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -154,7 +154,7 @@
 }
 
 .cardTitle {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -163,7 +163,7 @@
 }
 
 .cardDesc {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11.5px;
   font-weight: 400;
   line-height: 1.6;
@@ -197,6 +197,7 @@
   right: 5%;
   height: 150px;
   z-index: 4;
+  touch-action: none;
 }
 
 /* oriente.png — ícones no topo, bem acima da linha */
@@ -274,7 +275,7 @@
 }
 
 .solarPreloadLabel {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 3px;
@@ -366,7 +367,7 @@
 }
 
 .setorRowLabel {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 2.5px;
@@ -379,7 +380,7 @@
 }
 
 .setorRowSub {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 13px;
   color: rgba(150, 210, 220, 0.55);
   letter-spacing: 0.5px;
@@ -439,7 +440,7 @@
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -482,7 +483,7 @@
 
 .implImg {
   max-width: 100%;
-  max-height: calc(100vh - 44px - 80px);
+  max-height: calc(810px - 44px - 80px);
   width: auto;
   height: auto;
   display: block;
@@ -498,7 +499,7 @@
   background: rgba(10, 60, 78, 0.88);
   border: 2px solid rgba(42, 154, 170, 0.5);
   color: rgba(42, 154, 170, 0.9);
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -567,7 +568,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 10px;
   font-weight: 700;
   color: rgba(42, 154, 170, 0.9);
@@ -575,7 +576,7 @@
 }
 
 .implLegendName {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
   font-weight: 400;
   color: rgba(200, 235, 242, 0.8);
@@ -616,8 +617,8 @@
 
 .implOverlayCard {
   position: relative;
-  width: 88vw;
-  height: 82vh;
+  width: 1267.2px;
+  height: 664.2px;
   max-width: 1200px;
   background: #071820;
   border: 1px solid rgba(42, 154, 170, 0.3);
@@ -638,7 +639,7 @@
 }
 
 .implOverlayLabel {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -647,7 +648,7 @@
 }
 
 .implOverlay360Badge {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -670,7 +671,7 @@
 
 .implOverlayImg {
   width: 100%;
-  max-height: calc(82vh - 44px);
+  max-height: calc(664.2px - 44px);
   object-fit: cover;
   display: block;
 }
@@ -700,7 +701,7 @@
   inset: 0;
   display: flex;
   overflow: hidden;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
 }
 
 .tourSidebar {
@@ -834,7 +835,7 @@
 }
 
 .placeholderLabel {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 2.5px;
@@ -843,7 +844,7 @@
 }
 
 .placeholder small {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
   color: rgba(80, 150, 165, 0.4);
   letter-spacing: 1px;
@@ -854,71 +855,37 @@
   position: absolute;
   inset: 0;
   display: flex;
+  align-items: stretch;
   overflow: hidden;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.ftLeft {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  opacity: 0;
-  animation: m3ScaleIn 0.8s ease 0.1s forwards;
+  font-family: 'Mulish', sans-serif;
 }
 
 .ftBg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  z-index: 0;
 }
 
-.ftBgOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(7, 24, 32, 0.2) 0%,
-    rgba(7, 24, 32, 0.5) 70%,
-    rgba(5, 15, 20, 0.88) 100%
-  );
-}
-
-.ftBgCaption {
-  position: absolute;
-  bottom: 36px;
-  left: 40px;
+/* ── Painel flutuante — recorte diagonal, mesmo padrão do Siver ──────────── */
+.ftPanel {
+  position: relative;
+  z-index: 10;
+  margin: auto 0 auto auto;
+  align-self: center;
+  width: clamp(560px, 48%, 700px);
+  min-width: 560px;
+  height: 580px;
+  background: rgba(7, 24, 32, 0.88);
+  backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  opacity: 0;
-  animation: m3SlideUp 0.5s ease 0.7s forwards;
-}
-
-.ftBgTitle {
-  font-size: 28px;
-  font-weight: 200;
-  letter-spacing: 0.25em;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1;
-}
-
-.ftBgSub {
-  font-size: 9.5px;
-  font-weight: 400;
-  letter-spacing: 2px;
-  color: rgba(100, 210, 220, 0.65);
-  text-transform: lowercase;
-}
-
-.ftRight {
-  width: clamp(480px, 52%, 680px);
-  flex-shrink: 0;
-  background: rgba(5, 12, 18, 0.97);
-  border-left: 1px solid rgba(42, 154, 170, 0.12);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  clip-path: polygon(32px 0%, 100% 0%, 100% 100%, 0% 100%);
+  padding-left: 32px;
+  padding-bottom: 32px;
   opacity: 0;
   animation: m3SlideRight 0.6s ease 0.25s forwards;
 }
@@ -926,44 +893,64 @@
 .ftSubTabs {
   flex-shrink: 0;
   display: flex;
-  border-bottom: 1px solid rgba(42, 154, 170, 0.1);
+  gap: 12px;
+  padding: 0 32px;
+  margin-top: 44px;
   opacity: 0;
   animation: m3SlideDown 0.4s ease 0.5s forwards;
 }
 
 .ftSubTab {
-  flex: 1;
-  height: 52px;
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 10px;
+  padding: 14px 28px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 2px;
-  color: rgba(100, 170, 190, 0.4);
+  letter-spacing: 1px;
+  color: rgba(220, 240, 245, 0.45);
   cursor: pointer;
-  transition: color 0.18s, border-color 0.18s;
+  transition: color 0.18s, background 0.18s, border-color 0.18s;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-.ftSubTab:hover { color: rgba(150, 210, 230, 0.75); }
+.ftSubTab:hover {
+  color: rgba(220, 240, 245, 0.75);
+  background: rgba(255, 255, 255, 0.05);
+}
 
 .ftSubTabActive {
-  color: rgba(42, 154, 170, 1);
-  border-bottom-color: rgba(42, 154, 170, 0.9);
+  background: rgba(220, 240, 245, 0.12) !important;
+  color: #f0fbff !important;
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 .ftContent {
   flex: 1;
   overflow-y: auto;
-  padding: 32px 40px 40px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(42, 154, 170, 0.18) transparent;
+  padding: 36px 40px 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  scrollbar-width: none;
 }
 
-.ftSection { margin-bottom: 34px; }
+.ftContent::-webkit-scrollbar { display: none; }
+
+.ftSection { margin-bottom: 0; }
+
+.ftLottieCorner {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  z-index: 20;
+  pointer-events: none;
+  transform: scaleX(-1);
+  filter: brightness(0) invert(1);
+}
 
 .ftSectionTitle {
   font-size: 9px;
@@ -1076,6 +1063,20 @@
   color: rgba(100, 190, 210, 0.4);
   text-transform: uppercase;
   margin: 0 0 18px 0;
+}
+
+.ftUnitGroup {
+  margin-bottom: 24px;
+}
+
+.ftUnitGroupLabel {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(42, 154, 170, 0.7);
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
 .ftUnidades {
@@ -1236,8 +1237,8 @@
 .ftLightboxInner {
   background: #050f14;
   border: 1px solid rgba(42, 154, 170, 0.2);
-  max-width: 90vw;
-  max-height: 88vh;
+  max-width: 1296px;
+  max-height: 712.8px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -1287,15 +1288,15 @@
 }
 
 .ftLightboxImg {
-  max-height: calc(88vh - 46px);
+  max-height: calc(712.8px - 46px);
   max-width: 100%;
   object-fit: contain;
   display: block;
 }
 
 .ftLightboxFull {
-  width: 88vw;
-  height: 85vh;
+  width: 1267.2px;
+  height: 688.5px;
 }
 
 .ftLightboxIframe {

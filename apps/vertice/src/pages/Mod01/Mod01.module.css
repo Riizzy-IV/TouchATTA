@@ -5,7 +5,7 @@
   background: #071820;
   display: flex;
   flex-direction: column;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   overflow: hidden;
 }
 
@@ -160,7 +160,7 @@
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 8.5px;
   font-weight: 700;
   letter-spacing: 1.8px;
@@ -317,6 +317,20 @@
   margin: 0 0 18px 0;
 }
 
+.unitGroup {
+  margin-bottom: 22px;
+}
+
+.unitGroupLabel {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(42, 154, 170, 0.7);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
 .unidades {
   display: flex;
   flex-direction: column;
@@ -461,8 +475,8 @@
 .lightboxInner {
   background: #050f14;
   border: 1px solid rgba(42, 154, 170, 0.2);
-  max-width: 90vw;
-  max-height: 88vh;
+  max-width: 1296px;
+  max-height: 712.8px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -513,7 +527,7 @@
 }
 
 .lightboxImg {
-  max-height: calc(88vh - 52px);
+  max-height: calc(712.8px - 52px);
   max-width: 100%;
   object-fit: contain;
   display: block;

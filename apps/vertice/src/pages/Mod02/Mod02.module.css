@@ -21,10 +21,9 @@
 
 /* ── Layout Conveniências ─────────────────────────────────────────────────── */
 .conveniencias {
-  display: flex;
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
   overflow: hidden;
 }
 
@@ -40,26 +39,30 @@
   animation: convBgVideoIn 1s ease 0.1s forwards;
 }
 
-.conveniencias > *:not(.convBgVideo) {
-  position: relative;
+/* Vinheta sob o texto — não é uma caixa do texto, é o fundo inteiro fundindo */
+.conveniencias::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(7, 24, 32, 0.85) 0%, rgba(7, 24, 32, 0.55) 38%, rgba(7, 24, 32, 0) 62%);
   z-index: 1;
+  pointer-events: none;
 }
 
-.infoPanel {
-  flex-shrink: 0;
-  width: 280px;
-  padding: 40px 32px 40px 36px;
-  background: linear-gradient(160deg, #071820 0%, #0d3a48 60%, #134858 100%);
-  border-right: 1px solid rgba(42, 154, 170, 0.12);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/* ── Texto — lado esquerdo, direto sobre o vídeo, sem caixa separada ─────── */
+.textBlock {
+  position: absolute;
+  left: 56px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 320px;
   opacity: 0;
   animation: convPanelIn 0.6s ease 0.2s forwards;
 }
 
 .sectionTitle {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 24px;
   font-weight: 300;
   letter-spacing: 0.28em;
@@ -71,7 +74,7 @@
 }
 
 .sectionDesc {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 12.5px;
   font-weight: 400;
   line-height: 1.75;
@@ -91,7 +94,7 @@
 }
 
 .highlights li {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1.2px;
@@ -122,11 +125,136 @@
 }
 
 .carouselArea {
-  flex: 1;
-  position: relative;
-  background: transparent;
+  position: absolute;
+  top: 90px;
+  bottom: 90px;
+  left: 420px;
+  right: 0;
+  overflow: visible;
+  z-index: 10;
   opacity: 0;
   animation: convCarouselIn 0.7s ease 0.4s forwards;
+}
+
+/* ── Faixa de cards arrastável (padrão Siver, cores Vértice) ─────────────── */
+.strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  gap: 20px;
+  cursor: grab;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.strip:active {
+  cursor: grabbing;
+}
+
+.card {
+  position: relative;
+  width: 360px;
+  min-width: 360px;
+  height: 100%;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+.cardPhoto {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.cardSidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 100%;
+  background: rgba(7, 24, 32, 0.85);
+  border-right: 1px solid rgba(42, 154, 170, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0 18px;
+  z-index: 2;
+  justify-content: space-between;
+}
+
+.sidebarName {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Mulish', sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.sidebarDists {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.sidebarDist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  color: rgba(150, 215, 228, 0.7);
+  font-family: 'Mulish', sans-serif;
+  font-size: 7px;
+  letter-spacing: 0.5px;
+}
+
+.cardDistIconImg {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  opacity: 0.88;
+}
+
+.sidebarDist b {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+}
+
+/* ── Swipe hint — dentro do strip, move junto com os cards ──────────────── */
+.swipeHint {
+  position: absolute;
+  /* sidebar(44) + centro da foto(416/2=208) = 252px do strip left */
+  left: -39px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: rgba(7, 24, 32, 0.72);
+  backdrop-filter: blur(8px);
+  border-radius: 16px 0 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.swipeHint img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
 }
 
 /* ── Mapa ────────────────────────────────────────────────────────────────── */
@@ -173,7 +301,7 @@
 }
 
 .mapaPinLabel {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -197,7 +325,7 @@
 }
 
 .mapaDistItem {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -281,7 +409,7 @@
 }
 
 .loc360Label {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 2.5px;
@@ -321,7 +449,7 @@
 }
 
 .loc360PreloadLabel {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 3px;
@@ -400,7 +528,7 @@
 }
 
 .guiaBrandName {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 22px;
   font-weight: 300;
   letter-spacing: 0.22em;
@@ -409,7 +537,7 @@
 }
 
 .guiaBrandSub {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 8.5px;
   font-weight: 400;
   letter-spacing: 0.35em;
@@ -418,7 +546,7 @@
 }
 
 .guiaBrandTag {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 10px;
   font-weight: 300;
   line-height: 1.8;
@@ -483,7 +611,7 @@
 }
 
 .guiaPanelTitle {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 8.5px;
   font-weight: 700;
   letter-spacing: 1.6px;
@@ -519,7 +647,7 @@
 }
 
 .guiaPanelItemName {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 12.5px;
   font-weight: 400;
   color: rgba(190, 225, 235, 0.75);
@@ -536,7 +664,7 @@
 }
 
 .guiaPanelItemMin {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 13px;
   font-weight: 600;
   color: rgba(42, 154, 170, 0.8);
@@ -584,7 +712,7 @@
 }
 
 .guiaTabLabel {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 1.6px;
@@ -629,7 +757,7 @@
 }
 
 .placeholderLabel {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 2.5px;
@@ -638,7 +766,7 @@
 }
 
 .placeholder small {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 11px;
   color: rgba(80, 150, 165, 0.4);
   letter-spacing: 1px;

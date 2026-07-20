@@ -1,7 +1,7 @@
 import { useState, lazy, Suspense } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { Routes, Route } from 'react-router-dom';
-import { TransitionProvider } from '@showcase/core';
+import { TransitionProvider } from './context/TransitionContext';
 import ScaleWrapper from './components/ScaleWrapper/ScaleWrapper';
 import WelcomeModal from './components/WelcomeModal/WelcomeModal';
 import Home from './pages/Home/Home';
@@ -19,7 +19,7 @@ function MainApp() {
   const [started, setStarted] = useState(false);
   return (
     <ScaleWrapper>
-      <TransitionProvider logoSrc="/img/logo2.png" overlayColor="#e8f0f3">
+      <TransitionProvider>
         {!started && <WelcomeModal onStart={() => setStarted(true)} />}
         {started && (
           <Suspense fallback={null}>

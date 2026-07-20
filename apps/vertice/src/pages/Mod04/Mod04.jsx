@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { useTransition } from '@showcase/core';
+import { useTransition } from '../../context/TransitionContext';
 import styles from './Mod04.module.css';
 
 const TOUR_SRC = 'https://tour.meupasseiovirtual.com/view/j84YeloeZdi';

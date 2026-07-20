@@ -4,7 +4,6 @@ import styles from './Mod03.module.css';
 
 const TABS = [
   'FICHA TÉCNICA',
-  'SETORIZAÇÃO',
   'IMPLANTAÇÃO',
   'FACHADA INTERATIVA',
   'ORIENTAÇÃO SOLAR',
@@ -174,49 +173,11 @@ function OrientacaoSolarView() {
               transform="rotate(-90 48 48)"
               style={{ transition: 'stroke-dashoffset 0.15s linear' }}
             />
-            <text x="48" y="53" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="15" fontFamily="Open Sans, sans-serif" fontWeight="600">{progress}%</text>
+            <text x="48" y="53" textAnchor="middle" fill="rgba(255,255,255,0.9)" fontSize="15" fontFamily="Mulish, sans-serif" fontWeight="600">{progress}%</text>
           </svg>
           <span className={styles.solarPreloadLabel}>CARREGANDO</span>
         </div>
       )}
-    </div>
-  );
-}
-
-/* ── Setorização ────────────────────────────────────────────────────────── */
-const ZONAS = [
-  { id: 'studios', label: 'STUDIOS', sub: 'Torre única', img: '/img/setorizacao/setor_studios.jpg' },
-  { id: '1dorm', label: '1 DORMITÓRIO', sub: 'Torre única', img: '/img/setorizacao/setor_1dorm.jpg' },
-  { id: 'lazer', label: 'LAZER', sub: 'Áreas de lazer', img: '/img/setorizacao/setor_lazer.jpg' },
-  { id: 'rua', label: 'NÍVEL DA RUA', sub: 'Térreo e acesso', img: '/img/setorizacao/setor_rua.jpg' },
-];
-
-function SetorizacaoView() {
-  const [active, setActive] = useState(null);
-
-  const zoneImg = active ? ZONAS.find(z => z.id === active)?.img : null;
-
-  const handleClick = (zoneId) => setActive(active === zoneId ? null : zoneId);
-
-  return (
-    <div className={styles.setorLayout}>
-      <img src="/img/setorizacao/setor_base.jpg" alt="" draggable={false} className={styles.setorBuilding} />
-      {zoneImg && (
-        <img key={zoneImg} src={zoneImg} alt="" draggable={false} className={styles.setorBuildingZone} />
-      )}
-
-      <div className={styles.setorOverlay}>
-        {ZONAS.map((z) => (
-          <div
-            key={z.id}
-            className={`${styles.setorRow} ${active === z.id ? styles.setorRowActive : ''}`}
-            onClick={() => setActive(active === z.id ? null : z.id)}
-          >
-            <span className={styles.setorRowLabel}>{z.label}</span>
-            <span className={styles.setorRowSub}>{z.sub}</span>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
@@ -433,12 +394,31 @@ const FT_FLOORS = [
 ];
 
 const FT_UNITS = [
-  { id: 1, label: 'Unidade 01', area: '32,58', img: '/img/plantas/planta-01.jpg' },
-  { id: 2, label: 'Unidade 02', area: '26,71', img: '/img/plantas/planta-02.jpg' },
-  { id: 3, label: 'Unidade 03', area: '29,46', img: '/img/plantas/planta-03.jpg' },
-  { id: 4, label: 'Unidade 04', area: '39,06', img: '/img/plantas/planta-04.jpg' },
-  { id: 5, label: 'Unidade 05', area: '36,33', img: '/img/plantas/planta-05.jpg' },
+  { id: 1,  group: 'TÉRREO', label: 'Unidade 01',   area: '32,58', img: '/img/plantas/planta-01.jpg' },
+  { id: 2,  group: 'TÉRREO', label: 'Unidade 02',   area: '26,71', img: '/img/plantas/planta-02.jpg' },
+  { id: 3,  group: 'TÉRREO', label: 'Unidade 03',   area: '29,46', img: '/img/plantas/planta-03.jpg' },
+  { id: 4,  group: 'TÉRREO', label: 'Unidade 04',   area: '39,05', img: '/img/plantas/planta-04.jpg' },
+  { id: 5,  group: 'TÉRREO', label: 'Unidade 05',   area: '36,33', img: '/img/plantas/planta-05.jpg' },
+  { id: 6,  group: 'TIPO 2', label: 'Unid. 11/21',  area: '24,17', img: '/img/plantas/planta-06.jpg' },
+  { id: 7,  group: 'TIPO 2', label: 'Unid. 12/22',  area: '24,20', img: '/img/plantas/planta-06.jpg' },
+  { id: 8,  group: 'TIPO 2', label: 'Unid. 13/23',  area: '24,91', img: '/img/plantas/planta-07.jpg' },
+  { id: 9,  group: 'TIPO 2', label: 'Unid. 14/24',  area: '30,35', img: '/img/plantas/planta-07.jpg' },
+  { id: 10, group: 'TIPO 2', label: 'Unid. 15/25',  area: '29,31', img: '/img/plantas/planta-08.jpg' },
+  { id: 11, group: 'TIPO 2', label: 'Unid. 16/26',  area: '31,15', img: '/img/plantas/planta-08.jpg' },
+  { id: 12, group: 'TIPO 2', label: 'Unid. 17/27',  area: '29,10', img: '/img/plantas/planta-09.jpg' },
+  { id: 13, group: 'TIPO 2', label: 'Unid. 18/28',  area: '28,85', img: '/img/plantas/planta-09.jpg' },
+  { id: 14, group: 'TIPO 2', label: 'Unid. 19/29',  area: '27,50', img: '/img/plantas/planta-10.jpg' },
+  { id: 15, group: 'TIPO 3', label: 'Unidade 33',   area: '33,37', img: '/img/plantas/planta-10.jpg' },
+  { id: 16, group: 'TIPO 3', label: 'Unidade 34',   area: '33,52', img: '/img/plantas/planta-11.jpg' },
+  { id: 17, group: 'TIPO 3', label: 'Unidade 35',   area: '54,42', img: '/img/plantas/planta-11.jpg' },
+  { id: 18, group: 'TIPO 4', label: 'Final 1',      area: '35,57', img: '/img/plantas/planta-12.jpg' },
+  { id: 19, group: 'TIPO 4', label: 'Final 2',      area: '36,10', img: '/img/plantas/planta-12.jpg' },
+  { id: 20, group: 'TIPO 4', label: 'Final 3',      area: '24,72', img: '/img/plantas/planta-13.jpg' },
+  { id: 21, group: 'TIPO 4', label: 'Final 4',      area: '26,58', img: '/img/plantas/planta-13.jpg' },
+  { id: 22, group: 'TIPO 4', label: 'Final 5',      area: '28,14', img: '/img/plantas/planta-14.jpg' },
 ];
+
+const FT_UNIT_GROUPS = ['TÉRREO', 'TIPO 2', 'TIPO 3', 'TIPO 4'];
 
 const FT_LAZER = [
   { label: 'Churrasqueira',               tour: 'https://tour.meupasseiovirtual.com/view/CUFDfWuI33A', photo: '/img/areas/CHURRASQUEIRA01.jpg' },
@@ -462,18 +442,12 @@ function FichaTecnicaView() {
   return (
     <div className={styles.ftPage}>
 
-      {/* Left: background image */}
-      <div className={styles.ftLeft}>
-        <img src="/img/areas/ROOFTOP03.jpg" alt="" className={styles.ftBg} />
-        <div className={styles.ftBgOverlay} />
-        <div className={styles.ftBgCaption}>
-          <span className={styles.ftBgTitle}>VĒRTICE</span>
-          <span className={styles.ftBgSub}>Rua Bruna, 340 · Anália Franco · São Paulo</span>
-        </div>
-      </div>
+      {/* Fundo full-bleed */}
+      <img src="/img/areas/ROOFTOP03.jpg" alt="" className={styles.ftBg} />
 
-      {/* Right: data panel */}
-      <div className={styles.ftRight}>
+      {/* Painel flutuante — mesmo recorte/estilo do Siver */}
+      <div className={styles.ftPanel}>
+        <img src="/img/guidance-hand.gif" alt="" className={styles.ftLottieCorner} draggable={false} />
         <nav className={styles.ftSubTabs}>
           {FT_SUBTABS.map(t => (
             <button
@@ -556,19 +530,24 @@ function FichaTecnicaView() {
           {/* UNIDADES */}
           {sub === 'UNIDADES' && (
             <div>
-              <p className={styles.ftUnidadesNote}>Plantas do Pavimento Térreo · Duplex com Área Descoberta</p>
-              <div className={styles.ftUnidades}>
-                {FT_UNITS.map(unit => (
-                  <button key={unit.id} className={styles.ftUnitCard} onClick={() => setLightbox(unit)}>
-                    <img src={unit.img} alt={unit.label} className={styles.ftUnitImg} />
-                    <div className={styles.ftUnitInfo}>
-                      <span className={styles.ftUnitLabel}>{unit.label}</span>
-                      <span className={styles.ftUnitArea}>{unit.area} <em>m²</em></span>
-                      <span className={styles.ftUnitHint}>ver planta →</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
+              <p className={styles.ftUnidadesNote}>Plantas de todas as unidades · Térreo, Tipo 2, Tipo 3 e Tipo 4</p>
+              {FT_UNIT_GROUPS.map(group => (
+                <div key={group} className={styles.ftUnitGroup}>
+                  <span className={styles.ftUnitGroupLabel}>{group}</span>
+                  <div className={styles.ftUnidades}>
+                    {FT_UNITS.filter(u => u.group === group).map(unit => (
+                      <button key={unit.id} className={styles.ftUnitCard} onClick={() => setLightbox(unit)}>
+                        <img src={unit.img} alt={unit.label} className={styles.ftUnitImg} />
+                        <div className={styles.ftUnitInfo}>
+                          <span className={styles.ftUnitLabel}>{unit.label}</span>
+                          <span className={styles.ftUnitArea}>{unit.area} <em>m²</em></span>
+                          <span className={styles.ftUnitHint}>ver planta →</span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
@@ -721,7 +700,6 @@ export default function Mod03() {
     <ModuleLayout tabs={TABS} defaultTab="FICHA TÉCNICA">
       {(activeTab) => {
         if (activeTab === 'FICHA TÉCNICA') return <FichaTecnicaView />;
-        if (activeTab === 'SETORIZAÇÃO') return <SetorizacaoView />;
         if (activeTab === 'IMPLANTAÇÃO') return <ImplantacaoView />;
         if (activeTab === 'FACHADA INTERATIVA') return <FachadaInterativaView />;
         if (activeTab === 'ORIENTAÇÃO SOLAR') return <OrientacaoSolarView />;

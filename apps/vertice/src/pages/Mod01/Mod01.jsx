@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTransition } from '@showcase/core';
+import { useTransition } from '../../context/TransitionContext';
 import styles from './Mod01.module.css';
 
 const TABS = ['EMPREENDIMENTO', 'UNIDADES', 'LAZER'];
@@ -20,12 +20,31 @@ const FLOORS = [
 ];
 
 const UNITS = [
-  { id: 1, label: 'Unidade 01', area: '32,58', img: '/img/plantas/planta-01.jpg' },
-  { id: 2, label: 'Unidade 02', area: '26,71', img: '/img/plantas/planta-02.jpg' },
-  { id: 3, label: 'Unidade 03', area: '29,46', img: '/img/plantas/planta-03.jpg' },
-  { id: 4, label: 'Unidade 04', area: '39,06', img: '/img/plantas/planta-04.jpg' },
-  { id: 5, label: 'Unidade 05', area: '36,33', img: '/img/plantas/planta-05.jpg' },
+  { id: 1,  group: 'TÉRREO', label: 'Unidade 01',   area: '32,58', img: '/img/plantas/planta-01.jpg' },
+  { id: 2,  group: 'TÉRREO', label: 'Unidade 02',   area: '26,71', img: '/img/plantas/planta-02.jpg' },
+  { id: 3,  group: 'TÉRREO', label: 'Unidade 03',   area: '29,46', img: '/img/plantas/planta-03.jpg' },
+  { id: 4,  group: 'TÉRREO', label: 'Unidade 04',   area: '39,05', img: '/img/plantas/planta-04.jpg' },
+  { id: 5,  group: 'TÉRREO', label: 'Unidade 05',   area: '36,33', img: '/img/plantas/planta-05.jpg' },
+  { id: 6,  group: 'TIPO 2', label: 'Unid. 11/21',  area: '24,17', img: '/img/plantas/planta-06.jpg' },
+  { id: 7,  group: 'TIPO 2', label: 'Unid. 12/22',  area: '24,20', img: '/img/plantas/planta-06.jpg' },
+  { id: 8,  group: 'TIPO 2', label: 'Unid. 13/23',  area: '24,91', img: '/img/plantas/planta-07.jpg' },
+  { id: 9,  group: 'TIPO 2', label: 'Unid. 14/24',  area: '30,35', img: '/img/plantas/planta-07.jpg' },
+  { id: 10, group: 'TIPO 2', label: 'Unid. 15/25',  area: '29,31', img: '/img/plantas/planta-08.jpg' },
+  { id: 11, group: 'TIPO 2', label: 'Unid. 16/26',  area: '31,15', img: '/img/plantas/planta-08.jpg' },
+  { id: 12, group: 'TIPO 2', label: 'Unid. 17/27',  area: '29,10', img: '/img/plantas/planta-09.jpg' },
+  { id: 13, group: 'TIPO 2', label: 'Unid. 18/28',  area: '28,85', img: '/img/plantas/planta-09.jpg' },
+  { id: 14, group: 'TIPO 2', label: 'Unid. 19/29',  area: '27,50', img: '/img/plantas/planta-10.jpg' },
+  { id: 15, group: 'TIPO 3', label: 'Unidade 33',   area: '33,37', img: '/img/plantas/planta-10.jpg' },
+  { id: 16, group: 'TIPO 3', label: 'Unidade 34',   area: '33,52', img: '/img/plantas/planta-11.jpg' },
+  { id: 17, group: 'TIPO 3', label: 'Unidade 35',   area: '54,42', img: '/img/plantas/planta-11.jpg' },
+  { id: 18, group: 'TIPO 4', label: 'Final 1',      area: '35,57', img: '/img/plantas/planta-12.jpg' },
+  { id: 19, group: 'TIPO 4', label: 'Final 2',      area: '36,10', img: '/img/plantas/planta-12.jpg' },
+  { id: 20, group: 'TIPO 4', label: 'Final 3',      area: '24,72', img: '/img/plantas/planta-13.jpg' },
+  { id: 21, group: 'TIPO 4', label: 'Final 4',      area: '26,58', img: '/img/plantas/planta-13.jpg' },
+  { id: 22, group: 'TIPO 4', label: 'Final 5',      area: '28,14', img: '/img/plantas/planta-14.jpg' },
 ];
+
+const UNIT_GROUPS = ['TÉRREO', 'TIPO 2', 'TIPO 3', 'TIPO 4'];
 
 const LAZER = [
   'Churrasqueira',
@@ -167,24 +186,29 @@ export default function Mod01() {
             {activeTab === 'UNIDADES' && (
               <div>
                 <p className={styles.unidadesNote}>
-                  Plantas do Pavimento Térreo · Duplex com Área Descoberta
+                  Plantas de todas as unidades · Térreo, Tipo 2, Tipo 3 e Tipo 4
                 </p>
-                <div className={styles.unidades}>
-                  {UNITS.map(unit => (
-                    <button
-                      key={unit.id}
-                      className={styles.unitCard}
-                      onClick={() => setLightbox(unit)}
-                    >
-                      <img src={unit.img} alt={unit.label} className={styles.unitImg} />
-                      <div className={styles.unitInfo}>
-                        <span className={styles.unitLabel}>{unit.label}</span>
-                        <span className={styles.unitArea}>{unit.area} <em>m²</em></span>
-                        <span className={styles.unitHint}>ver planta →</span>
-                      </div>
-                    </button>
-                  ))}
-                </div>
+                {UNIT_GROUPS.map(group => (
+                  <div key={group} className={styles.unitGroup}>
+                    <span className={styles.unitGroupLabel}>{group}</span>
+                    <div className={styles.unidades}>
+                      {UNITS.filter(u => u.group === group).map(unit => (
+                        <button
+                          key={unit.id}
+                          className={styles.unitCard}
+                          onClick={() => setLightbox(unit)}
+                        >
+                          <img src={unit.img} alt={unit.label} className={styles.unitImg} />
+                          <div className={styles.unitInfo}>
+                            <span className={styles.unitLabel}>{unit.label}</span>
+                            <span className={styles.unitArea}>{unit.area} <em>m²</em></span>
+                            <span className={styles.unitHint}>ver planta →</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
 

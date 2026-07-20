@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { useFullscreen } from '@showcase/core';
+import { useFullscreen } from '../../hooks/useFullscreen';
 import styles from './WelcomeModal.module.css';
 
 export default function WelcomeModal({ onStart }) {

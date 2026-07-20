@@ -4,24 +4,17 @@ const DESIGN_W = 1440;
 const DESIGN_H = 810;
 
 export default function ScaleWrapper({ children }) {
-  const [scale, setScale] = useState(null);
+  const [scale, setScale] = useState(() =>
+    Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H)
+  );
 
   useEffect(() => {
     function update() {
-      const sw = window.innerWidth;
-      const sh = window.innerHeight;
-      const isPortrait = sh > sw;
-      const isMobile   = sw <= 768;
-
-      if (!isPortrait && !isMobile) { setScale(null); return; }
-      setScale(Math.min(sw / DESIGN_W, sh / DESIGN_H));
+      setScale(Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H));
     }
-    update();
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
   }, []);
-
-  if (scale === null) return <>{children}</>;
 
   return (
     <div style={{

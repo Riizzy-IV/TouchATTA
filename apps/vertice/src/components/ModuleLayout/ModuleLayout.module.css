@@ -29,22 +29,10 @@
   flex-shrink: 0;
 }
 
-.brandName {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 18px;
-  font-weight: 300;
-  letter-spacing: 0.22em;
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.brandSub {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 0.38em;
-  color: rgba(150, 215, 228, 0.75);
-  text-transform: uppercase;
-  margin-top: 3px;
+.brandLogo {
+  height: 26px;
+  width: auto;
+  display: block;
 }
 
 /* ── Divisor vertical ────────────────────────────────────────────────────── */
@@ -75,7 +63,7 @@
   border: none;
   cursor: pointer;
   padding: 6px 14px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Mulish', sans-serif;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 1.4px;

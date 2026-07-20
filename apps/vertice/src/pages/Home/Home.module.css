@@ -1,89 +1,371 @@
-/* ── Cena principal ──────────────────────────────────────────────────────── */
+/* ── Cena ─────────────────────────────────────────────────────────────────── */
+/* Canvas de design fixo 1440×810 (escalado pelo ScaleWrapper) — todos os valores
+   abaixo são px absolutos calculados a partir das proporções vw/vh originais
+   (1vw = 14.4px, 1vh = 8.1px) para que o layout nunca se deforme. */
 .scene {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
   background: #071820;
+  contain: layout style;
 }
 
-/* ── Vídeo de fundo fullscreen ───────────────────────────────────────────── */
-.hero {
+/* ── BG: foto lifestyle (esquerda, sangra para fora) ─────────────────────── */
+/* Referência 1920px: left=-245, width=1233 */
+.bgLifestyle {
   position: absolute;
-  inset: 0;
+  left: -183.74px;
+  top: 0;
+  width: 924.77px;
+  height: 100%;
   z-index: 0;
 }
 
-.heroVideo {
+.bgImg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center top;
   display: block;
 }
 
-.heroVideo2 {
-  opacity: 0;
-}
-
-/* ── Logo flutuante sobre o vídeo ────────────────────────────────────────── */
-.brand {
+/* ── BG: render da fachada (centro-direita) ──────────────────────────────── */
+/* Referência 1920px: centro em 50%+286px, largura=1348px */
+.bgFachada {
   position: absolute;
-  left: 28%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+  left: calc(50% - 291.02px);
+  top: 0;
+  width: 1011.02px;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
 }
 
-.logoImg {
-  width: clamp(180px, 22vw, 340px);
-  height: auto;
+.bgFachadaImg {
+  position: absolute;
+  height: 117.41%;
+  left: -51.34%;
+  max-width: none;
+  top: -13.89%;
+  width: 201.51%;
   display: block;
-  filter: drop-shadow(0 2px 20px rgba(0, 0, 0, 0.4));
 }
 
-/* ── Navegação vertical ──────────────────────────────────────────────────── */
-.nav {
+/* Overlay radial escuro sobre a fachada */
+.bgFachadaGrad {
   position: absolute;
-  top: 28%;
-  left: 0;
-  transform: translateY(-50%);
+  inset: 0;
+  mix-blend-mode: multiply;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(2, 78, 96, 0) 0%,
+    rgba(2, 78, 96, 1) 100%
+  );
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ── Régua vertical direita ──────────────────────────────────────────────── */
+/* Figma: container 95×572, inner SVG 572×95 rotado -90° para ser vertical */
+.ruler {
+  position: absolute;
+  left: 1368.72px;     /* 1825/1920 */
+  width: 71.25px;      /* 95/1920  */
+  height: 428.98px;    /* 572/1080 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+.rulerTop    { top: 0;       }
+.rulerBottom { top: 437.24px; }  /* 583/1080 */
+
+/* div intermediário rotacionado: SVG nativo é 572×95, rotado vira 95×572 */
+.rulerRotate {
+  flex-shrink: 0;
+  transform: rotate(-90deg);
+  width: 428.98px;   /* comprimento do SVG (572px) → vira altura visual */
+  height: 71.25px;   /* altura do SVG (95px)  → vira largura visual */
+}
+
+.rulerImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Retângulos decorativos de fundo ─────────────────────────────────────── */
+/* Referência: rect1 left=-304,top=793,w=1550,h=863 | rect2 left=-369,top=893,w=2003,h=821 */
+.decoRect1 {
+  position: absolute;
+  left: -227.95px;
+  top: 594.78px;
+  width: 1162.51px;
+  height: 647.27px;
+  border: 3px solid #d9d9d9;
+  border-radius: 42.05px;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.decoRect2 {
+  position: absolute;
+  left: -276.77px;
+  top: 669.79px;
+  width: 1502.21px;
+  height: 615.03px;
+  border: 3px solid #d9d9d9;
+  border-radius: 42.05px;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+/* ── Zimbel logo (top-right) ─────────────────────────────────────────────── */
+/* Referência: left=1586, top=56, width=209, height=50 */
+.zimbelWrap {
+  position: absolute;
+  left: 1189.44px;
+  top: 42.04px;
+  width: 156.67px;
+  height: 37.5px;
   z-index: 10;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding-left: 14px;
-}
-
-/* ── Logo Zimbel no rodapé ───────────────────────────────────────────────── */
-.footer {
-  position: absolute;
-  bottom: 28px;
-  left: 28px;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1px;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .zimbelLogo {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.28em;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: left top;
 }
 
-.zimbelSub {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 7.5px;
+/* ── will-change nos elementos GSAP (promove para camada GPU) ────────────── */
+.logoCard     { will-change: transform, opacity; }
+.tagline      { will-change: transform, opacity; }
+.navBar       { will-change: transform, opacity; }
+.floatTile    { will-change: transform, opacity; }
+
+/* ── Card frosted glass com logo Vértice ─────────────────────────────────── */
+/* Referência: top=434, width=664, height=213 */
+.logoCard {
+  position: absolute;
+  left: 0;
+  top: 325.54px;
+  width: 497.95px;
+  height: 159.73px;
+  display: flex;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid white;
+  border-radius: 0 18px 18px 0;
+  backdrop-filter: blur(8.85px);
+  -webkit-backdrop-filter: blur(8.85px);
+  box-shadow: 0 14.99px 45.04px rgba(0, 0, 0, 0.25);
+  z-index: 5;
+  overflow: hidden;
+}
+
+.logoCardBar {
+  flex-shrink: 0;
+  width: 30.82px;
+  background: #137d8e;
+  border-top: 1px solid #09c3e0;
+  border-bottom: 1px solid #09c3e0;
+}
+
+.logoCardContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-left: 83.23px;
+}
+
+/* Referência: width=384, height=63 */
+.logoWordmark {
+  width: 288px;
+  height: 47.22px;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ── Tiles flutuantes de amenidades ──────────────────────────────────────── */
+/* Referência: 117x117px cada */
+.floatTile {
+  position: absolute;
+  width: 87.7px;
+  height: 87.7px;
+  z-index: 6;
+}
+
+.floatTile img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* Referência: gym(513,63) service(605,580) pool(135,734) */
+.tileGym     { left: 384.77px; top: 47.22px;  }
+.tileService { left: 453.74px; top: 434.97px; }
+.tilePool    { left: 101.23px; top: 550.48px; }
+
+/* ── Tagline ─────────────────────────────────────────────────────────────── */
+/* Referência: left=741, top=286, width=316 */
+.tagline {
+  position: absolute;
+  left: 555.7px;
+  top: 214.49px;
+  width: 237.02px;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  gap: 7.21px;
+  pointer-events: none;
+}
+
+.taglineAccent {
+  width: 41.18px;
+  height: 3.73px;
+  background: #ffffff;
+}
+
+/* Referência: font-size=38.3px, letter-spacing=-0.77px */
+.taglineText {
+  margin: 0;
+  font-family: 'Mulish', var(--font-main, sans-serif);
+  font-size: 28.66px;
   font-weight: 400;
-  letter-spacing: 0.35em;
-  color: rgba(255, 255, 255, 0.28);
-  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -0.58px;
 }
 
+.taglineText strong {
+  font-weight: 700;
+}
+
+/* ── Barra de navegação inferior ─────────────────────────────────────────── */
+/* Referência: left=331, width=1258, height=142 */
+.navBar {
+  position: absolute;
+  left: 248.26px;
+  bottom: 0;
+  width: 943.49px;
+  height: 106.52px;
+  background: #d9d9d9;
+  border-radius: 18px 18px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.navItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5.99px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 6.05px;
+  height: 100%;
+  transition: background 0.18s;
+}
+
+.navItem:disabled { cursor: default; }
+
+.navItem:not(:disabled):hover {
+  background: rgba(19, 125, 142, 0.08);
+}
+
+.navItem:not(:disabled):hover .navLabel {
+  color: #137d8e;
+}
+
+.navItemDivider {
+  position: relative;
+}
+
+.navItemDivider::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 30.78px;
+  background: rgba(76, 76, 76, 0.28);
+}
+
+/* Referência: maior ícone = 46×36px (Áreas Comuns) no canvas 1920px */
+.navIconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34.56px;
+  height: 26.97px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+@keyframes navPulse {
+  0%   { transform: scale(0.6); opacity: 0.7; }
+  100% { transform: scale(2.2); opacity: 0;   }
+}
+
+/* Anel de pulso — border expande e some */
+.navIconBox::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 34.56px;
+  height: 34.56px;
+  margin: -17.28px 0 0 -17.28px;
+  border-radius: 50%;
+  border: 2px solid rgba(19, 125, 142, 0.7);
+  opacity: 0;
+  transform: scale(0.6);
+  animation: navPulse 0.85s ease-out infinite;
+  pointer-events: none;
+}
+
+/* Delays escalonados para os 5 itens */
+.navItem:nth-child(1) .navIconBox::before { animation-delay: 0s; }
+.navItem:nth-child(2) .navIconBox::before { animation-delay: 0.28s; }
+.navItem:nth-child(3) .navIconBox::before { animation-delay: 0.56s; }
+.navItem:nth-child(4) .navIconBox::before { animation-delay: 0.84s; }
+.navItem:nth-child(5) .navIconBox::before { animation-delay: 1.12s; }
+
+.navIcon {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+/* Referência: font-size=24px */
+.navLabel {
+  font-family: 'Mulish', var(--font-main, sans-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: #4c4c4c;
+  line-height: 1;
+  transition: color 0.18s;
+  white-space: nowrap;
+}
