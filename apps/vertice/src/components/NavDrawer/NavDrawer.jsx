@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { gsap } from 'gsap';
-import { useTransition } from '../../context/TransitionContext';
+import { useTransition } from '@showcase/core';
 import styles from './NavDrawer.module.css';
 
 const IconClose = () => (

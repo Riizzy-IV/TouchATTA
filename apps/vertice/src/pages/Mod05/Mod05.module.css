@@ -430,3 +430,65 @@
   color: rgba(80, 150, 165, 0.4);
   letter-spacing: 1px;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Tipologias: coluna única */
+  .layout { flex-direction: column; }
+  .infoPanel { display: none; }
+  .contentArea { padding: 16px; align-items: flex-start; overflow-y: auto; }
+  .unitsGrid { grid-template-columns: 1fr; max-width: 100%; gap: 14px; }
+
+  /* Plantas: sidebar vira barra horizontal no topo */
+  .plantasWrapper { flex-direction: column; }
+
+  .plantasSidebar {
+    width: 100%;
+    height: auto;
+    max-height: 110px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-right: none;
+    border-bottom: 1px solid rgba(42, 154, 170, 0.12);
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .sidebarGroup {
+    flex-direction: row;
+    flex-shrink: 0;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .sidebarGroupLabel { display: none; }
+
+  .sidebarBtn {
+    width: auto;
+    flex-shrink: 0;
+    padding: 6px 10px;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 3px;
+  }
+
+  .sidebarBtnLabel { display: none; }
+
+  .plantasImgArea {
+    flex: 1;
+    padding: 12px 40px;
+  }
+
+  .plantasImg {
+    max-height: calc(100svh - 56px - 110px - 24px);
+    max-width: 100%;
+  }
+
+  .plantasArrow { width: 28px; height: 48px; }
+  .plantasArrowLeft  { left: 4px; }
+  .plantasArrowRight { right: 4px; }
+}

@@ -61,3 +61,20 @@
 .btn:active {
   transform: scale(0.97);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .box {
+    padding: 36px 28px;
+    max-width: 340px;
+    border-radius: 20px;
+  }
+
+  .logoImg { width: 160px; }
+
+  .subtitle { font-size: 13px; margin-bottom: 28px; }
+
+  .btn { padding: 14px 32px; font-size: 12px; }
+}

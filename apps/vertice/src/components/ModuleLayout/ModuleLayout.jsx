@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useTransition } from '../../context/TransitionContext';
+import { useTransition } from '@showcase/core';
 import NavDrawer, { useNavDrawer } from '../NavDrawer/NavDrawer';
 import styles from './ModuleLayout.module.css';
 

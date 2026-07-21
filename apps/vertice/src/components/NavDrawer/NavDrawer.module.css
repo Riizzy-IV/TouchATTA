@@ -89,3 +89,26 @@
   color: #071820 !important;
   border-color: transparent !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Drawer fullscreen na lateral direita */
+  .drawer {
+    width: 200px;
+    border-radius: 0 0 0 12px;
+  }
+
+  .item {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .item span {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+  }
+}

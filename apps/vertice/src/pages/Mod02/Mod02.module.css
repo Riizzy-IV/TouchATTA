@@ -771,3 +771,80 @@
   color: rgba(80, 150, 165, 0.4);
   letter-spacing: 1px;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* ── Guia do Bairro — accordion vertical ──────────────────────────────── */
+  .guiaWrapper {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  /* Esconde o painel de marca */
+  .guiaBrand { display: none; }
+
+  /* Colunas viram lista vertical */
+  .guiaCols {
+    flex-direction: column;
+    gap: 0;
+    background: transparent;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .guiaCol {
+    flex: none;
+    border-left: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    overflow: visible;
+    min-height: 0;
+  }
+
+  /* Aba vira cabeçalho de accordion */
+  .guiaTab {
+    height: 56px;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 0 20px;
+    background: rgba(4,16,24,0.82);
+    filter: none;
+  }
+
+  .guiaTab:hover { filter: none; background: rgba(4,16,24,0.9); }
+  .guiaTabActive { background: rgba(19,125,142,0.22); filter: none; }
+
+  .lottieIcon { width: 28px; height: 28px; }
+
+  .guiaTabLabel {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-align: left;
+  }
+
+  /* Painel — expande abaixo da aba (sem posição absoluta) */
+  .guiaPanel {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    height: 0;
+    transform: none;
+    transition: height 0.35s cubic-bezier(0.4,0,0.2,1);
+    overflow: hidden;
+    border-top: none;
+  }
+
+  .guiaPanelOpen {
+    height: 280px;
+    transform: none;
+  }
+
+  .guiaPanelHead { display: none; }
+
+  .guiaPanelItemName { font-size: 13px; }
+
+  .guiaPanelItem { padding: 10px 20px; }
+}

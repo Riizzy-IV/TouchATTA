@@ -143,3 +143,44 @@
   overflow: hidden;
   position: relative;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .topBar {
+    height: 56px;
+    padding: 0 12px;
+    gap: 0;
+  }
+
+  .brand { margin-right: 12px; }
+  .brandLogo { height: 20px; }
+
+  .divider { margin-right: 12px; }
+
+  .tabs { gap: 0; }
+
+  .tab {
+    font-size: 9px;
+    padding: 6px 10px;
+    letter-spacing: 0.8px;
+  }
+
+  .tab::after {
+    left: 10px;
+    right: 10px;
+  }
+
+  .closeBtn {
+    width: 36px;
+    height: 36px;
+    margin-left: 8px;
+  }
+
+  .closeBtn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+}
