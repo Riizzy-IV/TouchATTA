@@ -41,33 +41,33 @@ function CardsStrip({ items }) {
       { x: 0, opacity: 1, duration: 0.45, ease: 'back.out(1.4)', delay: 0.3 }
     );
 
-    // Listeners nativos non-passive — única forma confiável de drag no mobile
     const strip = stripRef.current;
     const hint  = swipeHintRef.current;
 
     const getMin = () => {
-      const cw    = strip?.parentElement?.offsetWidth ?? 580;
+      const cw    = strip?.parentElement?.clientWidth ?? 580;
       const total = items.length * CARD_W + (items.length - 1) * CARD_GAP;
       return Math.min(0, cw - total);
     };
 
-    const touchStart = (e) => {
+    const start = (x) => {
       dragging.current = true;
-      lastX.current    = e.touches[0].clientX;
+      lastX.current    = x;
       velX.current     = 0;
       gsap.killTweensOf(strip);
     };
-    const touchMove = (e) => {
+
+    const move = (x) => {
       if (!dragging.current) return;
-      e.preventDefault();
-      const dx = e.touches[0].clientX - lastX.current;
+      const dx       = x - lastX.current;
       velX.current   = dx;
-      lastX.current  = e.touches[0].clientX;
+      lastX.current  = x;
       const next     = Math.max(getMin(), Math.min(0, stripX.current + dx));
       stripX.current = next;
       gsap.set(strip, { x: next });
     };
-    const touchEnd = () => {
+
+    const end = () => {
       if (!dragging.current) return;
       dragging.current = false;
       const target = Math.max(getMin(), Math.min(0, stripX.current + velX.current * 5));
@@ -77,104 +77,46 @@ function CardsStrip({ items }) {
       });
     };
 
-    const hintTouchStart = (e) => {
-      e.preventDefault(); // bloqueia long-press e context menu
-      touchStart(e);
-    };
+    // — Touch handlers (mobile) —
+    const onTS  = (e) => { e.preventDefault(); start(e.touches[0].clientX); };
+    const onTM  = (e) => { e.preventDefault(); move(e.touches[0].clientX); };
+    const onTE  = ()  => end();
 
-    strip?.addEventListener('touchstart',  touchStart,     { passive: false });
-    strip?.addEventListener('touchmove',   touchMove,      { passive: false });
-    strip?.addEventListener('touchend',    touchEnd);
-    strip?.addEventListener('touchcancel', touchEnd);
-    hint?.addEventListener('touchstart',   hintTouchStart, { passive: false });
-    hint?.addEventListener('touchmove',    touchMove,      { passive: false });
-    hint?.addEventListener('touchend',     touchEnd);
-    hint?.addEventListener('touchcancel',  touchEnd);
+    // — Pointer handlers (desktop) —
+    const onPD  = (e) => { start(e.clientX); try { strip.setPointerCapture(e.pointerId); } catch(_){} };
+    const onPM  = (e) => move(e.clientX);
+    const onPU  = ()  => end();
+
+    strip.addEventListener('touchstart',   onTS, { passive: false });
+    strip.addEventListener('touchmove',    onTM, { passive: false });
+    strip.addEventListener('touchend',     onTE);
+    strip.addEventListener('touchcancel',  onTE);
+    strip.addEventListener('pointerdown',  onPD);
+    strip.addEventListener('pointermove',  onPM);
+    strip.addEventListener('pointerup',    onPU);
+    strip.addEventListener('pointerleave', onPU);
+
+    hint.addEventListener('touchstart',   (e) => { e.preventDefault(); e.stopPropagation(); start(e.touches[0].clientX); }, { passive: false });
+    hint.addEventListener('touchmove',    (e) => { e.preventDefault(); e.stopPropagation(); move(e.touches[0].clientX); },  { passive: false });
+    hint.addEventListener('touchend',     onTE);
+    hint.addEventListener('touchcancel',  onTE);
 
     return () => {
-      strip?.removeEventListener('touchstart',  touchStart);
-      strip?.removeEventListener('touchmove',   touchMove);
-      strip?.removeEventListener('touchend',    touchEnd);
-      strip?.removeEventListener('touchcancel', touchEnd);
-      hint?.removeEventListener('touchstart',   hintTouchStart);
-      hint?.removeEventListener('touchmove',    touchMove);
-      hint?.removeEventListener('touchend',     touchEnd);
-      hint?.removeEventListener('touchcancel',  touchEnd);
+      strip.removeEventListener('touchstart',   onTS);
+      strip.removeEventListener('touchmove',    onTM);
+      strip.removeEventListener('touchend',     onTE);
+      strip.removeEventListener('touchcancel',  onTE);
+      strip.removeEventListener('pointerdown',  onPD);
+      strip.removeEventListener('pointermove',  onPM);
+      strip.removeEventListener('pointerup',    onPU);
+      strip.removeEventListener('pointerleave', onPU);
     };
   }, []);
-
-  const getMinX = () => {
-    if (!stripRef.current) return 0;
-    const cw    = stripRef.current.parentElement?.offsetWidth ?? 580;
-    const total = items.length * CARD_W + (items.length - 1) * CARD_GAP;
-    return Math.min(0, cw - total);
-  };
-
-  const getScale = () => {
-    const parent = stripRef.current?.parentElement;
-    if (!parent) return 1;
-    const rect = parent.getBoundingClientRect();
-    return rect.width / parent.offsetWidth || 1;
-  };
-
-  const onDown = (e) => {
-    dragging.current = true;
-    lastX.current    = e.clientX;
-    velX.current     = 0;
-    try { stripRef.current?.setPointerCapture(e.pointerId); } catch (_) {}
-    gsap.killTweensOf(stripRef.current);
-  };
-
-  const onMove = (e) => {
-    if (!dragging.current) return;
-    const dx       = e.clientX - lastX.current;
-    velX.current   = dx;
-    lastX.current  = e.clientX;
-    const next     = Math.max(getMinX(), Math.min(0, stripX.current + dx));
-    stripX.current = next;
-    gsap.set(stripRef.current, { x: next });
-  };
-
-  const onUp = () => {
-    if (!dragging.current) return;
-    dragging.current = false;
-    const target = Math.max(getMinX(), Math.min(0, stripX.current + velX.current * 5));
-    gsap.to(stripRef.current, {
-      x: target, duration: 0.55, ease: 'power3.out',
-      onUpdate: () => { stripX.current = gsap.getProperty(stripRef.current, 'x'); },
-    });
-  };
-
-  const onTouchStart = (e) => {
-    dragging.current = true;
-    lastX.current    = e.touches[0].clientX;
-    velX.current     = 0;
-    gsap.killTweensOf(stripRef.current);
-  };
-
-  const onTouchMove = (e) => {
-    if (!dragging.current) return;
-    const dx       = e.touches[0].clientX - lastX.current;
-    velX.current   = dx;
-    lastX.current  = e.touches[0].clientX;
-    const next     = Math.max(getMinX(), Math.min(0, stripX.current + dx));
-    stripX.current = next;
-    gsap.set(stripRef.current, { x: next });
-  };
-
-  const onTouchEnd = () => onUp();
 
   return (
     <div
       className={styles.strip}
       ref={stripRef}
-      onPointerDown={onDown}
-      onPointerMove={onMove}
-      onPointerUp={onUp}
-      onPointerLeave={onUp}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
     >
       {items.map((item, i) => (
         <div key={item.id} className={styles.card} ref={el => (cardRefs.current[i] = el)}>
@@ -197,18 +139,8 @@ function CardsStrip({ items }) {
         </div>
       ))}
 
-      {/* Swipe hint — dentro do strip, move junto com os cards */}
-      <div
-        className={styles.swipeHint}
-        ref={swipeHintRef}
-        onPointerDown={onDown}
-        onPointerMove={onMove}
-        onPointerUp={onUp}
-        onPointerLeave={onUp}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-      >
+      {/* Swipe hint — listeners nativos no useEffect */}
+      <div className={styles.swipeHint} ref={swipeHintRef}>
         <img src="/img/swipe-helper3.gif" alt="" draggable={false} />
       </div>
     </div>
