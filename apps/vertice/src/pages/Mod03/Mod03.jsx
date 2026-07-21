@@ -685,7 +685,7 @@ function FachadaInterativaView() {
       <iframe
         src="https://editor.atta3d.com.br/projetos/vertice/embed"
         title="Experiencia 3D - Vértice Anália Franco"
-        style={{ width: '100%', aspectRatio: '16/9', border: 0, display: 'block' }}
+        className={styles.fachadaIframe}
         allow="fullscreen; xr-spatial-tracking"
         allowFullScreen
         loading="lazy"
