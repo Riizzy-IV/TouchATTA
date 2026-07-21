@@ -41,13 +41,66 @@ function CardsStrip({ items }) {
       { x: 0, opacity: 1, duration: 0.45, ease: 'back.out(1.4)', delay: 0.3 }
     );
 
-    // Registra touchmove como non-passive para permitir preventDefault
-    const el = stripRef.current;
-    const handleTouchMove = (e) => {
-      if (dragging.current) e.preventDefault();
+    // Listeners nativos non-passive — única forma confiável de drag no mobile
+    const strip = stripRef.current;
+    const hint  = swipeHintRef.current;
+
+    const getMin = () => {
+      const cw    = strip?.parentElement?.offsetWidth ?? 580;
+      const total = items.length * CARD_W + (items.length - 1) * CARD_GAP;
+      return Math.min(0, cw - total);
     };
-    el?.addEventListener('touchmove', handleTouchMove, { passive: false });
-    return () => el?.removeEventListener('touchmove', handleTouchMove);
+
+    const touchStart = (e) => {
+      dragging.current = true;
+      lastX.current    = e.touches[0].clientX;
+      velX.current     = 0;
+      gsap.killTweensOf(strip);
+    };
+    const touchMove = (e) => {
+      if (!dragging.current) return;
+      e.preventDefault();
+      const dx = e.touches[0].clientX - lastX.current;
+      velX.current   = dx;
+      lastX.current  = e.touches[0].clientX;
+      const next     = Math.max(getMin(), Math.min(0, stripX.current + dx));
+      stripX.current = next;
+      gsap.set(strip, { x: next });
+    };
+    const touchEnd = () => {
+      if (!dragging.current) return;
+      dragging.current = false;
+      const target = Math.max(getMin(), Math.min(0, stripX.current + velX.current * 5));
+      gsap.to(strip, {
+        x: target, duration: 0.55, ease: 'power3.out',
+        onUpdate: () => { stripX.current = gsap.getProperty(strip, 'x'); },
+      });
+    };
+
+    const hintTouchStart = (e) => {
+      e.preventDefault(); // bloqueia long-press e context menu
+      touchStart(e);
+    };
+
+    strip?.addEventListener('touchstart',  touchStart,     { passive: false });
+    strip?.addEventListener('touchmove',   touchMove,      { passive: false });
+    strip?.addEventListener('touchend',    touchEnd);
+    strip?.addEventListener('touchcancel', touchEnd);
+    hint?.addEventListener('touchstart',   hintTouchStart, { passive: false });
+    hint?.addEventListener('touchmove',    touchMove,      { passive: false });
+    hint?.addEventListener('touchend',     touchEnd);
+    hint?.addEventListener('touchcancel',  touchEnd);
+
+    return () => {
+      strip?.removeEventListener('touchstart',  touchStart);
+      strip?.removeEventListener('touchmove',   touchMove);
+      strip?.removeEventListener('touchend',    touchEnd);
+      strip?.removeEventListener('touchcancel', touchEnd);
+      hint?.removeEventListener('touchstart',   hintTouchStart);
+      hint?.removeEventListener('touchmove',    touchMove);
+      hint?.removeEventListener('touchend',     touchEnd);
+      hint?.removeEventListener('touchcancel',  touchEnd);
+    };
   }, []);
 
   const getMinX = () => {
