@@ -40,6 +40,14 @@ function CardsStrip({ items }) {
       { x: -50, opacity: 0 },
       { x: 0, opacity: 1, duration: 0.45, ease: 'back.out(1.4)', delay: 0.3 }
     );
+
+    // Registra touchmove como non-passive para permitir preventDefault
+    const el = stripRef.current;
+    const handleTouchMove = (e) => {
+      if (dragging.current) e.preventDefault();
+    };
+    el?.addEventListener('touchmove', handleTouchMove, { passive: false });
+    return () => el?.removeEventListener('touchmove', handleTouchMove);
   }, []);
 
   const getMinX = () => {
@@ -60,14 +68,13 @@ function CardsStrip({ items }) {
     dragging.current = true;
     lastX.current    = e.clientX;
     velX.current     = 0;
-    stripRef.current?.setPointerCapture(e.pointerId);
+    try { stripRef.current?.setPointerCapture(e.pointerId); } catch (_) {}
     gsap.killTweensOf(stripRef.current);
   };
 
   const onMove = (e) => {
     if (!dragging.current) return;
-    const scale    = getScale();
-    const dx       = (e.clientX - lastX.current) / scale;
+    const dx       = e.clientX - lastX.current;
     velX.current   = dx;
     lastX.current  = e.clientX;
     const next     = Math.max(getMinX(), Math.min(0, stripX.current + dx));
@@ -85,6 +92,25 @@ function CardsStrip({ items }) {
     });
   };
 
+  const onTouchStart = (e) => {
+    dragging.current = true;
+    lastX.current    = e.touches[0].clientX;
+    velX.current     = 0;
+    gsap.killTweensOf(stripRef.current);
+  };
+
+  const onTouchMove = (e) => {
+    if (!dragging.current) return;
+    const dx       = e.touches[0].clientX - lastX.current;
+    velX.current   = dx;
+    lastX.current  = e.touches[0].clientX;
+    const next     = Math.max(getMinX(), Math.min(0, stripX.current + dx));
+    stripX.current = next;
+    gsap.set(stripRef.current, { x: next });
+  };
+
+  const onTouchEnd = () => onUp();
+
   return (
     <div
       className={styles.strip}
@@ -93,6 +119,9 @@ function CardsStrip({ items }) {
       onPointerMove={onMove}
       onPointerUp={onUp}
       onPointerLeave={onUp}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
     >
       {items.map((item, i) => (
         <div key={item.id} className={styles.card} ref={el => (cardRefs.current[i] = el)}>
@@ -123,6 +152,9 @@ function CardsStrip({ items }) {
         onPointerMove={onMove}
         onPointerUp={onUp}
         onPointerLeave={onUp}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
       >
         <img src="/img/swipe-helper3.gif" alt="" draggable={false} />
       </div>

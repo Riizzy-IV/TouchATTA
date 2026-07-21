@@ -860,6 +860,13 @@
     top: 80px;
     bottom: 80px;
     overflow: visible;
+    touch-action: none;
+  }
+
+  /* Strip — garante que o browser não intercepta o gesto */
+  .strip {
+    touch-action: none;
+    -webkit-user-select: none;
   }
 
   /* Swipe hint — alça visível na borda direita */
@@ -872,6 +879,7 @@
     width: 64px;
     height: 64px;
     border-radius: 12px 0 0 12px;
+    touch-action: none;
   }
 
   .swipeHint img {
