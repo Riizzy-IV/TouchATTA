@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTransition } from '../../context/TransitionContext';
+import { useTransition } from '@showcase/core';
 import styles from './Mod01.module.css';
 
 const TABS = ['EMPREENDIMENTO', 'UNIDADES', 'LAZER'];

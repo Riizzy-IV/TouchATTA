@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import VideoOverlay from '../../components/VideoOverlay/VideoOverlay';
-import { useTransition } from '../../context/TransitionContext';
+import { useTransition } from '@showcase/core';
 import styles from './Home.module.css';
 
 const MODULES = [
