@@ -116,7 +116,14 @@ function CardsStrip({ items }) {
       ))}
 
       {/* Swipe hint — dentro do strip, move junto com os cards */}
-      <div className={styles.swipeHint} ref={swipeHintRef}>
+      <div
+        className={styles.swipeHint}
+        ref={swipeHintRef}
+        onPointerDown={onDown}
+        onPointerMove={onMove}
+        onPointerUp={onUp}
+        onPointerLeave={onUp}
+      >
         <img src="/img/swipe-helper3.gif" alt="" draggable={false} />
       </div>
     </div>

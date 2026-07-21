@@ -248,7 +248,11 @@
   align-items: center;
   justify-content: center;
   z-index: 50;
-  pointer-events: none;
+  cursor: grab;
+}
+
+.swipeHint:active {
+  cursor: grabbing;
 }
 
 .swipeHint img {
@@ -847,4 +851,31 @@
   .guiaPanelItemName { font-size: 13px; }
 
   .guiaPanelItem { padding: 10px 20px; }
+
+  /* CarouselArea — espreita na borda direita no mobile */
+  .carouselArea {
+    left: auto;
+    right: 0;
+    width: 72px;
+    top: 80px;
+    bottom: 80px;
+    overflow: visible;
+  }
+
+  /* Swipe hint — alça visível na borda direita */
+  .swipeHint {
+    position: absolute;
+    left: 0;
+    right: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 12px 0 0 12px;
+  }
+
+  .swipeHint img {
+    width: 42px;
+    height: 42px;
+  }
 }
