@@ -269,6 +269,50 @@
   overflow: hidden;
 }
 
+.gmapsToggle {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  background: rgba(7, 24, 32, 0.88);
+  color: rgba(200, 240, 248, 0.95);
+  font-family: 'Mulish', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border: 1px solid rgba(42, 154, 170, 0.35);
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.gmapsToggle:hover,
+.gmapsToggle:active {
+  background: rgba(19, 125, 142, 0.9);
+  color: #fff;
+}
+
+.gmapsToggleActive {
+  background: rgba(19, 125, 142, 0.85);
+  color: #fff;
+  border-color: rgba(42, 154, 170, 0.6);
+}
+
+.gmapsToggleActive:hover,
+.gmapsToggleActive:active {
+  background: rgba(7, 24, 32, 0.88);
+  color: rgba(200, 240, 248, 0.95);
+}
+
 .mapaFrame {
   width: 100%;
   height: 100%;

@@ -314,6 +314,7 @@ function ConvenienciasView() {
 /* ── Mapa ───────────────────────────────────────────────────────────────── */
 const VERTICE_LAT = -23.5687;
 const VERTICE_LNG = -46.5599;
+const GMAPS_EMBED = `https://maps.google.com/maps?q=${VERTICE_LAT},${VERTICE_LNG}&z=16&output=embed`;
 
 const logoPinIcon = L.divIcon({
   className: '',
@@ -345,18 +346,42 @@ const logoPinIcon = L.divIcon({
 });
 
 function MapaView() {
+  const [useGmaps, setUseGmaps] = useState(false);
+
   return (
     <div className={styles.mapaWrapper}>
-      <MapContainer
-        center={[VERTICE_LAT, VERTICE_LNG]}
-        zoom={16}
-        style={{ width: '100%', height: '100%' }}
-        zoomControl={false}
-        attributionControl={false}
+      {useGmaps ? (
+        <iframe
+          src={GMAPS_EMBED}
+          width="100%"
+          height="100%"
+          style={{ border: 'none', display: 'block' }}
+          allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Localização Vértice Anália Franco"
+        />
+      ) : (
+        <MapContainer
+          center={[VERTICE_LAT, VERTICE_LNG]}
+          zoom={16}
+          style={{ width: '100%', height: '100%' }}
+          zoomControl={false}
+          attributionControl={false}
+        >
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <Marker position={[VERTICE_LAT, VERTICE_LNG]} icon={logoPinIcon} />
+        </MapContainer>
+      )}
+
+      <button
+        className={`${styles.gmapsToggle} ${useGmaps ? styles.gmapsToggleActive : ''}`}
+        onClick={() => setUseGmaps(v => !v)}
       >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Marker position={[VERTICE_LAT, VERTICE_LNG]} icon={logoPinIcon} />
-      </MapContainer>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+        {useGmaps ? 'Mapa padrão' : 'Google Maps'}
+      </button>
     </div>
   );
 }
