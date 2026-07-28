@@ -212,7 +212,10 @@ export default function Projeto() {
         ) : activeTopTab === 'orientacao-solar' ? (
           <SolarOrientacao />
         ) : activeTopTab === 'fachada-interativa' ? (
-          <Fachada360 />
+          <div className={styles.emBreve}>
+            <span className={styles.emBreveLabel}>EM BREVE</span>
+            <p className={styles.emBreveSubtitle}>FACHADA INTERATIVA</p>
+          </div>
         ) : activeTopTab === 'implantacao' ? (
           <Implantacao />
         ) : activeTopTab === 'diferenciais' ? (
