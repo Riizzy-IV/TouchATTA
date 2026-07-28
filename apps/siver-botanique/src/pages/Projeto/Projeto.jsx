@@ -210,7 +210,10 @@ export default function Projeto() {
           </div>
           </>
         ) : activeTopTab === 'orientacao-solar' ? (
-          <SolarOrientacao />
+          <div className={styles.emBreve}>
+            <span className={styles.emBreveLabel}>EM BREVE</span>
+            <p className={styles.emBreveSubtitle}>ORIENTAÇÃO SOLAR</p>
+          </div>
         ) : activeTopTab === 'fachada-interativa' ? (
           <div className={styles.emBreve}>
             <span className={styles.emBreveLabel}>EM BREVE</span>
