@@ -4,7 +4,7 @@
   --color-bordo: #5B0A28;
   --color-ocre: #C5A26A;
   --color-cinza: #444444;
-  --color-bg: #0e0408;
+  --color-bg: #EDE4D8;
   --font-main: 'Manrope', 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -28,7 +28,7 @@ body,
   overflow: hidden;
   background-color: var(--color-bg);
   font-family: var(--font-main);
-  color: #ffffff;
+  color: #444444;
 }
 
 a {

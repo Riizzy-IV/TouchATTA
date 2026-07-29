@@ -28,7 +28,7 @@ export default function ScaleWrapper({ children }) {
       <div style={{
         width: '100vw',
         height: '100svh',
-        background: '#0e0408',
+        background: '#EDE4D8',
         overflow: 'hidden',
         position: 'relative',
       }}>
@@ -41,7 +41,7 @@ export default function ScaleWrapper({ children }) {
     <div style={{
       width: '100vw',
       height: '100vh',
-      background: '#0e0408',
+      background: '#EDE4D8',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

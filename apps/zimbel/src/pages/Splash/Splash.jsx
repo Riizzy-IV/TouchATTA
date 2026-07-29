@@ -21,20 +21,25 @@ export default function Splash({ onStart }) {
 
   return (
     <div ref={rootRef} className={styles.root}>
-      {/* Marca d'água Z */}
+      <div className={styles.topLine} />
+
       <div className={styles.watermark} aria-hidden>
-        <ZimbelLogo color="#5B0A28" width={960} />
+        <ZimbelLogo color="#5B0A28" width={640} />
       </div>
 
-      {/* Card central */}
       <div className={styles.card}>
-        <p className={styles.welcome}>SEJA BEM VINDO AO</p>
+        <p className={styles.welcome}>SEJA BEM VINDO AO TOUCHATTA</p>
+
         <div className={styles.logoWrap}>
-          <ZimbelLogo color="white" width={280} />
+          <ZimbelLogo color="#5B0A28" width={300} />
         </div>
+
+        <div className={styles.divider} />
+
         <button className={styles.btn} onClick={handleAccess}>
           ACESSAR CATÁLOGO
         </button>
+
         <p className={styles.hint}>
           PARA UMA MELHOR EXPERIÊNCIA DE NAVEGAÇÃO<br />
           ESTE TOUCHATTA SERÁ EXECUTADO EM TELA CHEIA.
