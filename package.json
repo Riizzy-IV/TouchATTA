@@ -9,6 +9,8 @@
     "vertice": "npm run dev --workspace=apps/vertice",
     "build:vertice": "npm run build --workspace=apps/vertice",
     "siver": "npm run dev --workspace=apps/siver-botanique",
-    "build:siver": "npm run build --workspace=apps/siver-botanique"
+    "build:siver": "npm run build --workspace=apps/siver-botanique",
+    "zimbel": "npm run dev --workspace=apps/zimbel",
+    "build:zimbel": "npm run build --workspace=apps/zimbel"
   }
 }

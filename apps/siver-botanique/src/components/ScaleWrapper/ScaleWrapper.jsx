@@ -2,20 +2,40 @@ import { useState, useEffect } from 'react';
 
 const DESIGN_W = 1440;
 const DESIGN_H = 810;
+const MOBILE_BP = 768;
+
+function isMobile() {
+  return window.innerWidth <= MOBILE_BP;
+}
 
 export default function ScaleWrapper({ children }) {
-  const [scale, setScale] = useState(1);
+  const [mobile, setMobile] = useState(() => isMobile());
+  const [scale, setScale] = useState(() =>
+    Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H)
+  );
 
   useEffect(() => {
     function update() {
-      const sw = window.innerWidth;
-      const sh = window.innerHeight;
-      setScale(Math.min(sw / DESIGN_W, sh / DESIGN_H));
+      setMobile(isMobile());
+      setScale(Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H));
     }
-    update();
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
   }, []);
+
+  if (mobile) {
+    return (
+      <div style={{
+        width: '100vw',
+        height: '100svh',
+        background: '#0d2416',
+        overflow: 'hidden',
+        position: 'relative',
+      }}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <div style={{

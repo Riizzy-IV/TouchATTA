@@ -96,3 +96,26 @@
   display: block;
   transition: color 0.2s ease;
 }
+
+/* ── Mobile ────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .btn {
+    gap: 6px;
+    padding: 2px 4px;
+  }
+
+  .circle {
+    width: 46px;
+    height: 46px;
+  }
+
+  .circle svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .label span {
+    font-size: 7.5px;
+    letter-spacing: 1px;
+  }
+}
