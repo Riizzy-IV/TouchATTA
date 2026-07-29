@@ -1,0 +1,237 @@
+.scene {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0e0408 0%, #1a0712 40%, #0e0408 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Marca d'água do símbolo Z */
+.watermark {
+  position: absolute;
+  left: -120px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Linha de acento */
+.accentBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #5B0A28 30%, #C5A26A 60%, transparent 100%);
+  z-index: 1;
+}
+
+/* Header com logo */
+.header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 52px;
+}
+
+.tagline {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: rgba(197, 162, 106, 0.75);
+  text-transform: uppercase;
+}
+
+/* Grid de cards */
+.cards {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* Card base */
+.card {
+  width: 340px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cardActive {
+  cursor: pointer;
+}
+
+.cardActive:hover {
+  transform: translateY(-6px);
+  border-color: rgba(197, 162, 106, 0.35);
+  box-shadow: 0 20px 60px rgba(91, 10, 40, 0.4);
+}
+
+.cardComingSoon {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Imagem do card */
+.cardImg {
+  position: relative;
+  height: 240px;
+  background: #1a0b12;
+  overflow: hidden;
+}
+
+.cardImgEl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.cardImgPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, #2a0e1e 0%, #0e0408 100%);
+  opacity: 0.8;
+}
+
+.comingSoonBadge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(91, 10, 40, 0.9);
+  border: 1px solid rgba(197, 162, 106, 0.4);
+  color: #C5A26A;
+  font-family: 'Manrope', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+}
+
+/* Info do card */
+.cardInfo {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cardAccentLine {
+  width: 32px;
+  height: 2px;
+  border-radius: 1px;
+  margin-bottom: 8px;
+}
+
+.cardSubtitulo {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(197, 162, 106, 0.7);
+}
+
+.cardNome {
+  font-family: 'Manrope', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.cardDesc {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.cardCta {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #C5A26A;
+  margin-top: auto;
+  padding-top: 16px;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.cardActive:hover .cardCta {
+  color: #d4b87e;
+}
+
+/* Footer */
+.footer {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+}
+
+.footer span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .header {
+    margin-bottom: 32px;
+  }
+
+  .cards {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 0 20px;
+    overflow-y: auto;
+    max-height: calc(100svh - 200px);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .cards::-webkit-scrollbar { display: none; }
+
+  .card {
+    width: 100%;
+  }
+
+  .cardImg { height: 180px; }
+
+  .watermark { display: none; }
+}
