@@ -11,6 +11,8 @@
     "siver": "npm run dev --workspace=apps/siver-botanique",
     "build:siver": "npm run build --workspace=apps/siver-botanique",
     "zimbel": "npm run dev --workspace=apps/zimbel",
-    "build:zimbel": "npm run build --workspace=apps/zimbel"
+    "build:zimbel": "npm run build --workspace=apps/zimbel",
+    "evolution": "npm run dev --workspace=apps/evolution",
+    "build:evolution": "npm run build --workspace=apps/evolution"
   }
 }

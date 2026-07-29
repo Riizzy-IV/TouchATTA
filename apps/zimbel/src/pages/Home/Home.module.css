@@ -1,7 +1,7 @@
 .scene {
   width: 100%;
   height: 100%;
-  background: #EDE4D8;
+  background: url('/img/Background.png') center / cover no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,68 +10,44 @@
   overflow: hidden;
 }
 
-/* Marca d'água — símbolo Z em baixo à direita */
-.watermark {
+/* ── Header ─────────────────────────────────────────────────── */
+.header {
   position: absolute;
-  right: -80px;
-  bottom: -80px;
-  opacity: 0.07;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Linha de acento no topo */
-.accentBar {
-  position: absolute;
-  top: 0;
+  top: 48px;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent 0%, #5B0A28 25%, #C5A26A 65%, transparent 100%);
-  z-index: 1;
-}
-
-/* Header */
-.header {
-  position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 44px;
+  gap: 10px;
 }
 
 .tagline {
-  font-family: 'Manrope', sans-serif;
-  font-size: 9px;
+  font-family: 'Zalando Sans', sans-serif;
+  font-size: 8px;
   font-weight: 600;
   letter-spacing: 4px;
-  color: #C5A26A;
+  color: rgba(197, 162, 106, 0.75);
   text-transform: uppercase;
 }
 
-/* Grid de cards */
+/* ── Cards container ─────────────────────────────────────────── */
 .cards {
   position: relative;
   z-index: 2;
   display: flex;
-  gap: 24px;
-  align-items: stretch;
+  gap: 40px;
+  align-items: flex-end;
 }
 
-/* Card base */
+/* ── Card shell ──────────────────────────────────────────────── */
 .card {
-  width: 320px;
-  background: #ffffff;
-  border-radius: 4px;
-  overflow: hidden;
+  position: relative;
+  width: 480px;
   display: flex;
   flex-direction: column;
-  box-shadow:
-    0 2px 8px rgba(91, 10, 40, 0.06),
-    0 8px 32px rgba(91, 10, 40, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .cardActive {
@@ -79,119 +55,95 @@
 }
 
 .cardActive:hover {
-  transform: translateY(-5px);
-  box-shadow:
-    0 4px 16px rgba(91, 10, 40, 0.1),
-    0 24px 56px rgba(91, 10, 40, 0.16);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 64px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
-.cardComingSoon {
-  opacity: 0.65;
+.cardInactive {
   cursor: default;
+  opacity: 0.6;
 }
 
-/* Imagem do card */
-.cardImg {
-  position: relative;
-  height: 220px;
-  background: #D8CEBF;
-  overflow: hidden;
+/* ── Card image — portrait completo ──────────────────────────── */
+.cardImgWrap {
+  width: 100%;
 }
 
 .cardImgEl {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
   display: block;
+  transition: transform 0.4s ease;
 }
 
-.cardImgPlaceholder {
+.cardActive:hover .cardImgEl {
+  transform: scale(1.02);
+}
+
+.cardImgBlank {
   width: 100%;
-  height: 100%;
+  height: 340px;
+  background: #3a0619;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #D8CEBF;
 }
 
-.comingSoonBadge {
+/* ── CTA button ──────────────────────────────────────────────── */
+.ctaBtn {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  background: #5B0A28;
-  color: #C5A26A;
-  font-family: 'Manrope', sans-serif;
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  padding: 5px 10px;
-  border-radius: 2px;
-}
-
-/* Info do card */
-.cardInfo {
-  padding: 22px 24px 26px;
-  flex: 1;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.cardAccentLine {
-  width: 28px;
-  height: 2px;
-  border-radius: 1px;
-  margin-bottom: 10px;
-}
-
-.cardSubtitulo {
-  font-family: 'Manrope', sans-serif;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  padding: 12px 0;
+  background: #C5A26A;
+  color: #ffffff;
+  font-family: 'Zalando Sans', sans-serif;
   font-size: 9px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #C5A26A;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+  z-index: 5;
 }
 
-.cardNome {
-  font-family: 'Manrope', sans-serif;
-  font-size: 26px;
-  font-weight: 700;
-  color: #5B0A28;
-  line-height: 1.1;
-  letter-spacing: -0.5px;
+.ctaBtn:hover {
+  background: #5B0A28;
+  transform: translateX(-50%) scale(1.04);
 }
 
-.cardDesc {
-  font-family: 'Manrope', sans-serif;
-  font-size: 11px;
-  font-weight: 400;
-  color: #888;
-  letter-spacing: 0.3px;
-  margin-top: 4px;
-}
-
-.cardCta {
-  display: inline-block;
-  margin-top: auto;
-  padding-top: 18px;
-  font-family: 'Manrope', sans-serif;
+.ctaBtnDisabled {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  padding: 12px 0;
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'Zalando Sans', sans-serif;
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 2.5px;
-  color: #5B0A28;
-  transition: color 0.2s ease;
+  letter-spacing: 3px;
+  border-radius: 2px;
+  white-space: nowrap;
+  z-index: 5;
 }
 
-.cardActive:hover .cardCta {
-  color: #C5A26A;
-}
-
-/* Footer */
+/* ── Footer ──────────────────────────────────────────────────── */
 .footer {
   position: absolute;
-  bottom: 20px;
+  bottom: 18px;
   left: 0;
   right: 0;
   text-align: center;
@@ -199,15 +151,15 @@
 }
 
 .footer span {
-  font-family: 'Manrope', sans-serif;
-  font-size: 9px;
+  font-family: 'Zalando Sans', sans-serif;
+  font-size: 8px;
   font-weight: 400;
   letter-spacing: 1.5px;
-  color: rgba(91, 10, 40, 0.3);
+  color: rgba(255, 255, 255, 0.22);
   text-transform: uppercase;
 }
 
-/* ── Overlay iframe ─────────────────────────────────────────────────────── */
+/* ── Overlay iframe ──────────────────────────────────────────── */
 .overlay {
   position: absolute;
   inset: 0;
@@ -232,7 +184,7 @@
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(91, 10, 40, 0.2);
   color: #5B0A28;
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Zalando Sans', sans-serif;
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 2.5px;
@@ -241,7 +193,7 @@
   cursor: pointer;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease;
   z-index: 101;
 }
 
@@ -250,28 +202,24 @@
   border-color: #5B0A28;
 }
 
-/* ── Mobile ─────────────────────────────────────────────────────────────── */
+/* ── Mobile ──────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .scene { background: #EDE4D8; }
-
-  .header { margin-bottom: 28px; }
+  .header { margin-bottom: 16px; }
 
   .cards {
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
+    padding-top: 20px;
     width: 100%;
-    padding: 0 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     overflow-y: auto;
-    max-height: calc(100svh - 180px);
-    -webkit-overflow-scrolling: touch;
+    max-height: calc(100svh - 140px);
     scrollbar-width: none;
+    align-items: center;
   }
 
   .cards::-webkit-scrollbar { display: none; }
 
-  .card { width: 100%; }
-
-  .cardImg { height: 180px; }
-
-  .watermark { display: none; }
+  .card { width: min(290px, 100%); }
 }

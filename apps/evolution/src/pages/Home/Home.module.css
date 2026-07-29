@@ -1,0 +1,321 @@
+/*
+  Layout positions scaled 0.75× from Figma (1920×1080 → 1440×810)
+  Panel: left 907px | Oval: 875×176, 283×458px | NavBtns: x=1267px
+*/
+
+.scene {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #0c1a36;
+}
+
+/* ── Hero photo ─────────────────────────────────────────────────────────── */
+.hero {
+  position: absolute;
+  inset: 0;
+}
+
+.heroImg {
+  width: 90%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% center;
+  display: block;
+}
+
+/* ── Right dark panel ───────────────────────────────────────────────────── */
+.panel {
+  position: absolute;
+  left: 1000px;
+  top: 0;
+  width: 533px;
+  height: 100%;
+  background: #0c1a36;
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Geometric pattern overlay on panel ─────────────────────────────────── */
+.patternOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/pattern-ocre.svg');
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* ── Oval brand pill ────────────────────────────────────────────────────── */
+.oval {
+  position: absolute;
+  left: 800px;
+  top: 100px;
+  height: 520px;
+  width: auto;
+  z-index: 10;
+}
+
+.ovalLogo {
+  width: 220px;
+  height: auto;
+}
+
+.ovalEyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 4.4px;
+  color: #4C4C4C;
+  text-align: center;
+  margin-bottom: 2px;
+  opacity: 0.75;
+}
+
+.ovalTitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 69px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1;
+  color: #4C4C4C;
+  text-align: center;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+}
+
+.ovalLocation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.locLine {
+  display: block;
+  width: 42px;
+  height: 1px;
+  background: #0c1a36;
+  opacity: 0.45;
+  flex-shrink: 0;
+}
+
+.locText {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 6px;
+  color: #4C4C4C;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* ── Nav buttons container ──────────────────────────────────────────────── */
+/* Desktop: transparent passthrough — children keep their absolute positions */
+.navBar {
+  display: contents;
+}
+
+/* ── Nav buttons ────────────────────────────────────────────────────────── */
+.navBtn {
+  position: absolute;
+  left: 1220px;
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.18s ease;
+}
+
+.navBtn:hover:not(.navBtnOff) {
+  transform: scale(1.05);
+}
+
+.navBtn:hover:not(.navBtnOff) .navCircle {
+  background: #f0f0f0;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+
+.navBtnOff {
+  cursor: default;
+  pointer-events: none;
+}
+
+.navBtnOff .navLabel {
+  opacity: 0.5;
+}
+
+.navCircle {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+  transition: box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.ring {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(12, 26, 54, 0.35);
+  animation: pulse 2.8s infinite ease;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(0.6); opacity: 1; }
+  55%  { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+.navBtnOff .ring {
+  animation: none;
+  opacity: 0;
+}
+
+.icon {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.navLabel {
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  color: #4C4C4C;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.navLabelSmall {
+  font-size: 9px;
+}
+
+/* ── Zimbel logo top-right ──────────────────────────────────────────────── */
+.zimbelLogo {
+  position: absolute;
+  left: 1230px;
+  top: 32px;
+  width: 112px;
+  height: auto;
+  z-index: 20;
+  /* icon-unidades.svg is white fill — works on dark panel */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Hero — cobre a tela toda */
+  .heroImg {
+    width: 100% !important;
+    object-position: 60% center !important;
+  }
+
+  /* Painel direito — oculto */
+  .panel {
+    display: none;
+  }
+
+  /* Gradiente escuro na base para contrastar com a nav bar */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 35%,
+      rgba(12, 26, 54, 0.75) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Oval — centralizado, menor */
+  .oval {
+    left: 50% !important;
+    transform: translateX(-50%);
+    top: 32px !important;
+    height: 300px !important;
+    z-index: 10;
+  }
+
+  /* Nav bar — barra horizontal fixa no rodapé */
+  .navBar {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 20px 20px 0 0;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(4px, 3vw, 20px);
+    padding: 0 12px;
+    z-index: 20;
+    box-shadow: 0 -4px 28px rgba(0, 0, 0, 0.22);
+  }
+
+  /* Botão — estático dentro do flex, largura natural */
+  .navBtn {
+    position: static !important;
+    width: 68px !important;
+    flex-shrink: 0;
+  }
+
+  /* Círculo menor no mobile */
+  .navCircle {
+    width: 68px;
+    height: 68px;
+    gap: 3px;
+  }
+
+  .icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .navLabel {
+    font-size: 10px;
+  }
+
+  .navLabelSmall {
+    font-size: 8.5px;
+  }
+
+  /* Delays escalonados para pulsar em cascata */
+  .navBtn:nth-child(1) .ring { animation-delay: 0s;    }
+  .navBtn:nth-child(2) .ring { animation-delay: 0.3s;  }
+  .navBtn:nth-child(3) .ring { animation-delay: 0.6s;  }
+  .navBtn:nth-child(4) .ring { animation-delay: 0.9s;  }
+  .navBtn:nth-child(5) .ring { animation-delay: 1.2s;  }
+
+  /* Zimbel — topo direito */
+  .zimbelLogo {
+    left: auto !important;
+    right: 16px;
+    top: 16px !important;
+    width: 80px !important;
+  }
+}

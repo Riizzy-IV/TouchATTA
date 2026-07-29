@@ -1,0 +1,115 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0B1628;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 56px 64px;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  background: rgba(11, 22, 40, 0.98);
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.6), 0 0 1px rgba(201, 168, 76, 0.15);
+}
+
+/* Logo area */
+.logoWrap {
+  margin-bottom: 36px;
+}
+
+.modalLogo {
+  width: 280px;
+  height: auto;
+}
+
+.eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: rgba(201, 168, 76, 0.7);
+  margin-bottom: 4px;
+}
+
+.title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+}
+
+.location {
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: #C9A84C;
+  text-transform: uppercase;
+}
+
+/* Subtitle */
+.subtitle {
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 36px;
+}
+
+/* CTA button */
+.btn {
+  padding: 15px 52px;
+  border: 1.5px solid rgba(201, 168, 76, 0.5);
+  background: transparent;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #C9A84C;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  margin-bottom: 40px;
+}
+
+.btn:hover {
+  background: rgba(201, 168, 76, 0.1);
+  border-color: #C9A84C;
+  color: #e2c06e;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Footer logo */
+.footer {
+  border-top: 1px solid rgba(201, 168, 76, 0.12);
+  padding-top: 24px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.footerLogo {
+  height: 22px;
+  width: auto;
+  opacity: 0.35;
+  filter: brightness(0) invert(1);
+}

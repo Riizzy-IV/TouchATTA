@@ -21,17 +21,11 @@ export default function Splash({ onStart }) {
 
   return (
     <div ref={rootRef} className={styles.root}>
-      <div className={styles.topLine} />
-
-      <div className={styles.watermark} aria-hidden>
-        <ZimbelLogo color="#5B0A28" width={640} />
-      </div>
-
       <div className={styles.card}>
         <p className={styles.welcome}>SEJA BEM VINDO AO TOUCHATTA</p>
 
         <div className={styles.logoWrap}>
-          <ZimbelLogo color="#5B0A28" width={300} />
+          <ZimbelLogo color="white" width={300} />
         </div>
 
         <div className={styles.divider} />

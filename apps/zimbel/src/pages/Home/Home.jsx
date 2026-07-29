@@ -3,28 +3,27 @@ import { gsap } from 'gsap';
 import ZimbelLogo from '../../components/ZimbelLogo/ZimbelLogo';
 import styles from './Home.module.css';
 
-const VERTICE_URL = import.meta.env.VITE_VERTICE_URL ?? 'http://localhost:5175';
+const VERTICE_URL   = import.meta.env.VITE_VERTICE_URL   ?? 'http://localhost:5175';
+const EVOLUTION_URL = import.meta.env.VITE_EVOLUTION_URL ?? 'http://localhost:5176';
 
 const EMPREENDIMENTOS = [
   {
     id: 'vertice',
-    nome: 'Vértice',
-    subtitulo: 'Anália Franco',
-    descricao: 'O futuro agradece suas escolhas',
-    badge: null,
+    nome: 'VÉRTICE',
+    bairro: 'ANÁLIA FRANCO',
+    badge: 'LANÇAMENTO',
     iframeUrl: VERTICE_URL,
-    img: '/img/vertice-thumb.jpg',
+    img: '/img/[Zim] Vertice - card.png',
     accent: '#C5A26A',
   },
   {
     id: 'evolution',
-    nome: 'Evolution',
-    subtitulo: 'Tatuapé',
-    descricao: 'Em breve',
-    badge: 'EM BREVE',
-    iframeUrl: null,
-    img: null,
-    accent: '#5B0A28',
+    nome: 'EVOLUTION',
+    bairro: 'TATUAPÉ',
+    badge: 'LANÇAMENTO',
+    iframeUrl: EVOLUTION_URL,
+    img: '/img/[Zim] Evolution - card.png',
+    accent: '#C5A26A',
   },
 ];
 
@@ -38,18 +37,17 @@ export default function Home() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set(headerRef.current, { autoAlpha: 0, y: -30 });
+      gsap.set(headerRef.current, { autoAlpha: 0, y: -24 });
       cardsRef.current.forEach(c => c && gsap.set(c, { autoAlpha: 0, y: 40 }));
 
       const tl = gsap.timeline({ delay: 0.1 });
       tl.to(headerRef.current, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' });
       tl.to(
         cardsRef.current.filter(Boolean),
-        { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.15 },
+        { autoAlpha: 1, y: 0, duration: 0.55, ease: 'power2.out', stagger: 0.18 },
         '-=0.3'
       );
     }, sceneRef);
-
     return () => ctx.revert();
   }, []);
 
@@ -73,17 +71,9 @@ export default function Home() {
 
   return (
     <div ref={sceneRef} className={styles.scene}>
-      {/* Fundo decorativo — símbolo Z em marca d'água */}
-      <div className={styles.watermark} aria-hidden>
-        <ZimbelLogo color="#5B0A28" width={900} />
-      </div>
-
-      {/* Linha de acento */}
-      <div className={styles.accentBar} />
-
       {/* Header */}
       <header ref={headerRef} className={styles.header}>
-        <ZimbelLogo color="white" width={340} />
+        <ZimbelLogo width={180} />
         <p className={styles.tagline}>CATÁLOGO DE EMPREENDIMENTOS</p>
       </header>
 
@@ -93,33 +83,30 @@ export default function Home() {
           <div
             key={emp.id}
             ref={el => (cardsRef.current[i] = el)}
-            className={`${styles.card} ${emp.badge ? styles.cardComingSoon : styles.cardActive}`}
+            className={`${styles.card} ${emp.iframeUrl ? styles.cardActive : styles.cardInactive}`}
             onClick={() => openShowcase(emp)}
             role={emp.iframeUrl ? 'button' : undefined}
             tabIndex={emp.iframeUrl ? 0 : undefined}
           >
-            <div className={styles.cardImg}>
+            {/* Card image — full portrait */}
+            <div className={styles.cardImgWrap}>
               {emp.img ? (
                 <img src={emp.img} alt={emp.nome} className={styles.cardImgEl} />
               ) : (
-                <div className={styles.cardImgPlaceholder}>
-                  <ZimbelLogo color="#5B0A28" width={160} />
+                <div className={styles.cardImgBlank}>
+                  <ZimbelLogo width={90} />
                 </div>
-              )}
-              {emp.badge && (
-                <span className={styles.comingSoonBadge}>{emp.badge}</span>
               )}
             </div>
 
-            <div className={styles.cardInfo}>
-              <div className={styles.cardAccentLine} style={{ background: emp.accent }} />
-              <p className={styles.cardSubtitulo}>{emp.subtitulo}</p>
-              <h2 className={styles.cardNome}>{emp.nome}</h2>
-              <p className={styles.cardDesc}>{emp.descricao}</p>
-              {emp.iframeUrl && (
-                <span className={styles.cardCta}>ACESSAR SHOWCASE →</span>
-              )}
-            </div>
+            {/* CTA button */}
+            {emp.iframeUrl ? (
+              <button className={styles.ctaBtn}>
+                CONHEÇA &nbsp;→
+              </button>
+            ) : (
+              <div className={styles.ctaBtnDisabled}>EM BREVE</div>
+            )}
           </div>
         ))}
       </main>
@@ -129,7 +116,7 @@ export default function Home() {
         <span>© 2025 Zimbel Incorporadora · Todos os direitos reservados</span>
       </footer>
 
-      {/* Overlay fullscreen com iframe do showcase */}
+      {/* Overlay iframe */}
       <div ref={overlayRef} className={styles.overlay} style={{ visibility: 'hidden', opacity: 0 }}>
         {activeShowcase && (
           <>

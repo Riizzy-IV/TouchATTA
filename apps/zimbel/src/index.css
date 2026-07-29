@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
-
 :root {
   --color-bordo: #5B0A28;
   --color-ocre: #C5A26A;
   --color-cinza: #444444;
-  --color-bg: #EDE4D8;
-  --font-main: 'Manrope', 'Helvetica Neue', Arial, sans-serif;
+  --color-bg: #1a0010;
+  --font-main: 'Zalando Sans', 'Manrope', 'Helvetica Neue', Arial, sans-serif;
+  --font-ui: 'Zalando Sans', 'Manrope', 'Helvetica Neue', Arial, sans-serif;
 }
 
 *,

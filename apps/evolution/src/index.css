@@ -1,0 +1,36 @@
+:root {
+  --color-navy:  #0B1628;
+  --color-navy2: #0E1F38;
+  --color-gold:  #C9A84C;
+  --color-white: #FFFFFF;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-ui:     'Zalando Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  outline: none;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-navy);
+  font-family: var(--font-ui);
+  color: var(--color-white);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+}

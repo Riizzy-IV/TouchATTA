@@ -10,7 +10,7 @@ function isMobile() {
 
 export default function ScaleWrapper({ children }) {
   const [mobile, setMobile] = useState(() => isMobile());
-  const [scale, setScale] = useState(() =>
+  const [scale, setScale]   = useState(() =>
     Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H)
   );
 
@@ -26,11 +26,8 @@ export default function ScaleWrapper({ children }) {
   if (mobile) {
     return (
       <div style={{
-        width: '100vw',
-        height: '100svh',
-        background: '#1a0010',
-        overflow: 'hidden',
-        position: 'relative',
+        width: '100vw', height: '100svh',
+        background: '#0B1628', overflow: 'hidden', position: 'relative',
       }}>
         {children}
       </div>
@@ -39,17 +36,13 @@ export default function ScaleWrapper({ children }) {
 
   return (
     <div style={{
-      width: '100vw',
-      height: '100vh',
-      background: '#1a0010',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      width: '100vw', height: '100svh',
+      background: '#0B1628',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
       overflow: 'hidden',
     }}>
       <div style={{
-        width: DESIGN_W,
-        height: DESIGN_H,
+        width: DESIGN_W, height: DESIGN_H,
         flexShrink: 0,
         transformOrigin: 'center center',
         transform: `scale(${scale})`,
