@@ -1,9 +1,157 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import ModuleLayout from '../../components/ModuleLayout/ModuleLayout';
 import styles from './Mod05.module.css';
 import ComparadorView from './ComparadorView';
 
-const TABS = ['PLANTAS', 'COMPARADOR'];
+const TABS = ['PLANTAS', 'COMPARADOR', 'DISPONIBILIDADE'];
+
+/* ── Disponibilidade ─────────────────────────────────────────────────────── */
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1SMHsZej3XaqIjlNwq-nzLhWCaeTzhXGoTJ7P8B2_GOI/export?format=csv&gid=582955310';
+
+function parseCSVRow(row) {
+  const result = []; let cur = ''; let inQ = false;
+  for (const c of row) {
+    if (c === '"') { inQ = !inQ; }
+    else if (c === ',' && !inQ) { result.push(cur.trim()); cur = ''; }
+    else { cur += c; }
+  }
+  result.push(cur.trim());
+  return result;
+}
+
+function getPlantImg(id) {
+  if (id <= 5)  return `/Planta Vertice/UNIDADE ${id}_INFERIOR.avif`;
+  if (id <= 19) return `/Planta Vertice/UNIDADE ${id}.avif`;
+  if (id <= 29) return `/Planta Vertice/UNIDADE ${id - 10}.avif`;
+  if (id <= 35) return `/Planta Vertice/UNIDADE ${id}.avif`;
+  return `/Planta Vertice/UNIDADE FINAL ${id % 10}.avif`;
+}
+
+function floorShort(label) {
+  if (!label) return '';
+  if (label.toLowerCase().includes('térreo')) return 'TÉR.';
+  return label.replace(/\s*Pavimento\s*/i, '').trim();
+}
+
+function DisponibilidadeView() {
+  const [floors, setFloors] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selected, setSelected] = useState(null);
+  const [dispCount, setDispCount] = useState(0);
+
+  useEffect(() => {
+    fetch(SHEET_URL)
+      .then(r => r.text())
+      .then(text => {
+        const lines = text.split(/\r?\n/).filter(Boolean);
+        const floorMap = {}, floorOrder = [];
+        let currentFloor = null;
+        for (let i = 1; i < lines.length; i++) {
+          const cols = parseCSVRow(lines[i]);
+          const col0 = (cols[0] || '').trim();
+          if (!/^\d+$/.test(col0)) {
+            if (!col0) continue;
+            currentFloor = col0;
+            if (!floorMap[currentFloor]) { floorMap[currentFloor] = []; floorOrder.push(currentFloor); }
+            continue;
+          }
+          if (!currentFloor) continue;
+          const id = parseInt(col0, 10);
+          floorMap[currentFloor].push({
+            id, tipologia: cols[1] || '',
+            total: cols[6] || cols[3] || '',
+            valor: cols[7] || '',
+            status: (cols[9] || 'Vendido').trim(),
+            img: getPlantImg(id),
+          });
+        }
+        const ordered = [...floorOrder].reverse().map(l => ({ label: l, units: floorMap[l] }));
+        setDispCount(Object.values(floorMap).flat().filter(u => u.status === 'Disponível').length);
+        setFloors(ordered);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const closeModal = useCallback(() => setSelected(null), []);
+
+  return (
+    <div className={styles.dispScene}>
+      {/* Contador */}
+      <div className={styles.dispTopBar}>
+        {!loading && (
+          <div className={styles.dispCounter}>
+            <span className={styles.dispCounterNum}>{dispCount}</span>
+            <span className={styles.dispCounterOf}> / 71</span>
+            <span className={styles.dispCounterLabel}> disponíveis</span>
+          </div>
+        )}
+        <div className={styles.dispLegend}>
+          <span className={`${styles.dispDot} ${styles.dispDotDisp}`} /><span className={styles.dispLegendTxt}>Disponível</span>
+          <span className={`${styles.dispDot} ${styles.dispDotVend}`} /><span className={styles.dispLegendTxt}>Vendido</span>
+        </div>
+      </div>
+
+      {/* Grid */}
+      <div className={styles.dispGridArea}>
+        {loading ? (
+          <div className={styles.dispLoading}>
+            <div className={styles.dispSpinner} />
+            <p className={styles.dispLoadingTxt}>carregando disponibilidade…</p>
+          </div>
+        ) : (
+          <div className={styles.dispGrid}>
+            {floors.map(floor => (
+              <div key={floor.label} className={styles.dispFloorRow}>
+                <div className={styles.dispFloorLabel}>{floorShort(floor.label)}</div>
+                <div className={styles.dispUnitRow}>
+                  {floor.units.map(unit => {
+                    const isDisp = unit.status === 'Disponível';
+                    return (
+                      <button
+                        key={unit.id}
+                        className={`${styles.dispCell} ${isDisp ? styles.dispCellDisp : styles.dispCellVend}`}
+                        onClick={() => setSelected(unit)}
+                      >
+                        <span className={`${styles.dispCellNum} ${isDisp ? styles.dispCellNumDisp : styles.dispCellNumVend}`}>{unit.id}</span>
+                        {unit.total && <span className={`${styles.dispCellArea} ${isDisp ? styles.dispCellAreaDisp : styles.dispCellAreaVend}`}>{unit.total}m²</span>}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Modal */}
+      {selected && (
+        <div className={styles.dispOverlay} onClick={closeModal}>
+          <div className={styles.dispModal} onClick={e => e.stopPropagation()}>
+            <button className={styles.dispModalClose} onClick={closeModal}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+            <div className={`${styles.dispModalBadge} ${selected.status === 'Disponível' ? styles.dispBadgeDisp : styles.dispBadgeVend}`}>
+              {selected.status}
+            </div>
+            <img src={selected.img} alt={`Unidade ${selected.id}`} className={styles.dispModalPlant} />
+            <div className={styles.dispModalInfo}>
+              <p className={styles.dispModalUnit}>Unidade {selected.id}</p>
+              <p className={styles.dispModalTipo}>{selected.tipologia}</p>
+              {selected.total && <p className={styles.dispModalArea}>{selected.total} m² totais</p>}
+              {selected.status === 'Disponível' && selected.valor && (
+                <p className={styles.dispModalValor}>{selected.valor}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 const UNITS = [
   {
@@ -222,6 +370,7 @@ export default function Mod05() {
     <ModuleLayout tabs={TABS} defaultTab="PLANTAS">
       {(activeTab) =>
         activeTab === 'PLANTAS' ? <PlantasView />
+        : activeTab === 'DISPONIBILIDADE' ? <DisponibilidadeView />
         : <ComparadorView />
       }
     </ModuleLayout>

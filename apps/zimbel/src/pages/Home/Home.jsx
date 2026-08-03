@@ -12,7 +12,7 @@ const EMPREENDIMENTOS = [
     nome: 'VÉRTICE',
     bairro: 'ANÁLIA FRANCO',
     badge: 'LANÇAMENTO',
-    iframeUrl: VERTICE_URL,
+    iframeUrl: VERTICE_URL + '?embed=1',
     img: '/img/[Zim] Vertice - card.png',
     accent: '#C5A26A',
   },
@@ -21,7 +21,7 @@ const EMPREENDIMENTOS = [
     nome: 'EVOLUTION',
     bairro: 'TATUAPÉ',
     badge: 'LANÇAMENTO',
-    iframeUrl: EVOLUTION_URL,
+    iframeUrl: EVOLUTION_URL + '?embed=1',
     img: '/img/[Zim] Evolution - card.png',
     accent: '#C5A26A',
   },
@@ -99,22 +99,13 @@ export default function Home() {
               )}
             </div>
 
-            {/* CTA button */}
-            {emp.iframeUrl ? (
-              <button className={styles.ctaBtn}>
-                CONHEÇA &nbsp;→
-              </button>
-            ) : (
+            {/* EM BREVE badge — só para cards sem URL */}
+            {!emp.iframeUrl && (
               <div className={styles.ctaBtnDisabled}>EM BREVE</div>
             )}
           </div>
         ))}
       </main>
-
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <span>© 2025 Zimbel Incorporadora · Todos os direitos reservados</span>
-      </footer>
 
       {/* Overlay iframe */}
       <div ref={overlayRef} className={styles.overlay} style={{ visibility: 'hidden', opacity: 0 }}>

@@ -9,8 +9,10 @@ const Mod02 = lazy(() => import('./pages/Mod02/Mod02'));
 const Mod03 = lazy(() => import('./pages/Mod03/Mod03'));
 const Mod04 = lazy(() => import('./pages/Mod04/Mod04'));
 
+const isEmbedded = new URLSearchParams(window.location.search).has('embed');
+
 export default function App() {
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(isEmbedded);
 
   return (
     <ScaleWrapper>

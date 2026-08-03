@@ -15,8 +15,10 @@ const Mod05 = lazy(() => import('./pages/Mod05/Mod05'));
 const Mod06 = lazy(() => import('./pages/Mod06/Mod06'));
 const Mod07 = lazy(() => import('./pages/Mod07/Mod07'));
 
+const isEmbedded = new URLSearchParams(window.location.search).has('embed');
+
 function MainApp() {
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(isEmbedded);
   return (
     <ScaleWrapper>
       <TransitionProvider>

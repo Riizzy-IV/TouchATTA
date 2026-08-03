@@ -9,7 +9,7 @@ const MODULES = [
   { id: '02', label: 'Bairro',       icon: '/img/home/icon-bairro.svg',   isVideo: false, route: '/modulo/02' },
   { id: '03', label: 'Projeto',      icon: '/img/home/icon-projeto.svg',  isVideo: false, route: '/modulo/03' },
   { id: '04', label: 'Áreas Comuns', icon: '/img/home/icon-areas.svg',    isVideo: false, route: '/modulo/04' },
-  { id: '05', label: 'Unidades',     icon: '/img/home/icon-unidades.svg', isVideo: false, route: '/modulo/05' },
+  { id: '05', label: 'Unidades', icon: '/img/home/icon-unidades.svg', isVideo: false, route: '/modulo/05' },
 ];
 
 const PHASE = { ESPERA: 'espera', FIXO: 'fixo', SAI: 'sai' };

@@ -1,7 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
 import lottie from 'lottie-web';
 import { gsap } from 'gsap';
 import clickRaw from '../../assets/click.json';
@@ -312,76 +309,20 @@ function ConvenienciasView() {
 }
 
 /* ── Mapa ───────────────────────────────────────────────────────────────── */
-const VERTICE_LAT = -23.5687;
-const VERTICE_LNG = -46.5599;
-const GMAPS_EMBED = `https://maps.google.com/maps?q=${VERTICE_LAT},${VERTICE_LNG}&z=16&output=embed`;
-
-const logoPinIcon = L.divIcon({
-  className: '',
-  html: `
-    <div style="display:flex;flex-direction:column;align-items:center;">
-      <div style="
-        background:rgba(7,24,32,0.93);
-        border:1px solid rgba(255,255,255,0.22);
-        padding:10px 16px;
-        box-shadow:0 4px 24px rgba(0,0,0,0.55);
-      ">
-        <img src="/img/logo.png" alt="Vértice" style="width:90px;height:auto;display:block;" />
-      </div>
-      <div style="
-        width:0;height:0;
-        border-left:11px solid transparent;
-        border-right:11px solid transparent;
-        border-top:11px solid rgba(7,24,32,0.93);
-      "></div>
-      <div style="
-        width:8px;height:8px;border-radius:50%;
-        background:#fff;margin-top:3px;
-        box-shadow:0 0 0 3px rgba(7,24,32,0.6);
-      "></div>
-    </div>
-  `,
-  iconSize: [122, 92],
-  iconAnchor: [61, 92],
-});
+const GMAPS_EMBED = `https://maps.google.com/maps?q=Rua+Bruna,+340,+Ch%C3%A1cara+Mafalda,+S%C3%A3o+Paulo&z=16&output=embed`;
 
 function MapaView() {
-  const [useGmaps, setUseGmaps] = useState(false);
-
   return (
     <div className={styles.mapaWrapper}>
-      {useGmaps ? (
-        <iframe
-          src={GMAPS_EMBED}
-          width="100%"
-          height="100%"
-          style={{ border: 'none', display: 'block' }}
-          allowFullScreen
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Localização Vértice Anália Franco"
-        />
-      ) : (
-        <MapContainer
-          center={[VERTICE_LAT, VERTICE_LNG]}
-          zoom={16}
-          style={{ width: '100%', height: '100%' }}
-          zoomControl={false}
-          attributionControl={false}
-        >
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          <Marker position={[VERTICE_LAT, VERTICE_LNG]} icon={logoPinIcon} />
-        </MapContainer>
-      )}
-
-      <button
-        className={`${styles.gmapsToggle} ${useGmaps ? styles.gmapsToggleActive : ''}`}
-        onClick={() => setUseGmaps(v => !v)}
-      >
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-        </svg>
-        {useGmaps ? 'Mapa padrão' : 'Google Maps'}
-      </button>
+      <iframe
+        src={GMAPS_EMBED}
+        width="100%"
+        height="100%"
+        style={{ border: 'none', display: 'block' }}
+        allowFullScreen
+        referrerPolicy="no-referrer-when-downgrade"
+        title="Localização Vértice Chácara Mafalda"
+      />
     </div>
   );
 }

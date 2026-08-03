@@ -1,0 +1,356 @@
+.scene {
+  width: 100%;
+  height: 100%;
+  background: #06111f;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'Mulish', sans-serif;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+.header {
+  flex-shrink: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  background: rgba(6, 17, 31, 0.97);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+  gap: 20px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.headerLogo {
+  height: 22px;
+  width: auto;
+  opacity: 0.85;
+}
+
+.badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #C9A84C;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+
+.headerCenter {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.counter {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.counterNum {
+  font-size: 32px;
+  font-weight: 800;
+  color: #4CAF50;
+  line-height: 1;
+}
+
+.counterSep {
+  font-size: 18px;
+  color: rgba(255,255,255,0.2);
+}
+
+.counterTotal {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+}
+
+.counterLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-left: 4px;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dotDisp { background: #4CAF50; }
+.dotVend { background: #e53935; }
+
+.legendText {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  margin-right: 8px;
+}
+
+.closeBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.closeBtn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+/* ── Grid ────────────────────────────────────────────────────────────── */
+.gridArea {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px 28px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201,168,76,0.2) transparent;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.floorRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.floorLabel {
+  flex-shrink: 0;
+  width: 52px;
+  text-align: right;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+}
+
+.unitRow {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+/* ── Célula de unidade ───────────────────────────────────────────────── */
+.cell {
+  width: 116px;
+  height: 42px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.cell:hover { transform: translateY(-2px); }
+
+.cellDisp {
+  background: rgba(76, 175, 80, 0.12);
+  border-color: rgba(76, 175, 80, 0.5);
+}
+.cellDisp:hover {
+  background: rgba(76, 175, 80, 0.22);
+  box-shadow: 0 4px 16px rgba(76, 175, 80, 0.2);
+}
+
+.cellVend {
+  background: rgba(229, 57, 53, 0.1);
+  border-color: rgba(229, 57, 53, 0.4);
+}
+.cellVend:hover { background: rgba(229, 57, 53, 0.18); }
+
+.cellNum {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.cellArea {
+  font-size: 9px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  line-height: 1;
+}
+
+.cellDisp .cellNum { color: #7bc67e; }
+.cellDisp .cellArea { color: rgba(76,175,80,0.6); }
+.cellVend .cellNum { color: #ef9a9a; }
+.cellVend .cellArea { color: rgba(229,57,53,0.5); }
+
+/* ── Loading ─────────────────────────────────────────────────────────── */
+.loadingWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding-top: 120px;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(201,168,76,0.15);
+  border-top-color: #C9A84C;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loadingText {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ── Modal ───────────────────────────────────────────────────────────── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 10, 20, 0.82);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  position: relative;
+  background: #0d1e35;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 16px;
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.modalClose {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.modalClose:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+.modalBadge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+.badgeDisp { background: rgba(76,175,80,0.15); color: #81c784; border: 1px solid rgba(76,175,80,0.3); }
+.badgeVend { background: rgba(229,57,53,0.12); color: #ef9a9a; border: 1px solid rgba(229,57,53,0.3); }
+
+.modalPlant {
+  max-height: 320px;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.modalInfo {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modalUnit {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.modalTipo {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.modalArea {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+}
+
+.modalValor {
+  font-size: 22px;
+  font-weight: 800;
+  color: #C9A84C;
+  letter-spacing: -0.5px;
+  margin-top: 4px;
+}
