@@ -11,15 +11,41 @@ const IconClose = () => (
   </svg>
 );
 
+const AREAS = [
+  { slug: 'beach-tennis',     label: 'Beach Tennis' },
+  { slug: 'quadra',           label: 'Quadra Poliesportiva' },
+  { slug: 'fitness',          label: 'Espaço Fitness' },
+  { slug: 'academia',         label: 'Academia' },
+  { slug: 'teen',             label: 'Espaço Teen' },
+  { slug: 'playground',       label: 'Playground' },
+  { slug: 'brinquedoteca',    label: 'Brinquedoteca' },
+  { slug: 'churrasqueira',    label: 'Churrasqueira' },
+  { slug: 'salao-de-festas',  label: 'Salão de Festas' },
+  { slug: 'petplace',         label: 'Pet Place' },
+];
+
 export default function AreasComuns() {
   const { startTransition } = useTransition();
   const { drawerRef, open: openDrawer, close: closeDrawer } = useNavDrawer();
   const [phase, setPhase] = useState('video'); // 'video' | 'content'
+  const [lightbox, setLightbox] = useState(null);
 
-  const videoRef   = useRef(null);
-  const overlayRef = useRef(null);
-  const skipRef    = useRef(null);
-  const contentRef = useRef(null);
+  const videoRef     = useRef(null);
+  const overlayRef   = useRef(null);
+  const skipRef      = useRef(null);
+  const contentRef   = useRef(null);
+  const lightboxRef  = useRef(null);
+  const lightboxImgRef = useRef(null);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    gsap.fromTo(lightboxRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+    gsap.fromTo(lightboxImgRef.current, { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
+
+    const onKey = (e) => { if (e.key === 'Escape') setLightbox(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightbox]);
 
   useEffect(() => {
     if (phase !== 'video') return;
@@ -96,12 +122,45 @@ export default function AreasComuns() {
 
           {/* Corpo */}
           <div className={styles.body}>
-            <div className={styles.emBreve}>
-              <span className={styles.emBreveLabel}>EM BREVE</span>
-              <p className={styles.emBreveSubtitle}>ÁREAS COMUNS</p>
+            <div className={styles.grid}>
+              {AREAS.map(area => (
+                <button
+                  key={area.slug}
+                  className={styles.card}
+                  onClick={() => setLightbox(area)}
+                >
+                  <img
+                    src={`/img/areas/${area.slug}/${area.slug}.avif`}
+                    alt={area.label}
+                    className={styles.cardImg}
+                    draggable={false}
+                  />
+                  <div className={styles.cardOverlay} />
+                  <span className={styles.cardLabel}>{area.label}</span>
+                </button>
+              ))}
             </div>
           </div>
 
+        </div>
+      )}
+
+      {/* ── Lightbox ── */}
+      {lightbox && (
+        <div className={styles.lightbox} ref={lightboxRef} onClick={() => setLightbox(null)}>
+          <button className={styles.lightboxClose} onClick={() => setLightbox(null)}>
+            <IconClose />
+          </button>
+          <figure className={styles.lightboxFigure} onClick={(e) => e.stopPropagation()}>
+            <img
+              ref={lightboxImgRef}
+              src={`/img/areas/${lightbox.slug}/${lightbox.slug}.avif`}
+              alt={lightbox.label}
+              className={styles.lightboxImg}
+              draggable={false}
+            />
+            <figcaption className={styles.lightboxCaption}>{lightbox.label}</figcaption>
+          </figure>
         </div>
       )}
 
