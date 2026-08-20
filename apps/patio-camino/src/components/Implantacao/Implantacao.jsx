@@ -3,13 +3,13 @@ import { gsap } from 'gsap';
 import styles from './Implantacao.module.css';
 
 const ITEMS = [
-  { id: 1, label: 'Lojas / Fachada Ativa', x: 10, y: 60 },
-  { id: 2, label: 'Estacionamento',        x: 21, y: 30 },
-  { id: 3, label: 'Vagas PCD',             x: 61, y: 47 },
-  { id: 4, label: 'Piscina',               x: 77, y: 52 },
-  { id: 5, label: 'Quadra Poliesportiva',  x: 50, y: 74 },
-  { id: 6, label: 'Bloco A',               x: 66, y: 33 },
-  { id: 7, label: 'Bloco B',               x: 69, y: 74 },
+  { id: 1, label: 'Lojas / Fachada Ativa', x: 10, y: 63 },
+  { id: 2, label: 'Estacionamento',        x: 21, y: 32 },
+  { id: 3, label: 'Vagas PCD',             x: 61, y: 50 },
+  { id: 4, label: 'Piscina',               x: 77, y: 55 },
+  { id: 5, label: 'Quadra Poliesportiva',  x: 50, y: 78 },
+  { id: 6, label: 'Bloco A',               x: 66, y: 35 },
+  { id: 7, label: 'Bloco B',               x: 69, y: 78 },
 ];
 
 const SUBTABS = [
@@ -118,7 +118,7 @@ export default function Implantacao() {
           {/* Imagem + pins */}
           <div className={styles.imageArea} ref={imageRef}>
             <img
-              src="/img/implantacao-masterplan.jpg"
+              src="/img/implantacao-masterplan.png"
               alt="Implantação"
               className={styles.img}
               draggable={false}

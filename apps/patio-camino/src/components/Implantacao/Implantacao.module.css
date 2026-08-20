@@ -73,7 +73,7 @@
 .imageArea {
   position: relative;
   width: 60%;
-  aspect-ratio: 2600 / 1510;
+  aspect-ratio: 2600 / 1432;
   flex-shrink: 0;
   margin-left: 24px;
   overflow: hidden;
