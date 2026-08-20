@@ -1,0 +1,95 @@
+.solarWrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  user-select: none;
+  background: #000;
+  z-index: 10;
+}
+
+.solarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  touch-action: none;
+}
+
+/* ── Barra inferior ──────────────────────────────────────────────────────── */
+.solarBar {
+  position: absolute;
+  bottom: 12px;
+  left: 5%;
+  right: 5%;
+  height: 150px;
+  z-index: 4;
+}
+
+/* oriente.png — ícones no topo, bem acima da linha */
+.solarOriente {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88%;
+  height: 60%;
+  object-fit: contain;
+  object-position: bottom center;
+  pointer-events: none;
+  display: block;
+  z-index: 2;
+}
+
+/* linha do track — curta e grossa, bem abaixo dos ícones */
+.solarTrackLine {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 84%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 2px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* thumb gif — centrado EXATAMENTE sobre a linha */
+.solarThumb {
+  position: absolute;
+  top: 84%;
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* ── Preload overlay ─────────────────────────────────────────────────────── */
+.solarPreload {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 18, 28, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 20;
+  opacity: 1;
+  transition: opacity 0.45s ease;
+}
+
+.solarPreloadOut {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.solarPreloadLabel {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: rgba(42, 154, 170, 0.7);
+  text-transform: uppercase;
+}

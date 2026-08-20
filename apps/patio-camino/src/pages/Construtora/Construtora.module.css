@@ -1,0 +1,190 @@
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #0f0404;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Textura sutil de fundo */
+.scene::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/hero-fachada.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+/* Gradiente vermelho no canto */
+.scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(180, 30, 20, 0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────────────────── */
+.tabs {
+  position: absolute;
+  top: 32px;
+  left: 40px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+}
+
+.tab {
+  position: relative;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 20px;
+  transition: color 0.2s;
+}
+
+.tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  background: rgba(180, 30, 20, 0.7);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.tab:hover {
+  color: rgba(255,255,255,0.7);
+}
+
+.tabActive {
+  color: #fff !important;
+}
+
+.tabActive::before {
+  opacity: 1;
+}
+
+/* ── Botão fechar ─────────────────────────────────────────────────────────── */
+.closeBtn {
+  position: absolute;
+  top: 32px;
+  right: 40px;
+  width: 40px;
+  height: 40px;
+  background: rgba(180, 30, 20, 0.12);
+  border: 1px solid rgba(180, 30, 20, 0.35);
+  border-radius: 3px;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.closeBtn:hover {
+  background: rgba(180, 30, 20, 0.25);
+  color: #fff;
+}
+
+/* ── Conteúdo central ─────────────────────────────────────────────────────── */
+.center {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.eyebrow {
+  font-family: 'Manrope', sans-serif;
+  font-size: 45px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: rgba(200, 60, 50, 0.8);
+  text-transform: uppercase;
+}
+
+.titleRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+
+.title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 96px;
+  font-weight: 800;
+  letter-spacing: 8px;
+  color: #f3ecd9;
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.tagline {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(243, 236, 217, 0.55);
+  margin-top: 10px;
+}
+
+/* ── Em Breve ────────────────────────────────────────────────────────────── */
+.emBreve {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.emBreveLabel {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+}
+
+.emBreveSubtitle {
+  font-family: 'Manrope', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.14);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ── Logo ─────────────────────────────────────────────────────────────────── */
+.logo {
+  position: absolute;
+  bottom: 36px;
+  right: 44px;
+  height: 36px;
+  width: auto;
+  opacity: 0.4;
+  pointer-events: none;
+}
+

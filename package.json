@@ -13,6 +13,8 @@
     "zimbel": "npm run dev --workspace=apps/zimbel",
     "build:zimbel": "npm run build --workspace=apps/zimbel",
     "evolution": "npm run dev --workspace=apps/evolution",
-    "build:evolution": "npm run build --workspace=apps/evolution"
+    "build:evolution": "npm run build --workspace=apps/evolution",
+    "patio-camino": "npm run dev --workspace=apps/patio-camino",
+    "build:patio-camino": "npm run build --workspace=apps/patio-camino"
   }
 }

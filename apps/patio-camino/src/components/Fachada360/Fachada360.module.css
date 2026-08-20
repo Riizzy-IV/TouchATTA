@@ -1,0 +1,80 @@
+.wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  user-select: none;
+  background: #000;
+  z-index: 10;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  touch-action: none;
+}
+
+/* ── Barra inferior ──────────────────────────────────────────────────────── */
+.bar {
+  position: absolute;
+  bottom: 12px;
+  left: 5%;
+  right: 5%;
+  height: 150px;
+  z-index: 4;
+}
+
+/* linha do track */
+.trackLine {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 84%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 2px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* thumb gif — centrado EXATAMENTE sobre a linha */
+.thumb {
+  position: absolute;
+  top: 84%;
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* ── Preload overlay ─────────────────────────────────────────────────────── */
+.preload {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 18, 28, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 20;
+  opacity: 1;
+  transition: opacity 0.45s ease;
+}
+
+.preloadOut {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.preloadLabel {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: rgba(240, 200, 120, 0.7);
+  text-transform: uppercase;
+}

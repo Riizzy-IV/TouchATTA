@@ -1,0 +1,79 @@
+.root {
+  position: fixed;
+  inset: 0;
+  background: #1d1a16;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.eyebrow {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(243, 236, 217, 0.4);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.brandEyebrow {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(243, 236, 217, 0.85);
+}
+
+.logo {
+  height: 92px;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+
+.btn {
+  padding: 16px 56px;
+  border: 2.5px solid rgba(196, 154, 90, 0.5);
+  background: transparent;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: rgba(243, 236, 217, 0.8);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover,
+.btn:active {
+  background: rgba(196, 154, 90, 0.12);
+  color: #f3ecd9;
+  border-color: rgba(196, 154, 90, 0.8);
+}
+
+.hint {
+  font-family: 'Manrope', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(243, 236, 217, 0.25);
+  text-align: center;
+  line-height: 1.9;
+}
