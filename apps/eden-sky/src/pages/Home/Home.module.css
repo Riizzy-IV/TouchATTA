@@ -1,0 +1,317 @@
+/* ── Scene ─────────────────────────────────────────────────────────────────── */
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f2efe8;
+}
+
+/* ── Fundo ─────────────────────────────────────────────────────────────────── */
+/* Asset único exportado do Figma: painel ondulado (forma + textura + sombra),
+   torre e régua decorativa já compostos num só bitmap 1920x1080. */
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Nuvens em loop sobre o céu (mesmo tratamento do Siver Botanique) ────────── */
+.clouds {
+  position: absolute;
+  left: 0;
+  top: -2%;
+  width: 100%;
+  height: 66%;
+  object-fit: cover;
+  object-position: 75% center;
+  mix-blend-mode: screen;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Painel esquerdo (apenas posiciona a marca sobre a área clara do fundo) ── */
+.panelGroup {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 568.5px;
+  height: 810px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* ── Marca ─────────────────────────────────────────────────────────────────── */
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  padding: 0 0 0 100px;
+  width: 405px;
+  max-width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Logo oficial (emblema + wordmark "EDEN SKY" já compostos no arquivo) */
+.logo {
+  width: 260px;
+  height: auto;
+  display: block;
+  margin: 0 0 28px -6px;
+}
+
+/* Fallback em texto para o mobile: o logo tem o texto em tom escuro fixo,
+   ilegível sobre o scrim escuro usado lá — ver media query abaixo. */
+.wordmarkMobile {
+  display: none;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  color: #f4efe4;
+  margin: 0 0 18px;
+}
+
+/* Mesma largura e mesma margem-esquerda do logo (260px, -6px), para que a
+   centralização do divisor/tagline seja em relação ao logo — não à coluna toda. */
+.taglineBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 260px;
+  margin-left: -6px;
+}
+
+.divider {
+  width: 48px;
+  height: 2px;
+  background: var(--color-gold);
+  margin-bottom: 20px;
+}
+
+.tagline {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: rgba(44, 41, 37, 0.62);
+  line-height: 1.9;
+  text-align: center;
+}
+
+/* ── Navegação vertical (direita) ─────────────────────────────────────────── */
+.navRail {
+  position: absolute;
+  right: 28px;
+  top: 0;
+  height: 100%;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 46px;
+  z-index: 4;
+}
+
+.navSpine {
+  position: absolute;
+  left: 27px;
+  top: 8%;
+  bottom: 8%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 0;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+  opacity: 0.95;
+  transition: opacity 0.2s;
+}
+
+.navItem:disabled {
+  cursor: default;
+}
+
+.navItem:not(:disabled):hover .navCircle {
+  transform: scale(1.08);
+  border-color: var(--color-gold);
+}
+
+.navItem:not(:disabled):hover .navLabel span {
+  color: var(--color-gold);
+}
+
+.navCircle {
+  position: relative;
+  flex-shrink: 0;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: rgba(21, 19, 15, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.navCircle svg {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+/* Anel de pulso — mesmo padrão usado em vértice, siver e pátio camino */
+.ring {
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  animation: navPulse 3s infinite ease;
+  pointer-events: none;
+}
+
+@keyframes navPulse {
+  0%   { transform: scale(0.5); opacity: 1; }
+  50%  { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.navItemActive .navCircle {
+  background: #7f7a4d;
+  border-color: #7f7a4d;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.navItemActive .navCircle svg {
+  color: #fff;
+}
+
+.navItemActive .navLabel span {
+  color: #fff;
+  font-weight: 700;
+}
+
+.navLabel {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.navLabel span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+  transition: color 0.2s;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .bg {
+    object-fit: cover;
+    object-position: 78% center;
+  }
+
+  .clouds {
+    display: none;
+  }
+
+  .panelGroup {
+    display: none;
+  }
+
+  .brand {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    background: linear-gradient(to bottom, rgba(21,19,15,0.55), transparent);
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .wordmarkMobile {
+    display: block;
+  }
+
+  .divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .tagline {
+    color: rgba(244, 239, 228, 0.7);
+  }
+
+  .navRail {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0;
+    padding: 12px 6px 24px;
+    background: #efece3;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+  }
+
+  .navSpine {
+    display: none;
+  }
+
+  .navItem {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .navCircle {
+    width: 42px;
+    height: 42px;
+  }
+
+  .navCircle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .navLabel span {
+    font-size: 8px;
+  }
+}

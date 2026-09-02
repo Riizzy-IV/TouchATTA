@@ -7,3 +7,5 @@ dist/
 # Raw client-supplied reference material (not used by the app; kept locally only)
 apps/patio-camino/public/FINAL/
 apps/patio-camino/public/book-conceito.pdf
+apps/Eden Sky/
+apps/eden-sky/public/img/BG HOME.jpg
