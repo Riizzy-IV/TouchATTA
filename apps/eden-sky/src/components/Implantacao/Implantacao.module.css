@@ -1,0 +1,343 @@
+.wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 24px 40px 40px;
+  box-sizing: border-box;
+}
+
+.floorTabs {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-bottom: 20px;
+}
+
+.floorTab {
+  background: transparent;
+  border: 1px solid rgba(44, 41, 37, 0.2);
+  border-radius: 3px;
+  color: rgba(44, 41, 37, 0.55);
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 10px 22px;
+  transition: all 0.2s;
+}
+
+.floorTab:hover {
+  color: var(--color-ink);
+  border-color: rgba(44, 41, 37, 0.4);
+}
+
+.floorTabActive {
+  background: var(--color-gold) !important;
+  border-color: var(--color-gold) !important;
+  color: #fff !important;
+}
+
+/* ── Implantação geral (imagem com pins + painel) ─────────────────────────── */
+.mainRow {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  overflow: hidden;
+}
+
+.imageArea {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 12px 48px rgba(44, 41, 37, 0.18);
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ── Pins numerados (mesmo padrão do Siver) ───────────────────────────────── */
+.pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 6px 6px 6px 0px;
+  background: rgba(44, 41, 37, 0.85);
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+  z-index: 10;
+  border: none;
+  padding: 0;
+  line-height: 1;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.pinRing {
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  animation: pinPulse 3s infinite ease;
+  pointer-events: none;
+}
+
+@keyframes pinPulse {
+  0%   { transform: scale(0.3); opacity: 1; }
+  50%  { transform: scale(1);   opacity: 0; }
+  100% { transform: scale(1);   opacity: 0; }
+}
+
+.pin:hover {
+  background: var(--color-gold);
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.pin:active {
+  transform: translate(-50%, -50%) scale(0.92) !important;
+  transition: transform 0.08s ease;
+}
+
+.pinActive {
+  background: var(--color-gold) !important;
+  transform: translate(-50%, -50%) scale(1.15) !important;
+}
+
+/* ── Painel lateral ────────────────────────────────────────────────────────── */
+.panel {
+  width: 260px;
+  flex-shrink: 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.listRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.listRow:hover {
+  opacity: 0.75;
+}
+
+.chip {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px 6px 6px 0px;
+  background: rgba(44, 41, 37, 0.14);
+  color: var(--color-ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.15s, color 0.15s;
+}
+
+.listRowActive .chip {
+  background: var(--color-gold);
+  color: #fff;
+}
+
+.listLabel {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(44, 41, 37, 0.7);
+  line-height: 1.3;
+}
+
+.listRowActive .listLabel {
+  color: var(--color-ink);
+}
+
+/* ── Popup ─────────────────────────────────────────────────────────────────── */
+.popupBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(21, 19, 15, 0.55);
+}
+
+.popup {
+  width: calc(100% - 160px);
+  height: calc(100% - 140px);
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+}
+
+.popupHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: #f7f4ef;
+  flex-shrink: 0;
+}
+
+.popupChip {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 5px 5px 5px 0;
+  background: var(--color-gold);
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popupTitle {
+  flex: 1;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.popupClose {
+  background: rgba(44, 41, 37, 0.06);
+  border: 1px solid rgba(44, 41, 37, 0.15);
+  border-radius: 3px;
+  color: rgba(44, 41, 37, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  transition: all 0.15s;
+}
+
+.popupClose:hover {
+  background: rgba(44, 41, 37, 0.12);
+  color: var(--color-ink);
+}
+
+.popupImage {
+  flex: 1;
+  overflow: hidden;
+  background: #f7f4ef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.popupImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.emBreveLabel {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--color-gold);
+  text-transform: uppercase;
+}
+
+.emBreveText {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgba(44, 41, 37, 0.3);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 16px;
+  }
+
+  .floorTab {
+    font-size: 9px;
+    padding: 8px 14px;
+  }
+
+  .mainRow {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .imageArea {
+    width: 100%;
+    flex: none;
+  }
+
+  .panel {
+    width: 100%;
+  }
+
+  .list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .popup {
+    width: calc(100% - 32px);
+    height: calc(100% - 32px);
+  }
+}
