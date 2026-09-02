@@ -3,13 +3,20 @@ import { gsap } from 'gsap';
 import styles from './Implantacao.module.css';
 
 const ITEMS = [
-  { id: 1, label: 'Estacionamento',        x: 16, y: 52 },
-  { id: 2, label: 'Piscina',               x: 38, y: 30 },
-  { id: 3, label: 'Deck / Solarium',       x: 51, y: 25 },
-  { id: 4, label: 'Área Gourmet',          x: 43, y: 43 },
-  { id: 5, label: 'Quadra Poliesportiva',  x: 62, y: 27 },
-  { id: 6, label: 'Quadra de Areia',       x: 64, y: 42 },
-  { id: 9, label: 'Torre Residencial',     x: 57, y: 63 },
+  { id: 1,  label: 'Estacionamento',        x: 16,   y: 52 },
+  { id: 2,  label: 'Piscina',               x: 44,   y: 34,   image: '/img/areas/piscina/piscina.avif' },
+  { id: 3,  label: 'Churrasqueira',         x: 35.8, y: 49.1, image: '/img/areas/churrasqueira/churrasqueira.avif' },
+  { id: 4,  label: 'Salão de Festas',       x: 41.3, y: 49.2, image: '/img/areas/salao-de-festas/salao-de-festas.avif' },
+  { id: 5,  label: 'Quadra de Street Ball', x: 58.5, y: 33.7, image: '/img/areas/quadra/quadra.avif' },
+  { id: 6,  label: 'Quadra de Beach Tennis',x: 59.5, y: 46,   image: '/img/areas/beach-tennis/beach-tennis.avif' },
+  { id: 7,  label: 'Espaço Teen',           x: 68.4, y: 52.4, image: '/img/areas/teen/teen.avif' },
+  { id: 8,  label: 'Brinquedoteca',         x: 67.5, y: 64.9, image: '/img/areas/brinquedoteca/brinquedoteca.avif' },
+  { id: 9,  label: 'Academia',              x: 47.1, y: 60.6, image: '/img/areas/academia/academia.avif' },
+  { id: 10, label: 'Playground',            x: 62.9, y: 73.2, image: '/img/areas/playground/playground.avif' },
+  { id: 11, label: 'Espaço Pet',            x: 47.7, y: 89.4, image: '/img/areas/petplace/petplace.avif' },
+  { id: 12, label: 'Academia ao Ar Livre',  x: 63.6, y: 91.6, image: '/img/areas/fitness/fitness.avif' },
+  { id: 13, label: 'Torre Aroeira',         x: 47.9, y: 70.3 },
+  { id: 14, label: 'Torre Araucária',       x: 74.4, y: 64.4 },
 ];
 
 const IconClose = () => (
@@ -89,6 +96,7 @@ export default function Implantacao() {
 
       {/* Imagem + pins */}
       <div className={styles.imageArea} ref={imageRef}>
+        <h2 className={styles.panelTitle} ref={titleRef}>IMPLANTAÇÃO</h2>
         <img
           src="/img/implantacao/geral_planta.avif"
           alt="Implantação"
@@ -113,7 +121,6 @@ export default function Implantacao() {
 
       {/* Painel lateral */}
       <div className={styles.panel} ref={panelRef}>
-        <h2 className={styles.panelTitle} ref={titleRef}>IMPLANTAÇÃO</h2>
         <div className={styles.list}>
           {ITEMS.map((item, i) => (
             <div
@@ -147,8 +154,14 @@ export default function Implantacao() {
               </button>
             </div>
             <div className={styles.popupImage}>
-              <span className={styles.emBreveLabel}>EM BREVE</span>
-              <p className={styles.emBreveText}>{popup.label.toUpperCase()}</p>
+              {popup.image ? (
+                <img src={popup.image} alt={popup.label} className={styles.popupImg} draggable={false} />
+              ) : (
+                <>
+                  <span className={styles.emBreveLabel}>EM BREVE</span>
+                  <p className={styles.emBreveText}>{popup.label.toUpperCase()}</p>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -30,7 +30,7 @@
 /* ── Imagem ─────────────────────────────────────────────────────────────── */
 .imageArea {
   position: relative;
-  width: 60%;
+  width: 72%;
   aspect-ratio: 2538 / 1427;
   flex-shrink: 0;
   margin-left: 24px;
@@ -110,20 +110,36 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 40px 48px;
+  padding: 40px 32px;
   background: rgb(55, 72, 62);
   overflow: hidden;
 }
 
+.imageArea::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 130px;
+  background: linear-gradient(180deg, rgba(8, 14, 10, 0.65) 0%, rgba(8, 14, 10, 0) 100%);
+  z-index: 4;
+  pointer-events: none;
+}
+
 .panelTitle {
+  position: absolute;
+  top: 28px;
+  left: 32px;
+  z-index: 5;
   font-family: 'Manrope', sans-serif;
   font-weight: 800;
-  font-size: 42px;
+  font-size: 32px;
   letter-spacing: 2px;
   color: #ffffff;
-  margin: 0 0 28px;
+  margin: 0;
   text-transform: uppercase;
   line-height: 1;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
 }
 
 .list {
@@ -264,6 +280,14 @@
   justify-content: center;
   gap: 8px;
   background: #111a14;
+  overflow: hidden;
+}
+
+.popupImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .emBreveLabel {
