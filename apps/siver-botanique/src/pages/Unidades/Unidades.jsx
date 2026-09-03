@@ -5,7 +5,7 @@ import styles from './Unidades.module.css';
 
 const TABS = [
   { id: 'tour',     label: 'tour virtual' },
-  { id: 'compare',  label: 'compare unidades' },
+  { id: 'compare',  label: 'compare apartamentos' },
   { id: 'vistas',   label: 'vistas' },
 ];
 
@@ -67,7 +67,7 @@ export default function Unidades() {
         {activeTab === 'compare' && (
           <div className={styles.emBreve}>
             <span className={styles.emBreveLabel}>EM BREVE</span>
-            <p className={styles.emBreveSubtitle}>COMPARE UNIDADES</p>
+            <p className={styles.emBreveSubtitle}>COMPARE APARTAMENTOS</p>
           </div>
         )}
 

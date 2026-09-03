@@ -115,7 +115,7 @@ const CARD_GAP = 20;
 export default function Localizacao() {
   const { closeModule, startTransition } = useTransition();
   const { drawerRef, open: openDrawer, close: closeDrawer } = useNavDrawer();
-  const [activeTab, setActiveTab] = useState('conveniences');
+  const [activeTab, setActiveTab] = useState('map');
 
   const sceneRef  = useRef(null);
   const topBarRef = useRef(null);
@@ -200,8 +200,7 @@ export default function Localizacao() {
       <header className={styles.topBar} ref={topBarRef}>
         <img src="/img/logo.avif" className={styles.logoSmall} draggable={false} onClick={() => startTransition('/', '')} style={{ cursor: 'pointer' }} />
         <nav className={styles.tabs}>
-          <button className={`${styles.tab} ${activeTab === 'conveniences' ? styles.tabActive : ''}`}
-            onClick={() => setActiveTab('conveniences')}>conveniências</button>
+          {/* Aba "conveniências" removida temporariamente a pedido do cliente */}
           <button className={`${styles.tab} ${activeTab === 'map' ? styles.tabActive : ''}`}
             onClick={() => setActiveTab('map')}>mapa</button>
           <button className={`${styles.tab} ${activeTab === 'loc360' ? styles.tabActive : ''}`}
