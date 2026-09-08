@@ -194,13 +194,12 @@ export default function Localizacao() {
   };
 
   return (
-    <div className={`${styles.scene}${activeTab === 'conveniences' ? ` ${styles.sceneConveniences}` : ''}`} ref={sceneRef}>
+    <div className={`${styles.scene}${activeTab === 'guide' ? ` ${styles.sceneConveniences}` : ''}`} ref={sceneRef}>
 
       {/* ── Top bar ── */}
       <header className={styles.topBar} ref={topBarRef}>
         <img src="/img/logo.avif" className={styles.logoSmall} draggable={false} onClick={() => startTransition('/', '')} style={{ cursor: 'pointer' }} />
         <nav className={styles.tabs}>
-          {/* Aba "conveniências" removida temporariamente a pedido do cliente */}
           <button className={`${styles.tab} ${activeTab === 'map' ? styles.tabActive : ''}`}
             onClick={() => setActiveTab('map')}>mapa</button>
           <button className={`${styles.tab} ${activeTab === 'loc360' ? styles.tabActive : ''}`}
@@ -222,7 +221,7 @@ export default function Localizacao() {
       <div className={styles.body}>
 
         {/* Texto — lado esquerdo */}
-        <div className={styles.textBlock} ref={textRef} style={activeTab !== 'conveniences' ? { visibility: 'hidden' } : {}}>
+        <div className={styles.textBlock} ref={textRef} style={activeTab !== 'guide' ? { visibility: 'hidden' } : {}}>
           <span className={styles.eyebrow}>Av. Cleise Terezinha Rosa da Silva</span>
           <h1 className={styles.title}>
             <span>PERTO</span>
@@ -237,7 +236,7 @@ export default function Localizacao() {
         </div>
 
         {/* Cards */}
-        {activeTab === 'conveniences' && (
+        {activeTab === 'guide' && (
           <div className={styles.cardsArea}>
             <div
               className={styles.strip}
@@ -316,13 +315,6 @@ export default function Localizacao() {
         </div>
       )}
 
-      {/* Guia de Bairro */}
-      {activeTab === 'guide' && (
-        <div className={styles.emBreve}>
-          <span className={styles.emBreveLabel}>EM BREVE</span>
-          <p className={styles.emBreveSubtitle}>GUIA DE BAIRRO</p>
-        </div>
-      )}
     </div>
   );
 }
