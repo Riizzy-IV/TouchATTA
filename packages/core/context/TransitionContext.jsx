@@ -5,9 +5,9 @@ import { gsap } from 'gsap';
 const TransitionContext = createContext(null);
 
 /**
- * @param {{ logoSrc: string, overlayColor: string, children: React.ReactNode }} props
+ * @param {{ logoSrc: string, overlayColor: string, logoFullscreen?: boolean, children: React.ReactNode }} props
  */
-export function TransitionProvider({ children, logoSrc, overlayColor = '#e8f0f3' }) {
+export function TransitionProvider({ children, logoSrc, overlayColor = '#e8f0f3', logoFullscreen = false }) {
   const navigate   = useNavigate();
   const overlayRef = useRef(null);
   const logoRef    = useRef(null);
@@ -16,11 +16,15 @@ export function TransitionProvider({ children, logoSrc, overlayColor = '#e8f0f3'
   const animateLogo = useCallback(() => {
     const logo = logoRef.current;
     if (!logo) return;
+    if (logoFullscreen) {
+      gsap.fromTo(logo, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' });
+      return;
+    }
     gsap.fromTo(logo,
       { opacity: 0, scale: 0.88, y: 18 },
       { opacity: 1, scale: 1, y: 0, duration: 0.7, delay: 0.15, ease: 'power3.out' }
     );
-  }, []);
+  }, [logoFullscreen]);
 
   const runTransition = useCallback((route, fadeInDuration, fadeOutDelay, fadeOutDuration) => {
     setVisible(true);
@@ -88,7 +92,15 @@ export function TransitionProvider({ children, logoSrc, overlayColor = '#e8f0f3'
                 autoPlay
                 muted
                 playsInline
-                style={{
+                style={logoFullscreen ? {
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  opacity: 0,
+                  userSelect: 'none',
+                } : {
                   width: 'clamp(260px, 28vw, 460px)',
                   opacity: 0,
                   mixBlendMode: 'multiply',

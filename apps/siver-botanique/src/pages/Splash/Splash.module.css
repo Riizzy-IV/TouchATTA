@@ -31,9 +31,8 @@
 }
 
 .logo {
-  height: 120px;
-  width: auto;
-  mix-blend-mode: lighten;
+  width: clamp(320px, 30vw, 460px);
+  height: auto;
 }
 
 .btn {

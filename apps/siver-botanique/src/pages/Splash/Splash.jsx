@@ -47,7 +47,7 @@ export default function Splash({ onStart }) {
         <p className={styles.eyebrow} ref={logoRef}>Seja bem-vindo ao Touch Atta</p>
 
         <div className={styles.brand} ref={btnRef}>
-          <img src="/img/Logo Siver.avif" alt="Siver Botanique" className={styles.logo} />
+          <img src="/img/siver-logo-full.png" alt="Siver Botanique Sorocaba" className={styles.logo} />
         </div>
 
         <button className={styles.btn} onClick={handleStart}>

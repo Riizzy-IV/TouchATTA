@@ -134,7 +134,7 @@ const TOP_TABS = [
 
 export default function Projeto() {
   const { closeModule, startTransition } = useTransition();
-  const [activeTopTab, setActiveTopTab] = useState('ficha-tecnica');
+  const [activeTopTab, setActiveTopTab] = useState('implantacao');
   const [activeTab, setActiveTab] = useState('empreendimento');
   const [lightbox, setLightbox] = useState(null);
   const { drawerRef, open: openDrawer, close: closeDrawer } = useNavDrawer();

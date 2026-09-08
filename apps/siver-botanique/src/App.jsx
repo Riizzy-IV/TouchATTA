@@ -18,7 +18,7 @@ export default function App() {
 
   return (
     <ScaleWrapper>
-      <TransitionProvider logoSrc="/img/logo.avif" overlayColor="#f5f0e8">
+      <TransitionProvider logoSrc="/videos/joaninha.mp4" overlayColor="#f5f0e8" logoFullscreen>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/modulo/02" element={<Localizacao />} />

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { useTransition } from '@showcase/core';
-import NavButton from '../../components/NavButton/NavButton';
 import VideoOverlay from '../../components/VideoOverlay/VideoOverlay';
 import styles from './Home.module.css';
 
@@ -44,14 +43,11 @@ const PHASE = { ESPERA: 'espera', FIXO: 'fixo', SAI: 'sai' };
 
 export default function Home() {
   const { startTransition } = useTransition();
-  const sceneRef      = useRef(null);
-  const heroRef       = useRef(null);
-  const panelRef      = useRef(null);
-  const logoRef       = useRef(null);
-  const btnsRef       = useRef([]);
-  const footerRef     = useRef(null);
-  const strelitziaRef = useRef(null);
-  const floralRef     = useRef(null);
+  const sceneRef  = useRef(null);
+  const bgRef     = useRef(null);
+  const brandRef  = useRef(null);
+  const btnsRef   = useRef([]);
+  const footerRef = useRef(null);
 
   const [phase, setPhase]       = useState(PHASE.ESPERA);
   const [videoSrc, setVideoSrc] = useState(null);
@@ -62,13 +58,10 @@ export default function Home() {
 
       const tl = gsap.timeline({ onComplete: () => setPhase(PHASE.FIXO) });
 
-      tl.to(sceneRef.current,       { opacity: 1,                           duration: 0.7, ease: 'power2.inOut' });
-      tl.from(heroRef.current,      { scale: 1.06, opacity: 0,             duration: 1.3, ease: 'power2.out'   }, '-=0.4');
-      tl.from(panelRef.current,     { x: -40, opacity: 0,                  duration: 0.9, ease: 'power3.out'   }, '-=0.9');
-      tl.from(logoRef.current,      { opacity: 0, y: 20,                   duration: 0.6, ease: 'power2.out'   }, '-=0.5');
-      tl.from(footerRef.current,    { opacity: 0,                          duration: 0.4                        }, '-=0.2');
-      tl.from(strelitziaRef.current,{ opacity: 0, y: 60, scale: 0.85,      duration: 1.0, ease: 'power3.out'   }, '-=0.5');
-      tl.from(floralRef.current,    { opacity: 0, x: -30, rotate: -10,     duration: 0.8, ease: 'back.out(1.4)' }, '-=0.7');
+      tl.to(sceneRef.current,   { opacity: 1,                       duration: 0.7, ease: 'power2.inOut' });
+      tl.from(bgRef.current,    { scale: 1.05, opacity: 0,          duration: 1.2, ease: 'power2.out'   }, '-=0.4');
+      tl.from(brandRef.current, { x: -30, opacity: 0,               duration: 0.8, ease: 'power3.out'   }, '-=0.8');
+      tl.from(footerRef.current,{ opacity: 0,                       duration: 0.4                        }, '-=0.2');
     }, sceneRef);
 
     return () => ctx.revert();
@@ -86,81 +79,61 @@ export default function Home() {
 
     const tl = gsap.timeline({ onComplete: () => startTransition(mod.route, mod.label) });
 
-    tl.to(btnsRef.current,   { opacity: 0, y: 16, duration: 0.22, stagger: { each: 0.04, from: 'end' }, ease: 'power2.in' });
-    tl.to(logoRef.current,   { opacity: 0, y: -20, duration: 0.3, ease: 'power2.in' }, '<');
-    tl.to(panelRef.current,  { x: -50, opacity: 0, duration: 0.4, ease: 'power2.in' }, '-=0.1');
-    tl.to(heroRef.current,   { scale: 1.05, opacity: 0, duration: 0.5, ease: 'power2.in' }, '-=0.2');
-    tl.to(sceneRef.current,  { opacity: 0, duration: 0.3 }, '-=0.15');
+    tl.to(btnsRef.current,  { opacity: 0, y: 16, duration: 0.22, stagger: { each: 0.04, from: 'end' }, ease: 'power2.in' });
+    tl.to(brandRef.current, { opacity: 0, x: -20, duration: 0.3, ease: 'power2.in' }, '<');
+    tl.to(bgRef.current,    { scale: 1.03, opacity: 0, duration: 0.5, ease: 'power2.in' }, '-=0.2');
+    tl.to(sceneRef.current, { opacity: 0, duration: 0.3 }, '-=0.15');
   }, [phase, startTransition]);
 
   return (
     <div ref={sceneRef} className={styles.scene}>
 
-      {/* Hero image — full background, right-aligned */}
-      <div ref={heroRef} className={styles.hero}>
-        <img src="/img/hero.avif" alt="" className={styles.heroImg} />
-        <div className={styles.heroGradient} />
+      {/* Fundo completo — painel + curva + fachada já compostos na arte */}
+      <img ref={bgRef} src="/img/bg-siver.avif" alt="" className={styles.bg} />
+
+      {/* Efeito de luz correndo sobre o traçado dourado vertical da arte de fundo */}
+      <span className={styles.ledLine} aria-hidden="true" />
+
+      {/* Joaninha pousada na folha */}
+      <img src="/img/joaninha.png" alt="" className={styles.ladybug} aria-hidden="true" />
+
+      {/* Marca */}
+      <div ref={brandRef} className={styles.brand}>
+        <img src="/img/siver-logo-full.png" alt="Siver Botanique Sorocaba" className={styles.logoFull} />
+        <span className={styles.divider} />
+        <p className={styles.tagline}>2 DORMS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VARANDA GRILL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VAGA</p>
       </div>
 
-      {/* Strelitzia — canto inferior direito sobre o hero */}
-      <img ref={strelitziaRef} src="/img/strelitzia.avif" alt="" className={styles.strelitzia} />
+      {/* Nav — ancorado perto da base, independente da altura do bloco de marca */}
+      <nav className={styles.nav}>
+        {MODULES.map((mod, i) => (
+          <button
+            key={mod.id}
+            ref={el => (btnsRef.current[i] = el)}
+            className={styles.navItem}
+            style={{ animationDelay: `${0.75 + i * 0.1}s` }}
+            disabled={phase !== PHASE.FIXO}
+            onClick={() => handleModuleClick(mod)}
+          >
+            <span className={styles.navCircle}>
+              {mod.icon}
+              <span className={styles.ring} />
+              <span className={styles.ring} style={{ animationDelay: '0.5s' }} />
+            </span>
+            <span className={styles.navLabel}>{mod.label}</span>
+          </button>
+        ))}
+      </nav>
 
-
-      {/* Left cream panel */}
-      <div ref={panelRef} className={styles.panel}>
-        {/* Nuvens em loop atrás da fachada */}
-        <video
-          className={styles.clouds}
-          src="/videos/clouds.webm"
-          autoPlay
-          muted
-          loop
-          playsInline
+      {/* Footer */}
+      <div ref={footerRef} className={styles.footer}>
+        <img
+          src="/img/sivercon.avif"
+          alt="Sivercon"
+          className={styles.siverconLogo}
+          style={{ cursor: 'pointer' }}
+          onClick={() => startTransition('/construtora', '')}
         />
-
-        {/* Fachada fantasma sobre as nuvens */}
-        <img src="/img/fachada.avif" alt="" className={styles.fachada} />
-
-        {/* Orange top accent line */}
-        <div className={styles.accentLine} />
-
-        {/* Logo */}
-        <div ref={logoRef} className={styles.brand}>
-          <video
-            src="/img/LOGO SIVER v4-small.webm"
-            className={styles.logoImg}
-            autoPlay
-            muted
-            playsInline
-          />
-          <p className={styles.tagline}>2 DORMS &nbsp;•&nbsp; VARANDA GRILL &nbsp;•&nbsp; VAGA</p>
-        </div>
-
-        {/* Nav */}
-        <nav className={styles.nav}>
-          {MODULES.map((mod, i) => (
-            <NavButton
-              key={mod.id}
-              ref={el => (btnsRef.current[i] = el)}
-              icon={mod.icon}
-              label={mod.label}
-              delay={0.75 + i * 0.1}
-              disabled={phase !== PHASE.FIXO}
-              onClick={() => handleModuleClick(mod)}
-            />
-          ))}
-        </nav>
-
-        {/* Footer */}
-        <div ref={footerRef} className={styles.footer}>
-          <img
-            src="/img/sivercon.avif"
-            alt="Sivercon"
-            className={styles.siverconLogo}
-            style={{ cursor: 'pointer' }}
-            onClick={() => startTransition('/construtora', '')}
-          />
-        </div>
       </div>
 
       {videoSrc && <VideoOverlay src={videoSrc} onClose={() => setVideoSrc(null)} />}
