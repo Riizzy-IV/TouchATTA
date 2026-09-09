@@ -97,6 +97,9 @@ export default function Home() {
       {/* Joaninha pousada na folha */}
       <img src="/img/joaninha.png" alt="" className={styles.ladybug} aria-hidden="true" />
 
+      {/* Linha dourada horizontal — apoio para o selo da Sivercon */}
+      <span className={styles.footerLine} aria-hidden="true" />
+
       {/* Marca */}
       <div ref={brandRef} className={styles.brand}>
         <img src="/img/siver-logo-full.png" alt="Siver Botanique Sorocaba" className={styles.logoFull} />
