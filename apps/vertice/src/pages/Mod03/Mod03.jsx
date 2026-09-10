@@ -9,7 +9,7 @@ const TABS = [
   'FACHADA INTERATIVA',
   'ORIENTAÇÃO SOLAR',
   'TOUR VIRTUAL',
-  'DIFERENCIAIS',
+  // 'DIFERENCIAIS' removida temporariamente a pedido do cliente
 ];
 
 /* ── Orientação Solar ───────────────────────────────────────────────────── */
