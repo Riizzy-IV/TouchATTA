@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
 
-const ALLOWED_HOSTS = ['showcase.zimbel.com.br', 'touchatta.zimbel.com.br', 'localhost'];
+const ALLOWED_HOSTS = ['showcase.zimbel.com.br', 'touchatta.zimbel.com.br', 'touch-atta-vertice.vercel.app', 'localhost'];
 if (!ALLOWED_HOSTS.includes(window.location.hostname)) {
   document.body.innerHTML = '';
   throw new Error('Unauthorized');
