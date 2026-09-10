@@ -104,7 +104,7 @@ export default function Home() {
       <div ref={brandRef} className={styles.brand}>
         <img src="/img/siver-logo-full.png" alt="Siver Botanique Sorocaba" className={styles.logoFull} />
         <span className={styles.divider} />
-        <p className={styles.tagline}>2 DORMS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VARANDA GRILL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VAGA</p>
+        <p className={styles.tagline}>Perto de tudo, em meio à natureza.</p>
       </div>
 
       {/* Nav — ancorado perto da base, independente da altura do bloco de marca */}

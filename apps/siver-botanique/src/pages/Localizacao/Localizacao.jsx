@@ -9,8 +9,8 @@ import { useTransition } from '@showcase/core';
 import NavDrawer, { useNavDrawer } from '../../components/NavDrawer/NavDrawer';
 import styles from './Localizacao.module.css';
 
-const SIVER_LAT = -23.5145;
-const SIVER_LNG = -47.4724;
+const SIVER_LAT = -23.4587034;
+const SIVER_LNG = -47.4992200;
 
 const logoPinIcon = L.divIcon({
   className: '',

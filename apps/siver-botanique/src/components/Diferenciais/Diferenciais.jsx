@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import {
-  FaBolt, FaSnowflake, FaSwimmingPool, FaBuilding,
-  FaShieldAlt, FaVideo, FaLock, FaMobileAlt,
-  FaTint, FaLeaf, FaSolarPanel, FaCubes,
+  FaBolt, FaCouch, FaParking,
+  FaShieldAlt, FaBoxOpen, FaFireExtinguisher,
+  FaTree, FaTint,
 } from 'react-icons/fa';
+import { MdElevator } from 'react-icons/md';
 import styles from './Diferenciais.module.css';
 
 const SECTIONS = [
@@ -16,10 +17,10 @@ const SECTIONS = [
     photo: '/img/fachada-01.avif',
     photo2: '/img/piscina-01.avif',
     items: [
-      { icon: <FaBolt size={28} />,        text: 'Gerador de energia elétrica para as áreas comuns, bombas, portões e elevadores' },
-      { icon: <FaSnowflake size={28} />,   text: 'Áreas comuns entregues equipadas com ar-condicionado e decoradas' },
-      { icon: <FaSwimmingPool size={28} />, text: 'Piscina climatizada para uso em qualquer época do ano' },
-      { icon: <FaBuilding size={28} />,    text: 'Lazer elevado no 6º pavimento com vista privilegiada do empreendimento' },
+      { icon: <FaBolt size={28} />,     text: 'Gerador de energia elétrica para áreas comuns, bombas, portões e elevadores' },
+      { icon: <FaCouch size={28} />,    text: 'Áreas comuns entregues equipadas e decoradas' },
+      { icon: <MdElevator size={28} />, text: 'Elevador do edifício garagem' },
+      { icon: <FaParking size={28} />,  text: 'Todas unidades com vaga' },
     ],
   },
   {
@@ -30,10 +31,9 @@ const SECTIONS = [
     photo: '/img/fachada-cena-02.avif',
     photo2: '/img/fachada-02.avif',
     items: [
-      { icon: <FaShieldAlt size={28} />, text: 'Portaria 24 horas com controle de acesso e monitoramento permanente' },
-      { icon: <FaVideo size={28} />,     text: 'Câmeras de monitoramento em todas as áreas comuns e acessos' },
-      { icon: <FaLock size={28} />,      text: 'Fechadura digital nas unidades com acionamento por senha e cartão' },
-      { icon: <FaMobileAlt size={28} />, text: 'Interfone com vídeo para comunicação segura com a portaria' },
+      { icon: <FaShieldAlt size={28} />,       text: 'Portaria 24 horas com controle de acesso e monitoramento permanente' },
+      { icon: <FaBoxOpen size={28} />,         text: 'Armários delivery na antecâmara da área de controle de acesso' },
+      { icon: <FaFireExtinguisher size={28} />, text: 'Escadas confinadas e pressurizadas, com iluminação de emergência e portas corta-fogo, sistema de combate a incêndio com hidrantes, extintores e sinalização' },
     ],
   },
   {
@@ -44,10 +44,8 @@ const SECTIONS = [
     photo: '/img/piscina-01.avif',
     photo2: '/img/outdoor.avif',
     items: [
-      { icon: <FaTint size={28} />,       text: 'Reservatório de reuso de água pluvial para irrigação e limpeza' },
-      { icon: <FaLeaf size={28} />,       text: 'Área permeável de 1.500,76 m² favorecendo o escoamento natural' },
-      { icon: <FaSolarPanel size={28} />, text: 'Paisagismo com espécies nativas e iluminação LED nas áreas comuns' },
-      { icon: <FaCubes size={28} />,      text: 'Estrutura em alvenaria estrutural com maior durabilidade e eficiência' },
+      { icon: <FaTree size={28} />, text: 'Paisagismo integrado às árvores existentes, com preservação de aproximadamente 40% dos indivíduos arbóreos do terreno' },
+      { icon: <FaTint size={28} />, text: 'Mais de 1.500 m² de área permeável integrada ao projeto' },
     ],
   },
 ];
