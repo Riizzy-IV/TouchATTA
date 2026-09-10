@@ -5,6 +5,7 @@ import styles from './Mod03.module.css';
 const TABS = [
   'FICHA TÉCNICA',
   'IMPLANTAÇÃO',
+  'VISTAS',
   'FACHADA INTERATIVA',
   'ORIENTAÇÃO SOLAR',
   'TOUR VIRTUAL',
@@ -619,6 +620,67 @@ function FichaTecnicaView() {
   );
 }
 
+/* ── Vistas ─────────────────────────────────────────────────────────────── */
+const VISTAS_FLOORS = [
+  { id: 'terreo',   label: 'TÉRREO',  tour: 'https://tour.meupasseiovirtual.com/view/Rfi3RHcHQxK?sound=no' },
+  { id: '1',  label: '1',  tour: 'https://tour.meupasseiovirtual.com/view/IiRpzh5zYTo' },
+  { id: '2',  label: '2',  tour: 'https://tour.meupasseiovirtual.com/view/1lRZLS4G0HG' },
+  { id: '3',  label: '3',  tour: 'https://tour.meupasseiovirtual.com/view/rohI5E6DSWD' },
+  { id: '4',  label: '4',  tour: 'https://tour.meupasseiovirtual.com/view/haqn4amD225' },
+  { id: '5',  label: '5',  tour: 'https://tour.meupasseiovirtual.com/view/vuAiBEl13R5' },
+  { id: '6',  label: '6',  tour: 'https://tour.meupasseiovirtual.com/view/O3ERI5nRbhe' },
+  { id: '7',  label: '7',  tour: 'https://tour.meupasseiovirtual.com/view/Sg3mwquowud' },
+  { id: '8',  label: '8',  tour: 'https://tour.meupasseiovirtual.com/view/wOQ8UvP1Kp3' },
+  { id: '9',  label: '9',  tour: 'https://tour.meupasseiovirtual.com/view/q8fGa39IUFc' },
+  { id: '10', label: '10', tour: 'https://tour.meupasseiovirtual.com/view/Skez3SKEfJp' },
+  { id: '11', label: '11', tour: 'https://tour.meupasseiovirtual.com/view/GZ975ok7mpC' },
+  { id: '12', label: '12', tour: 'https://tour.meupasseiovirtual.com/view/inA7YAZ66aB' },
+  { id: 'rooftop', label: 'ROOFTOP', tour: 'https://tour.meupasseiovirtual.com/view/gqiENUciTh3' },
+];
+
+function VistasView() {
+  const [active, setActive] = useState(VISTAS_FLOORS[0]);
+
+  return (
+    <div className={styles.vistasWrapper}>
+      <div className={styles.vistasFull}>
+        {active.tour ? (
+          <iframe
+            key={active.id}
+            className={styles.tourIframe}
+            src={active.tour}
+            title={`Vista — ${active.label}`}
+            referrerPolicy="origin"
+            allow="fullscreen *; autoplay *; screen-wake-lock *; geolocation *; accelerometer *; gyroscope *; xr-spatial-tracking *; vr *; web-share *;"
+            allowFullScreen
+          />
+        ) : (
+          <div className={styles.vistasPlaceholder}>
+            <span className={styles.vistasPlaceholderLabel}>{active.label}</span>
+            <small>Vista 360° em breve</small>
+          </div>
+        )}
+      </div>
+
+      <aside className={styles.vistasPanel}>
+        <span className={styles.vistasTitle}>Escolha o<br />pavimento</span>
+        <img src="/img/guidance-hand.gif" alt="" className={styles.vistasHand} draggable={false} />
+        <div className={styles.vistasList}>
+          {VISTAS_FLOORS.map((floor) => (
+            <button
+              key={floor.id}
+              className={`${styles.vistasBtn} ${floor.label.length > 2 ? styles.vistasBtnWide : ''} ${active.id === floor.id ? styles.vistasBtnActive : ''}`}
+              onClick={() => setActive(floor)}
+            >
+              {floor.label}
+            </button>
+          ))}
+        </div>
+      </aside>
+    </div>
+  );
+}
+
 /* ── Tour Virtual ───────────────────────────────────────────────────────── */
 const TOUR_AREAS = [
   { label: 'Piscina',                tour: 'https://tour.meupasseiovirtual.com/view/FJlQh8lAZxS' },
@@ -701,6 +763,7 @@ export default function Mod03() {
       {(activeTab) => {
         if (activeTab === 'FICHA TÉCNICA') return <FichaTecnicaView />;
         if (activeTab === 'IMPLANTAÇÃO') return <ImplantacaoView />;
+        if (activeTab === 'VISTAS') return <VistasView />;
         if (activeTab === 'FACHADA INTERATIVA') return <FachadaInterativaView />;
         if (activeTab === 'ORIENTAÇÃO SOLAR') return <OrientacaoSolarView />;
         if (activeTab === 'TOUR VIRTUAL')    return <TourVirtualView />;
