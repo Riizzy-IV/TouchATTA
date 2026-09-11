@@ -22,7 +22,7 @@ export default function Splash({ onStart }) {
   return (
     <div ref={rootRef} className={styles.root}>
       <div className={styles.card}>
-        <p className={styles.welcome}>SEJA BEM VINDO AO TOUCHATTA</p>
+        <p className={styles.welcome}>SEJA BEM VINDO AO ATTA TOUCH</p>
 
         <div className={styles.logoWrap}>
           <ZimbelLogo color="white" width={300} />
@@ -36,7 +36,7 @@ export default function Splash({ onStart }) {
 
         <p className={styles.hint}>
           PARA UMA MELHOR EXPERIÊNCIA DE NAVEGAÇÃO<br />
-          ESTE TOUCHATTA SERÁ EXECUTADO EM TELA CHEIA.
+          ESTE ATTA TOUCH SERÁ EXECUTADO EM TELA CHEIA.
         </p>
       </div>
     </div>

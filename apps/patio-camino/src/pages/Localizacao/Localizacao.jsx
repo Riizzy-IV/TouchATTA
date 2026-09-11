@@ -196,8 +196,6 @@ export default function Localizacao() {
             onClick={() => setActiveTab('map')}>mapa</button>
           <button className={`${styles.tab} ${activeTab === 'loc360' ? styles.tabActive : ''}`}
             onClick={() => setActiveTab('loc360')}>localização 360°</button>
-          <button className={`${styles.tab} ${activeTab === 'guide' ? styles.tabActive : ''}`}
-            onClick={() => setActiveTab('guide')}>guia de bairro</button>
         </nav>
         <button className={styles.closeBtn} onClick={openDrawer}>
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
@@ -300,13 +298,6 @@ export default function Localizacao() {
         </div>
       )}
 
-      {/* Guia de Bairro */}
-      {activeTab === 'guide' && (
-        <div className={styles.emBreve}>
-          <span className={styles.emBreveLabel}>EM BREVE</span>
-          <p className={styles.emBreveSubtitle}>GUIA DE BAIRRO</p>
-        </div>
-      )}
     </div>
   );
 }

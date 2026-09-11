@@ -49,7 +49,7 @@ export default function WelcomeModal({ onStart }) {
 
         <p className={styles.subtitle}>
           Para uma melhor experiência de navegação,<br />
-          este Touch Atta será executado em tela cheia.
+          este Atta Touch será executado em tela cheia.
         </p>
 
         <button className={styles.btn} onClick={handleStart}>
