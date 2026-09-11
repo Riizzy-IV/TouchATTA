@@ -122,7 +122,6 @@ export default function Home() {
 
       {/* Navegação vertical à direita */}
       <nav ref={navRef} className={styles.navRail}>
-        <span className={styles.navSpine} />
         {MODULES.map((mod, i) => (
           <button
             key={mod.id}

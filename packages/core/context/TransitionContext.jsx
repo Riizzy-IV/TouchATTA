@@ -5,9 +5,9 @@ import { gsap } from 'gsap';
 const TransitionContext = createContext(null);
 
 /**
- * @param {{ logoSrc: string, overlayColor: string, logoFullscreen?: boolean, children: React.ReactNode }} props
+ * @param {{ logoSrc: string, overlayColor: string, logoFullscreen?: boolean, logoOnDark?: boolean, children: React.ReactNode }} props
  */
-export function TransitionProvider({ children, logoSrc, overlayColor = '#e8f0f3', logoFullscreen = false }) {
+export function TransitionProvider({ children, logoSrc, overlayColor = '#e8f0f3', logoFullscreen = false, logoOnDark = false }) {
   const navigate   = useNavigate();
   const overlayRef = useRef(null);
   const logoRef    = useRef(null);
@@ -115,7 +115,7 @@ export function TransitionProvider({ children, logoSrc, overlayColor = '#e8f0f3'
                 style={{
                   width: 'clamp(260px, 28vw, 460px)',
                   opacity: 0,
-                  mixBlendMode: 'multiply',
+                  ...(logoOnDark ? {} : { mixBlendMode: 'multiply' }),
                   userSelect: 'none',
                 }}
               />
