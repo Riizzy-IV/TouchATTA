@@ -180,6 +180,7 @@
 
 .dockCardImg {
   flex: 1;
+  min-height: 0;
   width: 100%;
   object-fit: contain;
   padding: 6px 5px 2px;
@@ -188,6 +189,7 @@
 }
 
 .dockCardInfo {
+  flex-shrink: 0;
   padding: 4px 6px 5px;
   background: rgba(11, 22, 40, 0.95);
   text-align: center;
