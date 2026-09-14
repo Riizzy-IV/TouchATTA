@@ -32,7 +32,7 @@ const EMPREENDIMENTO = [
     items: [
       { label: 'Unidades',        value: '40 unidades' },
       { label: 'Pavimentos',      value: '9 pavimentos' },
-      { label: 'Vagas',           value: '13 vagas de garagem' },
+      { label: 'Vagas',           value: '14 vagas de garagem' },
       { label: 'Área do terreno', value: '475 m²' },
       { label: 'Área construída', value: '2.295,53 m²' },
       { label: 'Tipologias',      value: '2 dormitórios — múltiplas configurações' },
@@ -42,9 +42,9 @@ const EMPREENDIMENTO = [
   {
     title: 'Por Pavimento',
     items: [
-      { label: 'Térreo',       value: 'Hall Social · Portaria · Bicicletário' },
-      { label: 'Andares tipo', value: '4 unidades por pavimento' },
-      { label: 'Cobertura',    value: 'Área Gourmet · Jacuzzi · Convivência' },
+      { label: 'Térreo',          value: 'Hall · Bicicletário' },
+      { label: 'Andares tipo',    value: '4 unidades por pavimento' },
+      { label: '4º Pavimento',    value: 'Pet Place · Pet Care · Mini Mercado · Coworking · Jacuzzi · Academia · Salão de Festas · Churrasqueira' },
     ],
   },
 ];
@@ -63,15 +63,15 @@ const TIPOLOGIAS = [
 ];
 
 const LAZER = [
-  { n: '01', label: 'Academia'        },
-  { n: '02', label: 'Coworking'       },
-  { n: '03', label: 'Espaço Pet'      },
-  { n: '04', label: 'Pet Care'        },
-  { n: '05', label: 'Área Gourmet'    },
-  { n: '06', label: 'Jacuzzi'         },
-  { n: '07', label: 'Bicicletário'    },
-  { n: '08', label: 'Hall de Entrada' },
-  { n: '09', label: 'Mini Mercado'    },
+  { n: '01', label: 'Academia',        image: '/img/areas/academia.webp' },
+  { n: '02', label: 'Coworking',       image: '/img/areas/coworking.webp' },
+  { n: '03', label: 'Espaço Pet',      image: '/img/areas/espaco-pet.webp' },
+  { n: '04', label: 'Pet Care',        image: '/img/areas/pet-care.webp' },
+  { n: '05', label: 'Área Gourmet',    image: '/img/areas/area-gourmet.webp' },
+  { n: '06', label: 'Jacuzzi',         image: '/img/areas/jacuzzi.webp' },
+  { n: '07', label: 'Bicicletário',    image: '/img/areas/bicicletario.webp' },
+  { n: '08', label: 'Hall de Entrada', image: '/img/areas/hall-entrada.webp' },
+  { n: '09', label: 'Mini Mercado',    image: '/img/areas/mini-mercado.webp' },
 ];
 
 /* ── Views ──────────────────────────────────────────────────────────────── */
@@ -135,6 +135,8 @@ function TipologiasView() {
 }
 
 function LazerView() {
+  const [selected, setSelected] = useState(null);
+
   return (
     <div className={styles.lazerRoot}>
       <img src="/img/gourmet-1.png" alt="" className={styles.lazerBg} />
@@ -144,13 +146,33 @@ function LazerView() {
         <h2 className={styles.lazerTitle}>9 Espaços de <em>Bem-viver</em></h2>
         <div className={styles.lazerGrid}>
           {LAZER.map(l => (
-            <div key={l.n} className={styles.lazerCard}>
+            <button key={l.n} className={styles.lazerCard} onClick={() => setSelected(l)}>
               <span className={styles.lazerNum}>{l.n}</span>
               <span className={styles.lazerName}>{l.label}</span>
-            </div>
+            </button>
           ))}
         </div>
       </div>
+
+      {selected && (
+        <div className={styles.lazerLightbox} onClick={() => setSelected(null)}>
+          <div className={styles.lazerLightboxCard} onClick={e => e.stopPropagation()}>
+            {selected.image ? (
+              <img src={selected.image} alt={selected.label} className={styles.lazerLightboxImg} />
+            ) : (
+              <div className={styles.lazerLightboxEmpty}>
+                <span>IMAGEM EM BREVE</span>
+              </div>
+            )}
+            <div className={styles.lazerLightboxHeader}>
+              <span className={styles.lazerLightboxLabel}>{selected.label}</span>
+              <button className={styles.lazerLightboxClose} onClick={() => setSelected(null)}>
+                <IconClose />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

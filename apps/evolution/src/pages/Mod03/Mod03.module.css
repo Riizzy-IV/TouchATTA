@@ -376,11 +376,86 @@
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(201,168,76,0.15);
   border-radius: 4px;
+  cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 .lazerCard:hover {
   background: rgba(201,168,76,0.08);
   border-color: rgba(201,168,76,0.35);
+}
+
+.lazerLightbox {
+  position: absolute;
+  inset: 0;
+  z-index: 300;
+  background: rgba(10, 12, 18, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lazerLightboxCard {
+  width: 56%;
+  max-width: 760px;
+  background: #0f1218;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.lazerLightboxImg {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.lazerLightboxEmpty {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.03);
+  color: rgba(201,168,76,0.5);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.lazerLightboxHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+
+.lazerLightboxLabel {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.lazerLightboxClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 3px;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+}
+
+.lazerLightboxClose:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.5);
 }
 
 .lazerNum {

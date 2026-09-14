@@ -10,7 +10,7 @@ const MODULES = [
   { id: '02', label: 'Bairro',       icon: '/img/icon-bairro.svg',       route: '/modulo/02', smallLabel: false },
   { id: '03', label: 'Projeto',      icon: '/img/icon-projeto.svg',      route: '/modulo/03', smallLabel: false },
   { id: '04', label: 'Áreas Comuns', icon: '/img/icon-areas.svg',        route: '/modulo/04', smallLabel: true  },
-  { id: '05', label: 'Unidades',     icon: '/img/icon-unidades-btn.svg', route: null,         smallLabel: false },
+  { id: '05', label: 'Unidades',     icon: '/img/icon-unidades-btn.svg', route: '/modulo/05', smallLabel: false },
 ];
 
 const BTN_TOP = [106, 222, 338, 454, 570]; // px (scaled 0.75× from 1920px Figma, adj for 810 canvas)

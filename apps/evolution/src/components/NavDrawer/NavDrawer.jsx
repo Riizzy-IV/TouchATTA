@@ -39,11 +39,19 @@ const IconGaleria = () => (
   </svg>
 );
 
+const IconUnidades = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 22, height: 22 }}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="1" />
+    <path d="M12 3.5V20.5M3.5 12H20.5" />
+  </svg>
+);
+
 const NAV_MODULES = [
   { route: '/',          label: 'Home',        icon: <IconHome /> },
   { route: '/modulo/02', label: 'Localização',  icon: <IconLoc /> },
   { route: '/modulo/03', label: 'Projeto',      icon: <IconProject /> },
   { route: '/modulo/04', label: 'Galeria',      icon: <IconGaleria /> },
+  { route: '/modulo/05', label: 'Unidades',     icon: <IconUnidades /> },
 ];
 
 export function useNavDrawer() {

@@ -24,9 +24,16 @@ const IconChevronR = () => (
 );
 
 const IMAGES = [
-  { id: 'f1', src: '/img/fachada-1.png',  label: 'Fachada · Vista 1', cat: 'FACHADA'  },
-  { id: 'f2', src: '/img/fachada-2.png',  label: 'Fachada · Vista 2', cat: 'FACHADA'  },
-  { id: 'g1', src: '/img/gourmet-1.png',  label: 'Área Gourmet',      cat: 'LAZER'    },
+  { id: 'f1', src: '/img/fachada-1.png',            label: 'Fachada · Vista 1', cat: 'FACHADA' },
+  { id: 'academia',    src: '/img/areas/academia.webp',    label: 'Academia',        cat: 'LAZER' },
+  { id: 'coworking',   src: '/img/areas/coworking.webp',   label: 'Coworking',       cat: 'LAZER' },
+  { id: 'espaco-pet',  src: '/img/areas/espaco-pet.webp',  label: 'Espaço Pet',      cat: 'LAZER' },
+  { id: 'pet-care',    src: '/img/areas/pet-care.webp',    label: 'Pet Care',        cat: 'LAZER' },
+  { id: 'gourmet',     src: '/img/areas/area-gourmet.webp',label: 'Área Gourmet',    cat: 'LAZER' },
+  { id: 'jacuzzi',     src: '/img/areas/jacuzzi.webp',     label: 'Jacuzzi',         cat: 'LAZER' },
+  { id: 'bicicletario',src: '/img/areas/bicicletario.webp',label: 'Bicicletário',    cat: 'LAZER' },
+  { id: 'hall',        src: '/img/areas/hall-entrada.webp',label: 'Hall de Entrada', cat: 'LAZER' },
+  { id: 'mercado',     src: '/img/areas/mini-mercado.webp',label: 'Mini Mercado',    cat: 'LAZER' },
 ];
 
 function Lightbox({ images, startIndex, onClose }) {
@@ -93,31 +100,20 @@ export default function Mod04() {
       <NavDrawer drawerRef={drawerRef} onClose={closeDrawer} currentRoute="/modulo/04" />
 
       <div className={styles.body}>
-        {/* Featured */}
-        <div className={styles.featured} onClick={() => setLightboxIdx(0)} role="button" tabIndex={0}>
-          <img src={IMAGES[0].src} alt={IMAGES[0].label} className={styles.featuredImg} draggable={false} />
-          <div className={styles.featuredOverlay}>
-            <span className={styles.featuredCat}>{IMAGES[0].cat}</span>
-            <span className={styles.featuredLabel}>{IMAGES[0].label}</span>
-            <span className={styles.featuredHint}>Clique para ampliar</span>
-          </div>
-        </div>
-
-        {/* Thumbnails column */}
-        <div className={styles.thumbCol}>
-          {IMAGES.slice(1).map((img, i) => (
-            <div key={img.id} className={styles.thumb} onClick={() => setLightboxIdx(i + 1)} role="button" tabIndex={0}>
-              <img src={img.src} alt={img.label} className={styles.thumbImg} draggable={false} />
-              <div className={styles.thumbOverlay}>
-                <span className={styles.thumbCat}>{img.cat}</span>
-                <span className={styles.thumbLabel}>{img.label}</span>
+        <div className={styles.grid}>
+          {IMAGES.map((img, i) => (
+            <button key={img.id} className={styles.gridCard} onClick={() => setLightboxIdx(i)}>
+              <img src={img.src} alt={img.label} className={styles.gridImg} draggable={false} />
+              <div className={styles.gridOverlay}>
+                <span className={styles.gridCat}>{img.cat}</span>
+                <span className={styles.gridLabel}>{img.label}</span>
               </div>
-            </div>
+            </button>
           ))}
-          <div className={styles.thumbNote}>
-            <p>Renders 3D · Evolution Tatuapé</p>
-            <small>Imagens de representação · sujeito a alteração</small>
-          </div>
+        </div>
+        <div className={styles.gridNote}>
+          <p>Renders 3D · Evolution Tatuapé</p>
+          <small>Imagens de representação · sujeito a alteração</small>
         </div>
 
         {lightboxIdx !== null && (
