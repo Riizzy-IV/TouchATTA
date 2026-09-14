@@ -196,9 +196,15 @@ export default function Projeto() {
             <p className={styles.emBreveSubtitle}>ORIENTAÇÃO SOLAR</p>
           </div>
         ) : activeTopTab === 'fachada-interativa' ? (
-          <div className={styles.emBreve}>
-            <span className={styles.emBreveLabel}>EM BREVE</span>
-            <p className={styles.emBreveSubtitle}>FACHADA INTERATIVA</p>
+          <div className={styles.fachadaWrapper}>
+            <iframe
+              src="https://editor.atta3d.com.br/projetos/patio-camino/embed?embedMode=inline"
+              title="Experiencia 3D - Pátio Camino"
+              className={styles.fachadaIframe}
+              allow="fullscreen *; autoplay *; screen-wake-lock *; geolocation *; accelerometer *; gyroscope *; xr-spatial-tracking *; vr *; web-share *;"
+              allowFullScreen
+              loading="lazy"
+            />
           </div>
         ) : activeTopTab === 'implantacao' ? (
           <Implantacao />
