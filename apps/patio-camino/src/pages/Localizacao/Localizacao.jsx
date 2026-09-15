@@ -6,6 +6,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useTransition } from '@showcase/core';
 import NavDrawer, { useNavDrawer } from '../../components/NavDrawer/NavDrawer';
+import Panorama360 from '../../components/Panorama360/Panorama360';
 import styles from './Localizacao.module.css';
 
 const CAMINO_LAT = -8.0305147;
@@ -290,11 +291,10 @@ export default function Localizacao() {
       {/* Mapa — filho direto do scene para cobrir topBar também */}
       {activeTab === 'map' && <MapaView />}
 
-      {/* Localização 360° — aguardando tour do Pátio Camino */}
+      {/* Localização 360° — panorama da cobertura */}
       {activeTab === 'loc360' && (
-        <div className={styles.emBreve}>
-          <span className={styles.emBreveLabel}>EM BREVE</span>
-          <p className={styles.emBreveSubtitle}>LOCALIZAÇÃO 360°</p>
+        <div className={styles.loc360Wrapper}>
+          <Panorama360 src="/img/vistas360/cobertura.avif" />
         </div>
       )}
 

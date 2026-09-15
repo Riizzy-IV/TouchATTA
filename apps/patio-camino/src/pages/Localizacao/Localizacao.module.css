@@ -388,6 +388,14 @@
   z-index: 30;
 }
 
+.loc360Wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 30;
+  background: #000;
+}
+
 .mapaWrapper :global(.leaflet-tile-pane) {
   filter: saturate(0.65) brightness(0.9);
 }

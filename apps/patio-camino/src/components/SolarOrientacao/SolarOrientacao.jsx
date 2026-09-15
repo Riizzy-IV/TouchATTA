@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import styles from './SolarOrientacao.module.css';
 
-// Sequência de frames extraída de um vídeo (nascer → pôr do sol).
-const TOTAL_FRAMES = 152;
+// Sequência de frames: madrugada → manhã → entardecer → noite.
+const TOTAL_FRAMES = 182;
 const SLIDER_MIN = 0;
 const SLIDER_MAX = TOTAL_FRAMES - 1;
 const LINE_LEFT = 15;
