@@ -209,6 +209,51 @@
   text-transform: uppercase;
 }
 
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .topBar {
+    height: auto;
+    min-height: 64px;
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .logoSmall {
+    width: 84px;
+    flex-shrink: 0;
+  }
+
+  .pageTitle {
+    font-size: 10px;
+  }
+
+  .closeBtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .grid {
+    height: auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: none;
+    grid-auto-rows: 150px;
+    gap: 2px;
+    padding: 2px;
+  }
+
+  .cardLabel {
+    left: 10px;
+    right: 10px;
+    bottom: 8px;
+    font-size: 10.5px;
+  }
+}
+
 /* ── Lightbox ────────────────────────────────────────────────────────────── */
 .lightbox {
   position: fixed;

@@ -459,6 +459,84 @@
   text-transform: uppercase;
 }
 
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .subTabs {
+    padding: 12px 14px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .subTabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .subTab {
+    flex-shrink: 0;
+    font-size: 9.5px;
+    padding: 6px 10px;
+  }
+
+  .editPanel {
+    flex-wrap: wrap;
+    padding: 8px 14px;
+  }
+
+  .editHint {
+    flex-basis: 100%;
+  }
+
+  .mainRow {
+    flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .imageArea {
+    width: 100%;
+    max-height: 40vh;
+    margin-left: 0;
+    flex-shrink: 0;
+  }
+
+  .floorArea {
+    width: 100%;
+    height: auto;
+    max-height: 40vh;
+    margin-left: 0;
+    padding: 14px 0;
+    flex-shrink: 0;
+  }
+
+  .panel {
+    width: 100%;
+    flex: none;
+    padding: 24px 20px;
+    overflow: visible;
+  }
+
+  .panelTitle {
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+
+  .list {
+    overflow-y: visible;
+  }
+
+  .pin {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+  }
+
+  .popup {
+    width: calc(100% - 24px);
+    height: calc(100% - 24px);
+  }
+}
+
 .emBreveText {
   font-family: 'Manrope', sans-serif;
   font-size: 28px;

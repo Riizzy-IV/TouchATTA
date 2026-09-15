@@ -96,6 +96,44 @@
   border-color: rgba(29, 26, 22, 0.45);
 }
 
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .topBar {
+    height: auto;
+    min-height: 64px;
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .logoSmall {
+    width: 84px;
+    flex-shrink: 0;
+  }
+
+  .topTabs {
+    flex: 1;
+    justify-content: flex-start;
+    overflow-x: auto;
+    gap: 14px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .topTabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .topTab {
+    padding: 6px 10px;
+    font-size: 9.5px;
+  }
+
+  .closeBtn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
 /* ── Body ────────────────────────────────────────────────────────────────── */
 .body {
   flex: 1;
@@ -340,6 +378,8 @@
 
 .vistasList {
   width: 100%;
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -383,4 +423,50 @@
 .vistasBtnActive:hover {
   background: #c49a5a;
   border-color: #c49a5a;
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .plantasWrap {
+    flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .plantasImgCol {
+    width: 100%;
+    height: auto;
+    max-height: 40vh;
+    flex-shrink: 0;
+    padding: 14px;
+  }
+
+  .plantasPanel {
+    width: 100%;
+    flex-shrink: 0;
+    border-left: none;
+    border-top: 1px solid rgba(29, 26, 22, 0.1);
+    padding: 20px 20px 32px;
+  }
+
+  .tipoArea {
+    font-size: 26px;
+  }
+
+  .tipoTitle {
+    font-size: 22px;
+  }
+
+  .vistasPanel {
+    width: 56px;
+    right: 10px;
+    top: 10px;
+    max-height: calc(100% - 20px);
+    padding: 6px 4px;
+  }
+
+  .vistasBtn {
+    padding: 8px 0;
+    font-size: 9px;
+  }
 }

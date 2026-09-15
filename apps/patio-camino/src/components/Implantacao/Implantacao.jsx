@@ -51,6 +51,7 @@ const IconClose = () => (
 );
 
 export default function Implantacao() {
+  const canEditPins = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('editpins');
   const [activeSub, setActiveSub] = useState('geral');
   const [active, setActive]   = useState(null);
   const [popup, setPopup]     = useState(null);
@@ -173,12 +174,14 @@ export default function Implantacao() {
             {t.label}
           </button>
         ))}
-        <button
-          className={`${styles.editToggle} ${editMode ? styles.editToggleActive : ''}`}
-          onClick={() => setEditMode(v => !v)}
-        >
-          {editMode ? 'Sair da edição' : 'Editar posição dos pins'}
-        </button>
+        {canEditPins && (
+          <button
+            className={`${styles.editToggle} ${editMode ? styles.editToggleActive : ''}`}
+            onClick={() => setEditMode(v => !v)}
+          >
+            {editMode ? 'Sair da edição' : 'Editar posição dos pins'}
+          </button>
+        )}
       </div>
 
       {editMode && (

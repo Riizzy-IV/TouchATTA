@@ -123,6 +123,43 @@
   background: rgba(29, 26, 22, 0.05);
 }
 
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .topBar {
+    height: auto;
+    min-height: 64px;
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .logoSmall {
+    width: 84px;
+    flex-shrink: 0;
+  }
+
+  .tabs {
+    flex: 1;
+    overflow-x: auto;
+    gap: 10px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    padding: 6px 10px;
+    font-size: 9px;
+  }
+
+  .closeBtn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
 /* ── Body ────────────────────────────────────────────────────────────────── */
 .body {
   flex: 1;

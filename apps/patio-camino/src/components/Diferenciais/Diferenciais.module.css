@@ -159,3 +159,37 @@
   pointer-events: none;
   transition: opacity 0.4s;
 }
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section {
+    flex-direction: column;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .titleCollapsed {
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+
+  .content {
+    padding: 16px 18px;
+    gap: 10px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .itemText {
+    font-size: 10.5px;
+  }
+}
