@@ -42,6 +42,70 @@
   border-radius: 4px;
 }
 
+.editToggle {
+  margin-left: auto;
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(243, 236, 217, 0.55);
+  background: transparent;
+  border: 1px solid rgba(243, 236, 217, 0.25);
+  border-radius: 4px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.editToggle:hover {
+  color: #f3ecd9;
+  border-color: rgba(243, 236, 217, 0.5);
+}
+
+.editToggleActive {
+  background: #f0c878;
+  border-color: #f0c878;
+  color: #1d1a16 !important;
+}
+
+.editPanel {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 24px;
+  background: rgba(240, 200, 120, 0.12);
+  border-bottom: 1px solid rgba(240, 200, 120, 0.3);
+}
+
+.editHint {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  color: rgba(243, 236, 217, 0.7);
+  flex: 1;
+}
+
+.editCopyBtn {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #1d1a16;
+  background: #f0c878;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.editCopyBtn:hover {
+  opacity: 0.85;
+}
+
 .wrapper::before {
   content: '';
   position: absolute;
@@ -103,13 +167,17 @@
   justify-content: center;
 }
 
+.floorImgWrap {
+  position: relative;
+  height: 100%;
+  display: inline-block;
+  line-height: 0;
+}
+
 .floorImg {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
   display: block;
+  height: 100%;
+  width: auto;
   border-radius: 4px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
@@ -125,13 +193,13 @@
 .pin {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 34px;
-  height: 34px;
-  border-radius: 6px 6px 6px 0px;
+  width: 26px;
+  height: 26px;
+  border-radius: 5px 5px 5px 0px;
   background: rgba(58, 50, 38, 0.88);
   color: #f3ecd9;
   font-family: 'Manrope', sans-serif;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 800;
   cursor: pointer;
   display: flex;
@@ -148,7 +216,7 @@
 
 .pinRing {
   position: absolute;
-  inset: -8px;
+  inset: -6px;
   border-radius: 50%;
   border: 1.5px solid rgba(243, 236, 217, 0.55);
   animation: pinPulse 3s infinite ease;
@@ -172,6 +240,16 @@
   transition: transform 0.08s ease;
 }
 
+.pinEditable {
+  cursor: grab;
+  outline: 2px dashed rgba(240, 200, 120, 0.6);
+  outline-offset: 2px;
+}
+
+.pinEditable:active {
+  cursor: grabbing;
+}
+
 .pinActive {
   background: #f0c878 !important;
   color: #1d1a16 !important;
@@ -184,13 +262,14 @@
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: 40px 48px;
   background: rgb(58, 50, 38);
   overflow: hidden;
+  min-height: 0;
 }
 
 .panelTitle {
+  flex-shrink: 0;
   font-family: 'Manrope', sans-serif;
   font-weight: 800;
   font-size: 42px;
@@ -202,10 +281,32 @@
 }
 
 .list {
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(243, 236, 217, 0.25) transparent;
+}
+
+.list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: rgba(243, 236, 217, 0.25);
+  border-radius: 3px;
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+  background: rgba(243, 236, 217, 0.4);
 }
 
 .listRow {
@@ -339,6 +440,14 @@
   justify-content: center;
   gap: 8px;
   background: #1a160f;
+  overflow: hidden;
+}
+
+.popupPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .emBreveLabel {

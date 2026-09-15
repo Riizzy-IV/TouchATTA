@@ -16,6 +16,8 @@ const AREAS = [
   { slug: 'brinquedoteca',  label: 'Brinquedoteca',       photo: '/img/areas-brinquedoteca.jpg' },
   { slug: 'playground',     label: 'Playground',          photo: '/img/areas-playground.jpg' },
   { slug: 'academia',       label: 'Academia',            photo: '/img/areas-academia.jpg' },
+  { slug: 'academia-arlivre', label: 'Academia ao Ar Livre', photo: '/img/areas-academia-arlivre.jpg' },
+  { slug: 'crossfit',       label: 'Espaço Crossfit',     photo: '/img/areas-crossfit.jpg' },
   { slug: 'petplace',       label: 'Pet Place',           photo: '/img/areas-petplace.jpg' },
   { slug: 'festas',         label: 'Espaço Festas',       photo: '/img/areas-festas.jpg' },
   { slug: 'gazebo',         label: 'Gazebo Grill',        photo: '/img/areas-gazebo.jpg' },
@@ -24,6 +26,7 @@ const AREAS = [
   { slug: 'minicampo',      label: 'Minicampo Infantil',  photo: '/img/areas-minicampo.jpg' },
   { slug: 'baby',           label: 'Espaço Baby',         photo: '/img/areas-baby.jpg' },
   { slug: 'minimarket',     label: 'Mini Market',         photo: '/img/areas-minimarket.jpg' },
+  { slug: 'salamultimidia', label: 'Sala Multimídia',     photo: '/img/areas-salamultimidia.jpg' },
 ];
 
 export default function AreasComuns() {

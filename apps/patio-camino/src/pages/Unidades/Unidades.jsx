@@ -14,15 +14,27 @@ const TIPOLOGIAS = [
     id: 'tipo1',
     label: 'Tipo 1',
     area: '45,68 m²',
+    img: '/img/planta-tipo1.png',
     items: ['2 quartos, sendo 1 suíte', 'Varanda', 'Sala para 02 ambientes', 'WC social', 'Cozinha integrada ao living', 'Área de serviço'],
+    diferenciais: ['Varanda com peitoril em vidro', 'Local para split', 'Tomada USB na suíte', 'Preparação para aquecimento a gás nos chuveiros'],
   },
   {
     id: 'tipo2',
     label: 'Tipo 2',
     area: '43,53 m²',
+    img: '/img/planta-tipo2.png',
     items: ['2 quartos, sendo 1 suíte', 'Varanda', 'Sala para 02 ambientes', 'WC social', 'Cozinha integrada ao living', 'Área de serviço'],
+    diferenciais: ['Varanda com peitoril em vidro', 'Local para split', 'Tomada USB na suíte', 'Preparação para aquecimento a gás nos chuveiros'],
   },
 ];
+
+const IconCompass = () => (
+  <svg viewBox="0 0 40 40" width="34" height="34" fill="none">
+    <circle cx="20" cy="20" r="13" stroke="#1d1a16" strokeWidth="1" />
+    <path d="M20 3 L20 9 M20 3 L17 8 M20 3 L23 8" stroke="#1d1a16" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+    <text x="20" y="24" textAnchor="middle" fontSize="8" fontWeight="700" fill="#1d1a16" fontFamily="Manrope, sans-serif">N</text>
+  </svg>
+);
 
 const VISTAS_FLOORS = [
   { id: 'terreo', label: 'TÉRREO', img: '/img/vistas360/terreo.avif' },
@@ -60,6 +72,7 @@ export default function Unidades() {
   const { drawerRef, open: openDrawer, close: closeDrawer } = useNavDrawer();
   const [activeTab, setActiveTab] = useState('plantas');
   const [activeFloor, setActiveFloor] = useState(VISTAS_FLOORS[0]);
+  const [activeTipo, setActiveTipo] = useState(TIPOLOGIAS[0]);
 
   return (
     <div className={styles.scene}>
@@ -96,17 +109,40 @@ export default function Unidades() {
 
         {activeTab === 'plantas' && (
           <div className={styles.plantasWrap}>
-            <img src="/img/plantas-tipos.jpg" alt="Plantas dos apartamentos" className={styles.plantasImg} draggable={false} />
+            <div className={styles.plantasImgCol}>
+              <div className={styles.plantasCompass}><IconCompass /></div>
+              <img src={activeTipo.img} alt={`Planta Apartamento ${activeTipo.label}`} className={styles.plantasImg} draggable={false} />
+            </div>
+
             <div className={styles.plantasPanel}>
-              {TIPOLOGIAS.map(t => (
-                <div key={t.id} className={styles.tipoCard}>
-                  <span className={styles.tipoLabel}>Apartamento {t.label}</span>
-                  <span className={styles.tipoArea}>{t.area}</span>
-                  <ul className={styles.tipoList}>
-                    {t.items.map(i => <li key={i}>{i}</li>)}
-                  </ul>
-                </div>
-              ))}
+              <div className={styles.tipoSwitch}>
+                {TIPOLOGIAS.map(t => (
+                  <button
+                    key={t.id}
+                    className={`${styles.tipoSwitchBtn} ${activeTipo.id === t.id ? styles.tipoSwitchBtnActive : ''}`}
+                    onClick={() => setActiveTipo(t)}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+
+              <span className={styles.tipoLabel}>Apartamento</span>
+              <h2 className={styles.tipoTitle}>{activeTipo.label}</h2>
+
+              <div className={styles.tipoDivider} />
+              <span className={styles.tipoArea}>{activeTipo.area}</span>
+              <div className={styles.tipoDivider} />
+
+              <ul className={styles.tipoList}>
+                {activeTipo.items.map(i => <li key={i}>{i}</li>)}
+              </ul>
+
+              <div className={styles.tipoDiferenciais}>
+                <ul>
+                  {activeTipo.diferenciais.map(d => <li key={d}>{d}</li>)}
+                </ul>
+              </div>
             </div>
           </div>
         )}

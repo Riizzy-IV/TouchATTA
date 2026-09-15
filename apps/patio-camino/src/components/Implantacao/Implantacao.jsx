@@ -3,19 +3,44 @@ import { gsap } from 'gsap';
 import styles from './Implantacao.module.css';
 
 const ITEMS = [
-  { id: 1, label: 'Lojas / Fachada Ativa', x: 10, y: 63 },
-  { id: 2, label: 'Estacionamento',        x: 21, y: 32 },
-  { id: 3, label: 'Vagas PCD',             x: 61, y: 50 },
-  { id: 4, label: 'Piscina',               x: 77, y: 55 },
-  { id: 5, label: 'Quadra Poliesportiva',  x: 50, y: 78 },
-  { id: 6, label: 'Bloco A',               x: 66, y: 35 },
-  { id: 7, label: 'Bloco B',               x: 69, y: 78 },
+  { id: 1,  label: 'Galeria comercial',            x: 13,   y: 65.3 },
+  { id: 2,  label: 'Minicampo infantil',            x: 49.3, y: 75,   photo: '/img/areas-minicampo.jpg' },
+  { id: 3,  label: 'Espaço Crossfit',                x: 44,   y: 86.8, photo: '/img/areas-crossfit.jpg' },
+  { id: 4,  label: 'Gazebo Grill',                   x: 64.6, y: 89.8, photo: '/img/areas-gazebo.jpg' },
+  { id: 5,  label: 'Praça Piquenique',               x: 89.3, y: 77.5, photo: '/img/areas-piquenique.jpg' },
+  { id: 6,  label: 'Piscina adulto com prainha',     x: 78,   y: 52.8, photo: '/img/hero-piscina.jpg' },
+  { id: 7,  label: 'Espaço Festas com copa',         x: 87.2, y: 52.6, photo: '/img/areas-festas.jpg' },
+  { id: 8,  label: 'Espaço Kids',                    x: 97.5, y: 37.5 },
+  { id: 9,  label: 'Brinquedoteca',                  x: 93.2, y: 38.6, photo: '/img/areas-brinquedoteca.jpg' },
+  { id: 10, label: 'Espaço para Self Market',        x: 89.2, y: 31.1, photo: '/img/areas-minimarket.jpg' },
+  { id: 11, label: 'Parque da infância',             x: 84.7, y: 27.9, photo: '/img/areas-playground.jpg' },
+  { id: 12, label: 'WCs',                            x: 93.1, y: 46.8 },
+  { id: 13, label: 'Academia',                       x: 87.8, y: 44.2, photo: '/img/areas-academia.jpg' },
+  { id: 14, label: 'Gazebo Grill',                   x: 84.3, y: 92,   photo: '/img/areas-gazebo.jpg' },
+  { id: 15, label: 'Pet Place / Pet Wash',           x: 92,   y: 65.9, photo: '/img/areas-petplace.jpg' },
+  { id: 16, label: 'Piscina infantil',               x: 71.3, y: 59.5, photo: '/img/hero-piscina.jpg' },
+  { id: 17, label: 'Sala multimídia',                x: 94.1, y: 29.4, photo: '/img/areas-salamultimidia.jpg' },
+  { id: 18, label: 'Deck',                           x: 81.9, y: 58.2 },
+  { id: 19, label: 'Redário',                        x: 75.3, y: 91.1 },
 ];
 
 const SUBTABS = [
   { id: 'geral',        label: 'Geral' },
   { id: 'lazer-terreo', label: 'Bloco Lazer · Térreo' },
   { id: 'lazer-pav1',   label: 'Bloco Lazer · Pav. 1' },
+];
+
+const ITEMS_TERREO = [
+  { id: 1, label: 'Sala multimídia',           x: 68.0, y: 15.0, photo: '/img/areas-salamultimidia.jpg' },
+  { id: 2, label: 'Espaço para Self Market',   x: 20.0, y: 35.0, photo: '/img/areas-minimarket.jpg' },
+  { id: 3, label: 'Brinquedoteca',             x: 55.0, y: 33.0, photo: '/img/areas-brinquedoteca.jpg' },
+  { id: 4, label: 'WCs',                       x: 78.0, y: 40.0 },
+  { id: 5, label: 'Espaço Festas com copa',    x: 45.0, y: 78.0, photo: '/img/areas-festas.jpg' },
+];
+
+const ITEMS_PAV1 = [
+  { id: 1, label: 'Academia',        x: 50.0, y: 28.0, photo: '/img/areas-academia.jpg' },
+  { id: 2, label: 'Espaço Crossfit', x: 50.0, y: 73.0, photo: '/img/areas-crossfit.jpg' },
 ];
 
 const IconClose = () => (
@@ -29,14 +54,52 @@ export default function Implantacao() {
   const [activeSub, setActiveSub] = useState('geral');
   const [active, setActive]   = useState(null);
   const [popup, setPopup]     = useState(null);
+  const [editMode, setEditMode] = useState(false);
+  const [items, setItems]     = useState(ITEMS);
+  const [terreoItems, setTerreoItems] = useState(ITEMS_TERREO);
+  const [pav1Items, setPav1Items]     = useState(ITEMS_PAV1);
+  const [copied, setCopied]   = useState(false);
 
   const wrapperRef  = useRef(null);
   const imageRef    = useRef(null);
+  const floorImgRef = useRef(null);
   const panelRef    = useRef(null);
   const titleRef    = useRef(null);
   const listRowRefs = useRef([]);
   const pinRefs     = useRef([]);
   const popupRef    = useRef(null);
+  const dragRef     = useRef(null);
+
+  const setterFor = (sub) => sub === 'geral' ? setItems : sub === 'lazer-terreo' ? setTerreoItems : setPav1Items;
+  const itemsFor = (sub) => sub === 'geral' ? items : sub === 'lazer-terreo' ? terreoItems : pav1Items;
+
+  useEffect(() => {
+    if (!editMode) return;
+    const onMove = (e) => {
+      if (!dragRef.current) return;
+      const container = activeSub === 'geral' ? imageRef.current : floorImgRef.current;
+      const rect = container.getBoundingClientRect();
+      const x = Math.min(100, Math.max(0, ((e.clientX - rect.left) / rect.width) * 100));
+      const y = Math.min(100, Math.max(0, ((e.clientY - rect.top) / rect.height) * 100));
+      setterFor(activeSub)(prev => prev.map(it => it.id === dragRef.current ? { ...it, x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 } : it));
+    };
+    const onUp = () => { dragRef.current = null; };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+  }, [editMode, activeSub]);
+
+  const copyItems = () => {
+    const code = itemsFor(activeSub)
+      .map(it => `  { id: ${it.id},${' '.repeat(Math.max(1, 3 - String(it.id).length))}label: '${it.label}',${' '.repeat(Math.max(1, 36 - it.label.length))}x: ${it.x}, y: ${it.y} },`)
+      .join('\n');
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -110,7 +173,22 @@ export default function Implantacao() {
             {t.label}
           </button>
         ))}
+        <button
+          className={`${styles.editToggle} ${editMode ? styles.editToggleActive : ''}`}
+          onClick={() => setEditMode(v => !v)}
+        >
+          {editMode ? 'Sair da edição' : 'Editar posição dos pins'}
+        </button>
       </div>
+
+      {editMode && (
+        <div className={styles.editPanel}>
+          <p className={styles.editHint}>Arraste os pins no mapa. Quando terminar, copie o código e me envie.</p>
+          <button className={styles.editCopyBtn} onClick={copyItems}>
+            {copied ? 'Copiado!' : 'Copiar posições'}
+          </button>
+        </div>
+      )}
 
       <div className={styles.mainRow}>
       {activeSub === 'geral' ? (
@@ -123,15 +201,16 @@ export default function Implantacao() {
               className={styles.img}
               draggable={false}
             />
-            {ITEMS.map((item, i) => (
+            {items.map((item, i) => (
               <button
                 key={item.id}
                 ref={el => (pinRefs.current[i] = el)}
-                className={`${styles.pin} ${active === item.id ? styles.pinActive : ''}`}
+                className={`${styles.pin} ${active === item.id ? styles.pinActive : ''} ${editMode ? styles.pinEditable : ''}`}
                 style={{ left: `${item.x}%`, top: `${item.y}%` }}
                 onPointerEnter={() => setActive(item.id)}
                 onPointerLeave={() => setActive(null)}
-                onClick={() => openPopup(item)}
+                onMouseDown={(e) => { if (editMode) { e.preventDefault(); dragRef.current = item.id; } }}
+                onClick={() => { if (!editMode) openPopup(item); }}
               >
                 <span className={styles.pinRing} />
                 {item.id}
@@ -163,16 +242,47 @@ export default function Implantacao() {
         <>
           {/* Planta do bloco lazer */}
           <div className={styles.floorArea}>
-            <img
-              src={FLOOR_INFO[activeSub].src}
-              alt={`${FLOOR_INFO[activeSub].title} - ${FLOOR_INFO[activeSub].subtitle}`}
-              className={styles.floorImg}
-              draggable={false}
-            />
+            <div className={styles.floorImgWrap}>
+              <img
+                ref={floorImgRef}
+                src={FLOOR_INFO[activeSub].src}
+                alt={`${FLOOR_INFO[activeSub].title} - ${FLOOR_INFO[activeSub].subtitle}`}
+                className={styles.floorImg}
+                draggable={false}
+              />
+              {itemsFor(activeSub).map(item => (
+                <button
+                  key={item.id}
+                  className={`${styles.pin} ${active === item.id ? styles.pinActive : ''} ${editMode ? styles.pinEditable : ''}`}
+                  style={{ left: `${item.x}%`, top: `${item.y}%` }}
+                  onPointerEnter={() => setActive(item.id)}
+                  onPointerLeave={() => setActive(null)}
+                  onMouseDown={(e) => { if (editMode) { e.preventDefault(); dragRef.current = item.id; } }}
+                  onClick={() => { if (!editMode) openPopup(item); }}
+                >
+                  <span className={styles.pinRing} />
+                  {item.id}
+                </button>
+              ))}
+            </div>
           </div>
           <div className={styles.panel}>
             <h2 className={styles.panelTitle}>{FLOOR_INFO[activeSub].title}</h2>
             <span className={styles.floorSubtitle}>{FLOOR_INFO[activeSub].subtitle}</span>
+            <div className={styles.list} style={{ marginTop: 24 }}>
+              {itemsFor(activeSub).map(item => (
+                <div
+                  key={item.id}
+                  className={`${styles.listRow} ${active === item.id ? styles.listRowActive : ''}`}
+                  onPointerEnter={() => setActive(item.id)}
+                  onPointerLeave={() => setActive(null)}
+                  onClick={() => openPopup(item)}
+                >
+                  <span className={styles.chip}>{item.id}</span>
+                  <span className={styles.listLabel}>{item.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </>
       )}
@@ -194,8 +304,14 @@ export default function Implantacao() {
               </button>
             </div>
             <div className={styles.popupImage}>
-              <span className={styles.emBreveLabel}>EM BREVE</span>
-              <p className={styles.emBreveText}>{popup.label.toUpperCase()}</p>
+              {popup.photo ? (
+                <img src={popup.photo} alt={popup.label} className={styles.popupPhoto} draggable={false} />
+              ) : (
+                <>
+                  <span className={styles.emBreveLabel}>EM BREVE</span>
+                  <p className={styles.emBreveText}>{popup.label.toUpperCase()}</p>
+                </>
+              )}
             </div>
           </div>
         </div>

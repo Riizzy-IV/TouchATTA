@@ -4,6 +4,7 @@ import { useTransition } from '@showcase/core';
 import NavDrawer, { useNavDrawer } from '../../components/NavDrawer/NavDrawer';
 import Implantacao from '../../components/Implantacao/Implantacao';
 import Diferenciais from '../../components/Diferenciais/Diferenciais';
+import SolarOrientacao from '../../components/SolarOrientacao/SolarOrientacao';
 import styles from './Projeto.module.css';
 
 const IconClose = () => (
@@ -191,10 +192,7 @@ export default function Projeto() {
           </div>
           </>
         ) : activeTopTab === 'orientacao-solar' ? (
-          <div className={styles.emBreve}>
-            <span className={styles.emBreveLabel}>EM BREVE</span>
-            <p className={styles.emBreveSubtitle}>ORIENTAÇÃO SOLAR</p>
-          </div>
+          <SolarOrientacao />
         ) : activeTopTab === 'fachada-interativa' ? (
           <div className={styles.fachadaWrapper}>
             <iframe
