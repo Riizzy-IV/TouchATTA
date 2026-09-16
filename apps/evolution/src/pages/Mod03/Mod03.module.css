@@ -361,9 +361,9 @@
 
 .lazerGrid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px 14px;
-  max-width: 900px;
+  max-width: 620px;
   margin: 0 auto;
 }
 

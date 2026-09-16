@@ -14,7 +14,6 @@ const IconClose = () => (
 /* ── Data ───────────────────────────────────────────────────────────────── */
 const TABS = [
   { id: 'empreendimento', label: 'Empreendimento' },
-  { id: 'tipologias',     label: 'Tipologias'     },
   { id: 'lazer',          label: 'Lazer'          },
 ];
 
@@ -46,19 +45,6 @@ const EMPREENDIMENTO = [
       { label: 'Andares tipo',    value: '4 unidades por pavimento' },
     ],
   },
-];
-
-const TIPOLOGIAS = [
-  { tipo: 'TIPO 01', desc: '2 Dorms · Varanda Gourmet · Terraço Descoberto', area: '49,90 m²' },
-  { tipo: 'TIPO 02', desc: '2 Dorms · Terraço Descoberto',                   area: '46,70 m²' },
-  { tipo: 'TIPO 03', desc: '2 Dorms · Terraço Coberto',                      area: '44,50 m²' },
-  { tipo: 'TIPO 04', desc: '2 Dorms · Varanda Gourmet',                      area: '42,30 m²' },
-  { tipo: 'TIPO 05', desc: '2 Dorms',                                         area: '38,20 m²' },
-  { tipo: 'TIPO 06', desc: '2 Dorms',                                         area: '36,80 m²' },
-  { tipo: 'TIPO 07', desc: '2 Dorms',                                         area: '35,90 m²' },
-  { tipo: 'TIPO 08', desc: '2 Dorms',                                         area: '35,40 m²' },
-  { tipo: 'TIPO 09', desc: '2 Dorms',                                         area: '34,97 m²' },
-  { tipo: 'TIPO 10', desc: '2 Dorms',                                         area: '34,97 m²' },
 ];
 
 const LAZER = [
@@ -98,36 +84,6 @@ function EmpreendimentoView() {
             ))}
           </section>
         ))}
-      </div>
-    </div>
-  );
-}
-
-function TipologiasView() {
-  return (
-    <div className={styles.tipoRoot}>
-      <div className={styles.tipoLeft}>
-        <p className={styles.tipoLabel}>TIPOLOGIAS</p>
-        <h2 className={styles.tipoTitle}>10 Plantas</h2>
-        <p className={styles.tipoRange}>de 34,97 m² até 49,90 m²</p>
-        {TIPOLOGIAS.map(t => (
-          <div key={t.tipo} className={styles.tipoItem}>
-            <div className={styles.tipoDot} />
-            <div>
-              <span className={styles.tipoTipo}>{t.tipo}</span>
-              <span className={styles.tipoDesc}>{t.desc}</span>
-            </div>
-            <span className={styles.tipoArea}>{t.area}</span>
-          </div>
-        ))}
-        <p className={styles.tipoNote}>* Dados sujeitos a alteração conforme memorial descritivo</p>
-      </div>
-      <div className={styles.tipoRight}>
-        <img src="/img/fachada-1.png" alt="" className={styles.tipoImg} />
-        <div className={styles.tipoOverlay}>
-          <p className={styles.tipoOverlayText}>Residencial<br /><strong>Evolution</strong></p>
-          <p className={styles.tipoOverlaySub}>TATUAPÉ</p>
-        </div>
       </div>
     </div>
   );
@@ -206,7 +162,6 @@ export default function Mod03() {
 
       <div className={styles.body}>
         {activeTab === 'empreendimento' && <EmpreendimentoView />}
-        {activeTab === 'tipologias'     && <TipologiasView />}
         {activeTab === 'lazer'          && <LazerView />}
       </div>
     </div>

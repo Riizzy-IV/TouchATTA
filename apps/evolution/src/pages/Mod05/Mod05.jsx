@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { useTransition } from '@showcase/core';
 import NavDrawer, { useNavDrawer } from '../../components/NavDrawer/NavDrawer';
 import ComparadorView from './ComparadorView';
+import DisponibilidadeView from './DisponibilidadeView';
 import styles from './Mod05.module.css';
 
 const IconClose = () => (
@@ -105,7 +106,7 @@ const PLANTAS = [
   },
   {
     id: 'unidades-22-27-32-37', src: '/img/plantas-humanizadas/unidades-22-27-32-37.webp',
-    unidade: 'Unidades 22, 27, 32 e 37', area: '34,97 m²', pill: '34,97m²',
+    unidade: 'Unidades 22 a 27 e 32 a 37', area: '34,97 m²', pill: '34,97m²',
     dorms: '2 dorms.', features: [],
   },
   {
@@ -115,7 +116,7 @@ const PLANTAS = [
   },
   {
     id: 'unidade-41', src: '/img/plantas-humanizadas/unidade-41.webp',
-    unidade: 'Unidade 41', area: '49,90 m²', pill: '49,90m²',
+    unidade: 'Unidade 41', area: '49,90 m² + Terraço descoberto', pill: '49,90m²',
     dorms: '2 dorms c/ 1 suíte', features: [{ icon: 'grill', label: 'Varanda Gourmet' }, { icon: 'sun', label: 'Área externa' }, { icon: 'car', label: '1 vaga de garagem' }],
   },
   {
@@ -186,7 +187,7 @@ function Lightbox({ images, startIndex, onClose }) {
 export default function Mod05() {
   const { closeModule } = useTransition();
   const { drawerRef, open: openDrawer, close: closeDrawer } = useNavDrawer();
-  const [section, setSection] = useState('plantas'); // 'plantas' | 'comparador'
+  const [section, setSection] = useState('plantas'); // 'plantas' | 'comparador' | 'disponibilidade'
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState(false);
   const cardRef = useRef(null);
@@ -222,6 +223,12 @@ export default function Mod05() {
           >
             Comparador de Unidades
           </button>
+          <button
+            className={`${styles.sectionBtn} ${section === 'disponibilidade' ? styles.sectionBtnActive : ''}`}
+            onClick={() => setSection('disponibilidade')}
+          >
+            Disponibilidade
+          </button>
         </div>
 
         <button className={styles.closeBtn} onClick={openDrawer}><IconClose /></button>
@@ -232,6 +239,8 @@ export default function Mod05() {
       <div className={styles.body}>
       {section === 'comparador' ? (
         <ComparadorView />
+      ) : section === 'disponibilidade' ? (
+        <DisponibilidadeView />
       ) : (
       <>
         <div className={styles.tabsBar}>

@@ -86,7 +86,7 @@
   width: 100%;
   display: block;
   pointer-events: none;
-  mix-blend-mode: multiply;
+  background: #fff;
 }
 
 .canvasCardLabel {
