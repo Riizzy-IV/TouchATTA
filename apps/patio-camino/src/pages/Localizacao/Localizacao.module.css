@@ -511,7 +511,7 @@
     bottom: 24px;
     left: 0;
     right: 0;
-    height: 450px;
+    height: clamp(240px, 38dvh, 470px);
     padding-left: 20px;
   }
 

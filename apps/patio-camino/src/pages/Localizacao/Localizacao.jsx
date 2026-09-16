@@ -119,6 +119,7 @@ export default function Localizacao() {
   const lastX    = useRef(0);
   const stripX   = useRef(0);
   const velX     = useRef(0);
+  const minXRef  = useRef(0);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -157,32 +158,75 @@ export default function Localizacao() {
     return Math.min(0, cw - total);
   };
 
-  const onDown = (e) => {
+  const beginDrag = (clientX) => {
     dragging.current = true;
-    lastX.current    = e.clientX;
+    lastX.current    = clientX;
     velX.current     = 0;
-    stripRef.current?.setPointerCapture(e.pointerId);
+    minXRef.current  = getMinX();
     gsap.killTweensOf(stripRef.current);
   };
 
-  const onMove = (e) => {
+  const moveDrag = (clientX) => {
     if (!dragging.current) return;
-    const dx       = e.clientX - lastX.current;
+    const dx       = clientX - lastX.current;
     velX.current   = dx;
-    lastX.current  = e.clientX;
-    const next     = Math.max(getMinX(), Math.min(0, stripX.current + dx));
+    lastX.current  = clientX;
+    const next     = Math.max(minXRef.current, Math.min(0, stripX.current + dx));
     stripX.current = next;
     gsap.set(stripRef.current, { x: next });
   };
 
-  const onUp = () => {
+  const endDrag = () => {
     if (!dragging.current) return;
     dragging.current = false;
-    const target = Math.max(getMinX(), Math.min(0, stripX.current + velX.current * 5));
+    const target = Math.max(minXRef.current, Math.min(0, stripX.current + velX.current * 5));
     gsap.to(stripRef.current, {
       x: target, duration: 0.55, ease: 'power3.out',
       onUpdate: () => { stripX.current = gsap.getProperty(stripRef.current, 'x'); },
     });
+  };
+
+  // Native touch listeners (passive: false) — mobile in-app browsers (WhatsApp,
+  // Instagram) handle these far more reliably than React's synthetic Pointer Events.
+  useEffect(() => {
+    const el = stripRef.current;
+    if (!el) return;
+
+    const onTouchStart = (e) => beginDrag(e.touches[0].clientX);
+    const onTouchMove = (e) => {
+      if (!dragging.current) return;
+      e.preventDefault();
+      moveDrag(e.touches[0].clientX);
+    };
+    const onTouchEnd = () => endDrag();
+
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd, { passive: true });
+    el.addEventListener('touchcancel', onTouchEnd, { passive: true });
+
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
+      el.removeEventListener('touchcancel', onTouchEnd);
+    };
+  }, []);
+
+  const onDown = (e) => {
+    if (e.pointerType === 'touch') return;
+    beginDrag(e.clientX);
+    stripRef.current?.setPointerCapture(e.pointerId);
+  };
+
+  const onMove = (e) => {
+    if (e.pointerType === 'touch') return;
+    moveDrag(e.clientX);
+  };
+
+  const onUp = (e) => {
+    if (e.pointerType === 'touch') return;
+    endDrag();
   };
 
   return (
