@@ -471,4 +471,35 @@
     height: 100%;
     aspect-ratio: auto;
   }
+
+  .panel {
+    width: 100%;
+    min-width: 0;
+    height: min(70vh, 560px);
+    clip-path: none;
+    padding-left: 0;
+  }
+
+  .tabsRow {
+    padding: 0 16px;
+    margin-top: 24px;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tabsRow::-webkit-scrollbar { display: none; }
+
+  .tab {
+    padding: 10px 14px;
+    font-size: 10.5px;
+    min-height: 40px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .panelContent {
+    padding: 24px 20px 0 20px;
+  }
 }

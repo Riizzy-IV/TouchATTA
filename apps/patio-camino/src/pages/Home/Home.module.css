@@ -165,7 +165,7 @@
 @media (max-width: 768px) {
   /* Hero — ocupa tela toda com gradiente escuro na base */
   .heroImg {
-    object-position: 62% center;
+    object-position: 40% center;
   }
 
   .heroGradient {
@@ -188,7 +188,7 @@
     flex-direction: column !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    padding-top: 130px !important;
+    padding-top: 140px !important;
     overflow: visible !important;
   }
 
