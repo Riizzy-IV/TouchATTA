@@ -151,8 +151,9 @@ export default function Localizacao() {
 
   const getMinX = () => {
     if (!stripRef.current) return 0;
-    const cw    = stripRef.current.parentElement?.offsetWidth ?? 580;
-    const total = PLACES.length * CARD_W + (PLACES.length - 1) * CARD_GAP;
+    const cw       = stripRef.current.parentElement?.offsetWidth ?? 580;
+    const cardW    = cardRefs.current[0]?.offsetWidth ?? CARD_W;
+    const total    = PLACES.length * cardW + (PLACES.length - 1) * CARD_GAP;
     return Math.min(0, cw - total);
   };
 

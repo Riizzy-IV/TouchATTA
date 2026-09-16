@@ -123,43 +123,6 @@
   background: rgba(29, 26, 22, 0.05);
 }
 
-/* ── Mobile ──────────────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .topBar {
-    height: auto;
-    min-height: 64px;
-    padding: 10px 14px;
-    gap: 10px;
-  }
-
-  .logoSmall {
-    width: 84px;
-    flex-shrink: 0;
-  }
-
-  .tabs {
-    flex: 1;
-    overflow-x: auto;
-    gap: 10px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .tabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .tab {
-    padding: 6px 10px;
-    font-size: 9px;
-  }
-
-  .closeBtn {
-    width: 36px;
-    height: 36px;
-  }
-}
-
 /* ── Body ────────────────────────────────────────────────────────────────── */
 .body {
   flex: 1;
@@ -478,4 +441,82 @@
 .gmapsToggleActive:active {
   background: rgba(29, 26, 22, 0.88);
   color: #f3ecd9;
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .topBar {
+    height: auto;
+    min-height: 64px;
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .logoSmall {
+    width: 84px;
+    flex-shrink: 0;
+  }
+
+  .tabs {
+    flex: 1;
+    overflow-x: auto;
+    gap: 10px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    padding: 6px 10px;
+    font-size: 9px;
+  }
+
+  .closeBtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .textBlock {
+    left: 20px;
+    right: 20px;
+    top: 84px;
+    transform: none;
+    max-width: none;
+  }
+
+  .eyebrow {
+    font-size: 8px;
+    margin-bottom: 14px;
+  }
+
+  .title {
+    margin: 0 0 14px;
+  }
+
+  .title span {
+    font-size: clamp(30px, 9.5vw, 44px);
+    letter-spacing: 1px;
+  }
+
+  .subtitle {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+
+  .cardsArea {
+    top: auto;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    height: 220px;
+    padding-left: 20px;
+  }
+
+  .card {
+    width: 78vw;
+    min-width: 78vw;
+  }
 }

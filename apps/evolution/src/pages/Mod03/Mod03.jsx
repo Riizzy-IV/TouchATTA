@@ -42,9 +42,8 @@ const EMPREENDIMENTO = [
   {
     title: 'Por Pavimento',
     items: [
-      { label: 'Térreo',          value: 'Hall · Bicicletário' },
+      { label: 'Térreo',          value: 'Hall · Bicicletário · Pet Place · Pet Care · Mini Mercado · Coworking · Jacuzzi · Academia · Salão de Festas · Churrasqueira' },
       { label: 'Andares tipo',    value: '4 unidades por pavimento' },
-      { label: '4º Pavimento',    value: 'Pet Place · Pet Care · Mini Mercado · Coworking · Jacuzzi · Academia · Salão de Festas · Churrasqueira' },
     ],
   },
 ];

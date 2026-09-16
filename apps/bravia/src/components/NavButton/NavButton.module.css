@@ -1,0 +1,119 @@
+.btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(229, 226, 221, 0.14);
+  padding: 16px 4px;
+  cursor: not-allowed;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: riseIn 0.5s ease forwards;
+  width: 100%;
+}
+
+.btn:last-child {
+  border-bottom: 1px solid rgba(229, 226, 221, 0.14);
+}
+
+@keyframes riseIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn.active { cursor: pointer; }
+
+.index {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 13px;
+  color: rgba(159, 151, 132, 0.65);
+  width: 22px;
+  flex-shrink: 0;
+  transition: color 0.25s ease;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: rgba(229, 226, 221, 0.55);
+  flex-shrink: 0;
+  transition: color 0.25s ease;
+}
+
+.icon svg { width: 100%; height: 100%; }
+
+.label {
+  flex: 1;
+  text-align: left;
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(229, 226, 221, 0.85);
+  transition: color 0.25s ease, letter-spacing 0.25s ease;
+}
+
+.underline {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: -1px;
+  height: 1px;
+  background: #9F9784;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+
+.btn.active:hover .index,
+.btn.active:active .index {
+  color: #9F9784;
+}
+
+.btn.active:hover .icon,
+.btn.active:active .icon {
+  color: #9F9784;
+}
+
+.btn.active:hover .label,
+.btn.active:active .label {
+  color: #E5E2DD;
+  letter-spacing: 3.2px;
+}
+
+.btn.active:hover .underline,
+.btn.active:active .underline {
+  transform: scaleX(1);
+}
+
+/* ── Mobile ────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .btn {
+    padding: 12px 4px;
+    gap: 10px;
+  }
+
+  .index {
+    font-size: 11px;
+    width: 18px;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .label {
+    font-size: 10px;
+    letter-spacing: 1.8px;
+  }
+}

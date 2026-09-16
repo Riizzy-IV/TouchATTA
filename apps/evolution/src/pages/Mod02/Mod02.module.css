@@ -195,7 +195,7 @@
 /* Card */
 .convCard {
   flex-shrink: 0;
-  width: 300px;
+  width: 340px;
   height: 100%;
   border-radius: 12px;
   overflow: hidden;

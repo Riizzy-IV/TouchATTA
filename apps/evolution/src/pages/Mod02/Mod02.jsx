@@ -25,17 +25,15 @@ const IconCar = () => (
 const GMAPS_URL = 'https://maps.google.com/maps?q=R.+Prof.+Pedreira+de+Freitas,+848,+Tatu%C3%AEap%C3%A9,+SP&z=16&output=embed';
 
 const PLACES = [
-  { id: 1, local: 'Sky Fit Academia',        cat: 'ACADEMIA',    pe: '4',  carro: '2',  photo: null, hue: '#0f2040' },
-  { id: 2, local: 'Coco Bambu Tatuapé',      cat: 'GASTRONOMIA', pe: '5',  carro: '2',  photo: null, hue: '#112238' },
-  { id: 3, local: 'Hospital São Luiz',       cat: 'SAÚDE',       pe: '6',  carro: '2',  photo: null, hue: '#0d1e35' },
-  { id: 4, local: 'Mercado Extra',           cat: 'MERCADO',     pe: '8',  carro: '3',  photo: null, hue: '#102040' },
-  { id: 5, local: 'Parque Ceret',            cat: 'LAZER',       pe: '10', carro: '4',  photo: null, hue: '#0e2238' },
-  { id: 6, local: 'Metrô Carrão',            cat: 'MOBILIDADE',  pe: '12', carro: '5',  photo: null, hue: '#0c1c36' },
-  { id: 7, local: 'Shopping Anália Franco',  cat: 'SHOPPING',    pe: '18', carro: '7',  photo: null, hue: '#111f3a' },
-  { id: 8, local: 'Arena Corinthians',       cat: 'ESPORTE',     pe: '25', carro: '10', photo: null, hue: '#0d2040' },
+  { id: 1, local: 'Sky Fit Academia',        cat: 'ACADEMIA',    pe: '4',  carro: '2',  photo: '/img/conveniencia/sky-fit.png',                hue: '#0f2040' },
+  { id: 2, local: 'Coco Bambu Tatuapé',      cat: 'GASTRONOMIA', pe: '5',  carro: '2',  photo: '/img/conveniencia/coco-bambu.jpg',             hue: '#112238' },
+  { id: 3, local: 'Hospital São Luiz',       cat: 'SAÚDE',       pe: '6',  carro: '2',  photo: null,                                            hue: '#0d1e35' },
+  { id: 5, local: 'Parque Ceret',            cat: 'LAZER',       pe: '10', carro: '4',  photo: '/img/conveniencia/ceret.avif',                 hue: '#0e2238' },
+  { id: 6, local: 'Metrô Carrão',            cat: 'MOBILIDADE',  pe: '12', carro: '5',  photo: '/img/conveniencia/metro-carrao.jpg',           hue: '#0c1c36' },
+  { id: 7, local: 'Shopping Anália Franco',  cat: 'SHOPPING',    pe: '18', carro: '7',  photo: '/img/conveniencia/shopping-analia-franco.webp', hue: '#111f3a' },
 ];
 
-const CARD_W   = 300;
+const CARD_W   = 340;
 const CARD_GAP = 16;
 
 function ConvenienciasView() {
