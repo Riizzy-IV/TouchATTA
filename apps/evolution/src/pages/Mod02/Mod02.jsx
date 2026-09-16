@@ -27,7 +27,7 @@ const GMAPS_URL = 'https://maps.google.com/maps?q=R.+Prof.+Pedreira+de+Freitas,+
 const PLACES = [
   { id: 1, local: 'Sky Fit Academia',        cat: 'ACADEMIA',    pe: '4',  carro: '2',  photo: '/img/conveniencia/sky-fit.png',                hue: '#0f2040' },
   { id: 2, local: 'Coco Bambu Tatuapé',      cat: 'GASTRONOMIA', pe: '5',  carro: '2',  photo: '/img/conveniencia/coco-bambu.jpg',             hue: '#112238' },
-  { id: 3, local: 'Hospital São Luiz',       cat: 'SAÚDE',       pe: '6',  carro: '2',  photo: null,                                            hue: '#0d1e35' },
+  { id: 3, local: 'Hospital São Luiz',       cat: 'SAÚDE',       pe: '6',  carro: '2',  photo: '/img/conveniencia/hospital-sao-luiz.jpg',      hue: '#0d1e35' },
   { id: 5, local: 'Parque Ceret',            cat: 'LAZER',       pe: '10', carro: '4',  photo: '/img/conveniencia/ceret.avif',                 hue: '#0e2238' },
   { id: 6, local: 'Metrô Carrão',            cat: 'MOBILIDADE',  pe: '12', carro: '5',  photo: '/img/conveniencia/metro-carrao.jpg',           hue: '#0c1c36' },
   { id: 7, local: 'Shopping Anália Franco',  cat: 'SHOPPING',    pe: '18', carro: '7',  photo: '/img/conveniencia/shopping-analia-franco.webp', hue: '#111f3a' },
