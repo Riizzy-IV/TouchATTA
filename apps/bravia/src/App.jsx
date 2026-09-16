@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { TransitionProvider } from '@showcase/core';
+import { PreloadProvider } from './context/PreloadContext';
 import ScaleWrapper from './components/ScaleWrapper/ScaleWrapper';
 import Splash from './pages/Splash/Splash';
 import Home from './pages/Home/Home';
+import Localizacao from './pages/Localizacao/Localizacao';
+import Projeto from './pages/Projeto/Projeto';
 
 export default function App() {
   const [started, setStarted] = useState(false);
@@ -15,9 +18,13 @@ export default function App() {
   return (
     <ScaleWrapper>
       <TransitionProvider logoSrc="/img/bravia-simbolo-preto.svg" overlayColor="#E5E2DD">
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <PreloadProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/localizacao" element={<Localizacao />} />
+            <Route path="/projeto" element={<Projeto />} />
+          </Routes>
+        </PreloadProvider>
       </TransitionProvider>
     </ScaleWrapper>
   );

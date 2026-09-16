@@ -11,9 +11,10 @@ const NavButton = forwardRef(function NavButton({ icon, label, index, onClick, d
       disabled={disabled}
     >
       <span className={styles.index}>{index}</span>
-      <span className={styles.icon}>{icon}</span>
+      <span className={styles.iconWrap}>
+        <span className={styles.icon}>{icon}</span>
+      </span>
       <span className={styles.label}>{label}</span>
-      <span className={styles.underline} />
     </button>
   );
 });

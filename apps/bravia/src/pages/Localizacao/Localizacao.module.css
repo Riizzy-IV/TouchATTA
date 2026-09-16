@@ -1,0 +1,95 @@
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--color-ink);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Top bar ───────────────────────────────────────────────────────────────── */
+.topBar {
+  flex-shrink: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 40px;
+  border-bottom: 1px solid rgba(229, 226, 221, 0.1);
+}
+
+.logo {
+  height: 26px;
+  width: auto;
+  cursor: pointer;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 100%;
+}
+
+.tabBtn {
+  height: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(229, 226, 221, 0.45);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tabBtn:hover {
+  color: rgba(229, 226, 221, 0.8);
+}
+
+.tabBtnActive {
+  color: #E5E2DD;
+  border-bottom-color: #9F9784;
+}
+
+.closeBtn {
+  margin-left: auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(229, 226, 221, 0.25);
+  background: rgba(229, 226, 221, 0.04);
+  color: #E5E2DD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(229, 226, 221, 0.12);
+  border-color: rgba(229, 226, 221, 0.5);
+}
+
+/* ── Map ───────────────────────────────────────────────────────────────────── */
+.mapArea {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.mapArea :global(.leaflet-container) {
+  width: 100%;
+  height: 100%;
+  background: #0A192C;
+  filter: grayscale(0.25) contrast(1.05) brightness(0.97);
+}
+
+@media (max-width: 768px) {
+  .topBar { padding: 0 20px; height: 60px; gap: 16px; }
+}
