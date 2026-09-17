@@ -137,7 +137,7 @@ export default function Home() {
 
       {/* Zimbel top-right */}
       <div className={styles.zimbelWrap}>
-        <img src="/img/home/zimbel-logo.svg" alt="Zimbel" className={styles.zimbelLogo} />
+        <img src="/zimbel-logo.svg" alt="Zimbel" className={styles.zimbelLogo} />
       </div>
 
       {/* Card frosted glass com logo */}
