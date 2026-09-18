@@ -25,6 +25,13 @@
   cursor: pointer;
 }
 
+.logoMark {
+  display: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
 .tabs {
   display: flex;
   align-items: center;
@@ -92,4 +99,6 @@
 
 @media (max-width: 768px) {
   .topBar { padding: 0 20px; height: 60px; gap: 16px; }
+  .logo { display: none; }
+  .logoMark { display: block; flex-shrink: 0; }
 }

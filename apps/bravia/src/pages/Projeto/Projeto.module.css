@@ -342,10 +342,21 @@
     border-radius: 16px 16px 0 0;
   }
 
+  /* A foto ocupa só a faixa acima do painel, para aparecer inteira (céu + edificação) */
+  .hero {
+    bottom: auto;
+    height: 62%;
+  }
+
+  .heroImg {
+    object-position: 28% center;
+  }
+
   .heroWithPanel {
     top: 16px;
     right: 16px;
     bottom: 62%;
     left: 16px;
+    height: auto;
   }
 }

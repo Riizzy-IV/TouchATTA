@@ -280,12 +280,15 @@
     bottom: 96px;
     width: 100%;
     height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .wordmarkImg {
-    height: 100px;
-    width: 566px;
-    transform: translate(-178px, -50%);
+    width: 280px;
+    height: auto;
+    transform: none;
   }
 
   .leftPhoto {

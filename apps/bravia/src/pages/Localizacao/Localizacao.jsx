@@ -64,6 +64,12 @@ export default function Localizacao() {
           className={styles.logo}
           onClick={() => startTransition('/', '')}
         />
+        <img
+          src="/img/bravia-simbolo-branco.svg"
+          alt="Brávia"
+          className={styles.logoMark}
+          onClick={() => startTransition('/', '')}
+        />
         <nav className={styles.tabs}>
           {TABS.map(t => (
             <button
