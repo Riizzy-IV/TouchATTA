@@ -11,7 +11,7 @@ const IconClose = () => (
 
 const TOP_TABS = [
   { id: 'ficha', label: 'Ficha Técnica', enabled: true },
-  { id: 'implantacao', label: 'Implantação', enabled: false },
+  { id: 'implantacao', label: 'Implantação', enabled: true },
   { id: 'vistas', label: 'Vistas', enabled: false },
   { id: 'fachada', label: 'Fachada Interativa', enabled: false },
   { id: 'solar', label: 'Orientação Solar', enabled: false },
@@ -33,14 +33,53 @@ const AREAS = [
   { value: '101.219,66 m²', label: 'Lagos' },
 ];
 
+const LEGEND = [
+  'Pórtico de acesso ao condomínio',
+  'Market Place',
+  'Estacionamento',
+  'Pub-Gourmet da Praia',
+  'Club House',
+  'Piscina Adulto',
+  'Piscina Infantil',
+  'Praia',
+  'Atracadouro',
+  'Quadra de Beach Tênis',
+  'Quadra de futvôlei',
+  'Quadra de futebol 7',
+  'Quiosque Gourmet',
+  'Quadra poliesportiva',
+  'Quadra de tênis rápida',
+  'Quadra de tênis coberta',
+  'Quadra de padel',
+  'Playground',
+  'Fireplace e Parrilla',
+  'Quadra de Pickleball',
+  'Quadra de beach tennis coberta',
+  'Quadra de padel coberta',
+  'Kids Arena',
+  'Cachorródromo',
+  'Cancha de bocha',
+  'Vertiporto e área de recharge de veículos',
+  'Heliponto',
+  'Chimarródromo',
+  'Pomar',
+  'Passarela',
+  'Acesso de Serviços',
+];
+
 export default function Projeto() {
   const { startTransition } = useTransition();
+  const [topTab, setTopTab] = useState('ficha');
   const [panelTab, setPanelTab] = useState('empreendimento');
 
   return (
     <div className={styles.scene}>
-      <div className={styles.hero}>
-        <img src="/img/projeto-hero.jpg" alt="" className={styles.heroImg} />
+      <div className={`${styles.hero} ${topTab === 'implantacao' ? styles.heroWithPanel : ''}`}>
+        <img
+          src={topTab === 'implantacao' ? '/img/bravia-implantacao.jpg' : '/img/projeto-hero.jpg'}
+          alt=""
+          className={`${styles.heroImg} ${topTab === 'implantacao' ? styles.heroImgContain : ''}`}
+        />
       </div>
 
       <header className={styles.topBar}>
@@ -55,8 +94,9 @@ export default function Projeto() {
           {TOP_TABS.map(t => (
             <button
               key={t.id}
-              className={`${styles.tab} ${t.id === 'ficha' ? styles.tabActive : ''}`}
+              className={`${styles.tab} ${t.id === topTab ? styles.tabActive : ''}`}
               disabled={!t.enabled}
+              onClick={() => t.enabled && setTopTab(t.id)}
             >
               {t.label}
             </button>
@@ -68,6 +108,21 @@ export default function Projeto() {
         </button>
       </header>
 
+      {topTab === 'implantacao' ? (
+        <div className={styles.panel}>
+          <div className={styles.panelBody}>
+            <h3 className={styles.blockTitle}>Legenda</h3>
+            <ol className={styles.legendList}>
+              {LEGEND.map((item, i) => (
+                <li key={item} className={styles.legendItem}>
+                  <span className={styles.legendNum}>{i + 1}</span>
+                  <span className={styles.legendLabel}>{item}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      ) : (
       <div className={styles.panel}>
         <nav className={styles.panelTabs}>
           {PANEL_TABS.map(t => (
@@ -134,6 +189,7 @@ export default function Projeto() {
           )}
         </div>
       </div>
+      )}
     </div>
   );
 }

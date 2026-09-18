@@ -20,6 +20,18 @@
   display: block;
 }
 
+.heroImgContain {
+  object-fit: contain;
+  background: #0A192C;
+}
+
+.heroWithPanel {
+  top: 96px;
+  right: 520px;
+  bottom: 40px;
+  left: 40px;
+}
+
 /* ── Top bar ───────────────────────────────────────────────────────────────── */
 .topBar {
   position: absolute;
@@ -254,6 +266,49 @@
   line-height: 1.4;
 }
 
+/* ── Implantação legend ────────────────────────────────────────────────────── */
+.legendList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(229, 226, 221, 0.1);
+}
+
+.legendItem:last-child {
+  border-bottom: none;
+}
+
+.legendNum {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(159, 151, 132, 0.2);
+  color: #9F9784;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.legendLabel {
+  font-family: var(--font-main-normal);
+  font-size: 13px;
+  color: rgba(229, 226, 221, 0.85);
+  line-height: 1.4;
+}
+
 /* ── Paragraphs ────────────────────────────────────────────────────────────── */
 .paragraph {
   font-family: var(--font-main-normal);
@@ -281,5 +336,12 @@
     max-width: none;
     max-height: 62%;
     border-radius: 16px 16px 0 0;
+  }
+
+  .heroWithPanel {
+    top: 16px;
+    right: 16px;
+    bottom: 62%;
+    left: 16px;
   }
 }

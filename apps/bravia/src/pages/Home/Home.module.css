@@ -7,164 +7,206 @@
   background: #0A192C;
 }
 
-/* ── Hero background ────────────────────────────────────────────────────────── */
-.hero {
+/* ── Faint full-bleed base — clubhouse & palms ────────────────────────────── */
+.bg {
   position: absolute;
-  inset: 0;
+  left: -19px;
+  top: -13px;
+  width: 1478px;
+  height: 832px;
   z-index: 0;
 }
 
-.heroImg {
+.bgImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 40%;
   display: block;
+  opacity: 0.3;
 }
 
-.heroGradientTop {
+.bgTint {
   position: absolute;
   inset: 0;
-  height: 45%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.28) 0%, transparent 100%);
+  background: rgba(8, 14, 24, 0.55);
 }
 
-.heroGradientBottom {
+/* ── Right panel — clubhouse deck at dusk (sits behind the left photo, so it
+   shows through any transparent edge the left asset has) ────────────────── */
+.rightPhoto {
   position: absolute;
   left: 0;
-  right: 0;
-  bottom: 0;
-  height: 40%;
-  background: linear-gradient(to top, rgba(6, 15, 27, 0.92) 0%, rgba(6, 15, 27, 0.68) 35%, rgba(6, 15, 27, 0.15) 75%, transparent 100%);
+  top: 0;
+  width: 1440px;
+  height: 810px;
+  overflow: hidden;
+  z-index: 0;
 }
 
-/* ── Brand — top-left ──────────────────────────────────────────────────────── */
-.brand {
+.rightPhotoImg {
   position: absolute;
-  top: 44px;
-  left: 50%;
-  transform: translateX(calc(-50% - 24px));
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
+  left: 1217px;
+  top: 50%;
+  width: 1450px;
+  height: 900px;
+  max-width: none;
+  transform: translate(-63%, -46%);
 }
 
-.wordmark {
-  width: clamp(300px, 25vw, 380px);
-  height: auto;
+/* ── Left panel — aerial pool photo ────────────────────────────────────────── */
+.leftPhoto {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 802px;
+  height: 810px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.leftPhotoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
   display: block;
-  filter: drop-shadow(0 2px 8px rgba(10, 25, 44, 0.25));
 }
 
-.tagline {
-  font-family: var(--font-main);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: var(--color-ink);
-  opacity: 0.75;
-}
-
-/* ── Headline ──────────────────────────────────────────────────────────────── */
-.headline {
+.rightPhotoTint {
   position: absolute;
-  top: 175px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  margin: 0;
-  max-width: 560px;
-  font-family: var(--font-main-normal);
-  font-weight: 400;
-  font-size: clamp(32px, 3.4vw, 44px);
-  line-height: 1.28;
-  color: var(--color-ink);
-  text-align: center;
-  text-shadow: 0 2px 14px rgba(255, 255, 255, 0.2);
+  inset: 0;
+  background: rgba(6, 13, 26, 0.5);
 }
 
-/* ── Bottom nav bar ────────────────────────────────────────────────────────── */
+/* ── Sun symbol — floats over the sky ─────────────────────────────────────── */
+.symbolWrap {
+  position: absolute;
+  left: 276px;
+  top: 59px;
+  width: 222px;
+  height: 182px;
+  z-index: 2;
+}
+
+.symbol {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Wordmark ──────────────────────────────────────────────────────────────── */
+.wordmarkClip {
+  position: absolute;
+  left: 0;
+  top: 602px;
+  width: 940px;
+  height: 206px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.wordmarkImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Side nav ──────────────────────────────────────────────────────────────── */
 .nav {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
+  right: 46px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  padding: 30px 40px;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .navBtn {
   display: flex;
   align-items: center;
-  gap: 13px;
+  justify-content: flex-end;
+  gap: 24px;
   background: transparent;
   border: none;
-  padding: 10px 38px;
+  padding: 0;
   cursor: not-allowed;
-  position: relative;
-}
-
-.navBtn::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1px;
-  height: 18px;
-  background: rgba(229, 226, 221, 0.3);
-}
-
-.navBtn:last-child::after {
-  display: none;
-}
-
-.navIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  color: rgba(229, 226, 221, 0.65);
-  transition: color 0.25s ease;
-}
-
-.navIcon svg {
-  width: 100%;
-  height: 100%;
 }
 
 .navLabel {
   font-family: var(--font-main);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
-  letter-spacing: 1.8px;
+  letter-spacing: 7px;
   text-transform: uppercase;
   color: #fff;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
-  transition: color 0.25s ease, letter-spacing 0.25s ease;
+  transition: letter-spacing 0.25s ease;
+  white-space: nowrap;
+}
+
+.navIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 97px;
+  height: 97px;
+  border-radius: 50%;
+  background: #BCA78B;
+  border: 3px solid #fff;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.25);
+  color: #F5F1E8;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.navIcon>img,
+.navIcon>span {
+  width: 56%;
+  height: 56%;
+  object-fit: contain;
+}
+
+.navIcon>img[src*="nav-projeto"],
+.navIcon>img[src*="nav-galeria"] {
+  width: 46%;
+  height: 46%;
+}
+
+.navIconBare {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.navIconBare>img {
+  width: 100%;
+  height: 100%;
 }
 
 .navBtnActive {
   cursor: pointer;
 }
 
-.navBtnActive:hover .navIcon,
+.navBtnActive:hover .navIcon {
+  transform: scale(1.06);
+}
+
+/* Efeito de clique — encolhe rápido no toque, como nos outros projetos */
 .navBtnActive:active .navIcon {
-  color: #9F9784;
+  transform: scale(0.92);
+  transition: transform 0.08s ease;
+}
+
+.navBtnActive:hover .navIcon:not(.navIconBare),
+.navBtnActive:active .navIcon:not(.navIconBare) {
+  background: #cfba9c;
 }
 
 .navBtnActive:hover .navLabel,
 .navBtnActive:active .navLabel {
-  color: #fff;
-  letter-spacing: 2px;
+  letter-spacing: 3.6px;
 }
 
 /* ── Video modal ───────────────────────────────────────────────────────────── */
@@ -195,7 +237,6 @@
   max-width: 1100px;
   max-height: 78vh;
   border-radius: 4px;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
   background: #000;
 }
 
@@ -225,41 +266,67 @@
    MOBILE  (≤ 768px)
    ═══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .heroImg {
-    object-position: 60% center;
-  }
-
-  .brand {
-    top: 32px;
+  .symbolWrap {
     left: 50%;
+    top: 40px;
+    width: 140px;
+    height: 115px;
+    transform: translateX(-50%);
   }
 
-  .wordmark {
-    width: 150px;
+  .wordmarkClip {
+    left: 0;
+    top: auto;
+    bottom: 96px;
+    width: 100%;
+    height: 90px;
   }
 
-  .headline {
-    top: 110px;
-    left: 50%;
-    max-width: none;
-    width: calc(100% - 48px);
-    font-size: 22px;
+  .wordmarkImg {
+    height: 100px;
+    width: 566px;
+    transform: translate(-178px, -50%);
+  }
+
+  .leftPhoto {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .rightPhoto {
+    display: none;
   }
 
   .nav {
+    right: auto;
+    left: 0;
+    bottom: 0;
+    top: auto;
+    transform: none;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 6px 0;
-    padding: 16px 12px 22px;
+    width: 100%;
+    gap: 8px 18px;
+    padding: 14px 12px;
     background: #0A192C;
   }
 
   .navBtn {
-    padding: 6px 14px;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .navIcon {
+    width: 46px;
+    height: 46px;
+    border-width: 2px;
   }
 
   .navLabel {
-    font-size: 10px;
+    font-size: 9px;
     letter-spacing: 1px;
   }
 
