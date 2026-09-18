@@ -96,8 +96,12 @@
   color: rgba(229, 226, 221, 0.35);
   white-space: nowrap;
   border-radius: 3px;
-  cursor: not-allowed;
+  cursor: pointer;
   position: relative;
+}
+
+.tab:disabled {
+  cursor: not-allowed;
 }
 
 .tabActive {

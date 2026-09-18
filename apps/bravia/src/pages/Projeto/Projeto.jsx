@@ -12,10 +12,6 @@ const IconClose = () => (
 const TOP_TABS = [
   { id: 'ficha', label: 'Ficha Técnica', enabled: true },
   { id: 'implantacao', label: 'Implantação', enabled: true },
-  { id: 'vistas', label: 'Vistas', enabled: false },
-  { id: 'fachada', label: 'Fachada Interativa', enabled: false },
-  { id: 'solar', label: 'Orientação Solar', enabled: false },
-  { id: 'tour', label: 'Tour Virtual', enabled: false },
 ];
 
 const PANEL_TABS = [
