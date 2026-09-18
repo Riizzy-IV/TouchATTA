@@ -7,6 +7,7 @@ import Splash from './pages/Splash/Splash';
 import Home from './pages/Home/Home';
 import Localizacao from './pages/Localizacao/Localizacao';
 import Projeto from './pages/Projeto/Projeto';
+import Galeria from './pages/Galeria/Galeria';
 
 export default function App() {
   const [started, setStarted] = useState(false);
@@ -23,6 +24,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/localizacao" element={<Localizacao />} />
             <Route path="/projeto" element={<Projeto />} />
+            <Route path="/galeria" element={<Galeria />} />
           </Routes>
         </PreloadProvider>
       </TransitionProvider>

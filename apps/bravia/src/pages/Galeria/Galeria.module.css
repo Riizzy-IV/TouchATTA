@@ -1,0 +1,254 @@
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #060f1b;
+}
+
+/* ── Imagem principal em tela cheia ─────────────────────────────────────── */
+.heroImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.heroFade {
+  animation: heroFadeIn 0.6s ease both;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 40%, rgba(0, 0, 0, 0.5));
+}
+
+/* ── Barra superior ─────────────────────────────────────────────────────── */
+.topBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.brandMark {
+  width: 22px;
+  height: 22px;
+}
+
+.brandWord {
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #fff;
+}
+
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hint {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-family: var(--font-main);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+}
+
+.roundBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.75);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.08s ease;
+}
+
+.roundBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.roundBtn:active {
+  transform: scale(0.92);
+}
+
+/* ── Painel de espaços (lista à direita) ────────────────────────────────── */
+.panelWrap {
+  position: absolute;
+  top: 84px;
+  right: 24px;
+  bottom: 24px;
+  width: 320px;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.panel {
+  width: 100%;
+  max-height: 100%;
+  pointer-events: auto;
+  overflow-y: auto;
+  padding: 8px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.85);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.item:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.itemActive,
+.itemActive:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.thumb {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
+.itemText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.itemTitle {
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s ease;
+}
+
+.itemActive .itemTitle {
+  color: #fcd34d;
+}
+
+.itemDesc {
+  font-family: var(--font-main-normal);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Foto no topo, lista em painel fixo embaixo — nada cobre a imagem */
+  .heroImg {
+    inset: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 58%;
+  }
+
+  .vignette {
+    bottom: 42%;
+  }
+
+  .topBar {
+    padding: 16px;
+  }
+
+  .hint {
+    display: none;
+  }
+
+  .panelWrap {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: 42%;
+    align-items: stretch;
+  }
+
+  .panel {
+    height: 100%;
+    max-height: none;
+    padding: 10px 12px 14px;
+    border-radius: 18px 18px 0 0;
+    border-width: 1px 0 0;
+    background: #060f1b;
+  }
+
+  .thumb {
+    width: 52px;
+    height: 52px;
+  }
+}

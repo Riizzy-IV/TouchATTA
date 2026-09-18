@@ -30,7 +30,7 @@ const MODULES = [
   { id: '01', label: 'Vídeo', icon: <IconVideo />, action: 'video', bare: true },
   { id: '02', label: 'Localização', icon: <IconLocalizacao />, route: '/localizacao', bare: true },
   { id: '03', label: 'Projeto', icon: <IconProjeto />, route: '/projeto', bare: true },
-  { id: '04', label: 'Galeria', icon: <IconGaleria />, route: null, bare: true },
+  { id: '04', label: 'Galeria', icon: <IconGaleria />, route: '/galeria', bare: true },
 ];
 
 const PHASE = { ESPERA: 'espera', FIXO: 'fixo', SAI: 'sai' };
