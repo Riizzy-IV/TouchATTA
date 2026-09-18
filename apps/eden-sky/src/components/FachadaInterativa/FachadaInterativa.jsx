@@ -19,10 +19,13 @@ export default function FachadaInterativa() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(imageRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.35, ease: 'power2.out' }
-      );
+      const tl = gsap.timeline();
+      tl.set(imageRef.current, { opacity: 0 })
+        .to(imageRef.current, { opacity: 1,    duration: 0.07, ease: 'power1.out' })
+        .to(imageRef.current, { opacity: 0.15, duration: 0.06, ease: 'power1.in'  })
+        .to(imageRef.current, { opacity: 1,    duration: 0.07, ease: 'power1.out' })
+        .to(imageRef.current, { opacity: 0.15, duration: 0.05, ease: 'power1.in'  })
+        .to(imageRef.current, { opacity: 1,    duration: 0.18, ease: 'power2.out' });
     }, wrapperRef);
     return () => ctx.revert();
   }, [active]);

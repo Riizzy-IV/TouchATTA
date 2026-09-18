@@ -8,12 +8,53 @@
   background: #f7f4ef;
 }
 
+/* Grande recorte diagonal em duas cores, ocupando boa parte da tela */
+.scene::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  inset: 0;
+  background: var(--color-ink);
+  opacity: 0.09;
+  clip-path: polygon(100% 0%, 100% 100%, 38% 100%);
+}
+
+.scene::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  inset: 0;
+  background: var(--color-gold);
+  opacity: 0.32;
+  clip-path: polygon(100% 22%, 100% 100%, 55% 100%);
+}
+
+/* Linha fina acompanhando o corte da cunha dourada */
+.diagLine {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.diagLine line {
+  stroke: var(--color-gold);
+  stroke-width: 3;
+  opacity: 0.6;
+}
+
 /* ── Top bar ─────────────────────────────────────────────────────────────── */
 .topBar {
   height: 100px;
   min-height: 100px;
   width: 100%;
   background: #f7f4ef;
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -86,6 +127,7 @@
 .body {
   flex: 1;
   position: relative;
+  z-index: 1;
   overflow: hidden;
 }
 

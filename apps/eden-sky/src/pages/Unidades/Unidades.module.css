@@ -1,0 +1,444 @@
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #efece3;
+}
+
+/* ── Top bar ─────────────────────────────────────────────────────────────── */
+.topBar {
+  height: 100px;
+  min-height: 100px;
+  width: 100%;
+  background: #efece3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.logoSmall {
+  width: 80px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.08s ease;
+}
+
+.logoSmall:active {
+  transform: scale(0.94);
+}
+
+.topTabs {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.pageTitle {
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 1.5px solid rgba(44, 41, 37, 0.2);
+  border-radius: 3px;
+  color: rgba(44, 41, 37, 0.5);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.closeBtn:hover {
+  color: var(--color-ink);
+  border-color: rgba(44, 41, 37, 0.45);
+}
+
+.closeBtn:active {
+  transform: scale(0.9);
+  transition: transform 0.08s ease;
+}
+
+/* ── Body ────────────────────────────────────────────────────────────────── */
+.body {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  padding: 0 28px 24px;
+}
+
+/* "Página" branca com moldura fina, no espírito do book de vendas */
+.page {
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  background: #fff;
+  border: 1.5px solid #15130f;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 26px 34px 20px;
+}
+
+/* isolation: isolate acima faz da .page seu próprio contexto de empilhamento,
+   então basta z-index negativo para a folhagem ficar sempre atrás do conteúdo
+   normal (botões, textos) — mesmo de elementos sem z-index próprio. */
+.leafTop {
+  position: absolute;
+  top: -46px;
+  right: -30px;
+  width: 300px;
+  height: auto;
+  transform: rotate(20deg) scaleX(-1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.leafBottom {
+  position: absolute;
+  bottom: -46px;
+  left: -30px;
+  width: 260px;
+  height: auto;
+  transform: rotate(200deg);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Título e tabs ficam à esquerda, em coluna — o canto superior direito
+   fica livre para a folhagem decorativa, sem texto/botão por cima dela. */
+.pageHead {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-bottom: 18px;
+}
+
+.pageTitleBig {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 600;
+  color: #0b2216;
+  line-height: 1;
+}
+
+.spreadTabs {
+  display: flex;
+  gap: 22px;
+}
+
+.spreadTab {
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: rgba(44, 41, 37, 0.4);
+  padding-bottom: 6px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.spreadTab:hover {
+  color: var(--color-ink);
+}
+
+.spreadTab:active {
+  transform: scale(0.94);
+  transition: transform 0.08s ease;
+}
+
+.spreadTabActive {
+  color: #0b2216;
+  border-bottom-color: var(--color-gold);
+}
+
+/* ── Spread (par de plantas, como no book) ──────────────────────────────── */
+.spread {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 32px;
+  min-height: 0;
+}
+
+.columnWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  justify-content: center;
+}
+
+.column {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.plan {
+  position: relative;
+  margin: 0;
+  height: 100%;
+  max-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.planImg {
+  max-width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(11, 34, 22, 0.15));
+}
+
+.pill {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0b2216;
+  color: #fff;
+  font-family: var(--font-main);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.columnInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 210px;
+}
+
+.typologyLine {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.typologyLabel {
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  color: rgba(44, 41, 37, 0.7);
+}
+
+.typologyLabel b {
+  font-weight: 800;
+  color: #0b2216;
+}
+
+.typologyUnits {
+  font-family: var(--font-main);
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(44, 41, 37, 0.4);
+}
+
+/* ── Cartões de característica — badge preto + ícone branco, como no book ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid rgba(11, 34, 22, 0.12);
+  border-radius: 3px;
+  padding: 12px 8px;
+  min-height: 88px;
+}
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #171512;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.cardIcon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.cardText {
+  font-family: var(--font-main);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: rgba(44, 41, 37, 0.8);
+  line-height: 1.3;
+}
+
+/* ── Alternância entre variantes de uma tipologia (B/C, D1/D2) ───────────── */
+.variantToggle {
+  display: flex;
+  gap: 0;
+  border: 1px solid rgba(11, 34, 22, 0.25);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.dToggle {
+  align-self: center;
+  margin-bottom: 10px;
+}
+
+.variantToggle button {
+  font-family: var(--font-main);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: rgba(44, 41, 37, 0.55);
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.variantToggle button:hover {
+  color: #0b2216;
+}
+
+.variantToggle button:active {
+  transform: scale(0.94);
+  transition: transform 0.08s ease;
+}
+
+.variantActive {
+  background: #0b2216;
+  color: #fff !important;
+}
+
+/* ── Selo de página ────────────────────────────────────────────────────── */
+.pageBadge {
+  position: absolute;
+  right: 20px;
+  bottom: 16px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #0b2216;
+  color: #fff;
+  font-family: var(--font-main);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .topBar {
+    height: 72px;
+    min-height: 72px;
+    padding: 0 16px;
+  }
+
+  .logoSmall {
+    width: 84px;
+  }
+
+  .pageTitle {
+    font-size: 10px;
+  }
+
+  .body {
+    padding: 0 14px 14px;
+    overflow-y: auto;
+  }
+
+  .page {
+    padding: 18px 16px 16px;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100%;
+  }
+
+  .leafTop,
+  .leafBottom {
+    width: 160px;
+  }
+
+  .pageHead {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .pageTitleBig {
+    font-size: 28px;
+  }
+
+  .spreadTabs {
+    gap: 14px;
+  }
+
+  .spread {
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  .column {
+    flex-direction: column;
+  }
+
+  .columnInfo {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cards {
+    width: 100%;
+    max-width: 280px;
+  }
+}

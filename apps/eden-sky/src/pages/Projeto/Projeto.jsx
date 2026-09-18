@@ -30,6 +30,11 @@ export default function Projeto() {
   return (
     <div className={styles.scene}>
 
+      {/* Linha de contorno da cunha diagonal */}
+      <svg className={styles.diagLine} viewBox="0 0 1440 810" preserveAspectRatio="none">
+        <line x1="1440" y1="178.2" x2="792" y2="810" />
+      </svg>
+
       {/* Top bar */}
       <header className={styles.topBar}>
         <img
