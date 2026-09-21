@@ -6,8 +6,8 @@ import { useTransition } from '@showcase/core';
 import ZoomableImage from '../../components/ZoomableImage/ZoomableImage';
 import styles from './Localizacao.module.css';
 
-const BRAVIA_LAT = -29.77124;
-const BRAVIA_LNG = -50.08533;
+const BRAVIA_LAT = -29.77327;
+const BRAVIA_LNG = -50.08878;
 
 const pinIcon = L.divIcon({
   className: '',
@@ -35,9 +35,11 @@ const pinIcon = L.divIcon({
       "></div>
     </div>
   `,
-  iconSize: [96, 80],
-  iconAnchor: [48, 80],
+  iconSize: [96, 59],
+  iconAnchor: [48, 55.5],
 });
+
+const GMAPS_EMBED = `https://maps.google.com/maps?q=${BRAVIA_LAT},${BRAVIA_LNG}&z=17&output=embed`;
 
 const IconClose = () => (
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
@@ -54,6 +56,7 @@ const TABS = [
 export default function Localizacao() {
   const { startTransition } = useTransition();
   const [tab, setTab] = useState('mapa');
+  const [useGmaps, setUseGmaps] = useState(false);
 
   return (
     <div className={styles.scene}>
@@ -88,20 +91,44 @@ export default function Localizacao() {
 
       <div className={styles.mapArea}>
         {tab === 'mapa' ? (
-          <MapContainer
-            key={`${BRAVIA_LAT},${BRAVIA_LNG}`}
-            center={[BRAVIA_LAT, BRAVIA_LNG]}
-            zoom={14}
-            style={{ width: '100%', height: '100%' }}
-            zoomControl={false}
-            attributionControl={false}
-            zoomAnimation={false}
-            markerZoomAnimation={false}
-            fadeAnimation={false}
-          >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker position={[BRAVIA_LAT, BRAVIA_LNG]} icon={pinIcon} />
-          </MapContainer>
+          <>
+            {useGmaps ? (
+              <iframe
+                src={GMAPS_EMBED}
+                width="100%"
+                height="100%"
+                style={{ border: 'none', display: 'block' }}
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Localização Brávia"
+              />
+            ) : (
+              <MapContainer
+                key={`${BRAVIA_LAT},${BRAVIA_LNG}`}
+                center={[BRAVIA_LAT, BRAVIA_LNG]}
+                zoom={14}
+                style={{ width: '100%', height: '100%' }}
+                zoomControl={false}
+                attributionControl={false}
+                zoomAnimation={false}
+                markerZoomAnimation={false}
+                fadeAnimation={false}
+              >
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                <Marker position={[BRAVIA_LAT, BRAVIA_LNG]} icon={pinIcon} />
+              </MapContainer>
+            )}
+
+            <button
+              className={`${styles.gmapsToggle} ${useGmaps ? styles.gmapsToggleActive : ''}`}
+              onClick={() => setUseGmaps(v => !v)}
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+              {useGmaps ? 'Mapa padrão' : 'Google Maps'}
+            </button>
+          </>
         ) : (
           <ZoomableImage src="/img/localizacao-mapa-regional.png" alt="Localização Regional Brávia" />
         )}
