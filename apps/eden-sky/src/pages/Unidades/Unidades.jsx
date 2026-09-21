@@ -146,7 +146,7 @@ export default function Unidades() {
       {/* Top bar */}
       <header className={styles.topBar}>
         <img
-          src="/img/logo.svg"
+          src="/img/logo.webp"
           className={styles.logoSmall}
           alt="Eden Sky"
           draggable={false}

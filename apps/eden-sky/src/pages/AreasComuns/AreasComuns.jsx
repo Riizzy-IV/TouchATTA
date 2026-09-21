@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { useTransition } from '@showcase/core';
 import NavDrawer, { useNavDrawer } from '../../components/NavDrawer/NavDrawer';
@@ -12,42 +12,49 @@ const IconClose = () => (
 );
 
 const AREAS = [
-  { slug: 'piscina',       label: 'Piscina' },
-  { slug: 'parquinho',     label: 'Parquinho' },
-  { slug: 'academia',      label: 'Academia' },
-  { slug: 'gourmet',       label: 'Espaço Gourmet' },
-  { slug: 'jogos',         label: 'Salão de Jogos' },
-  { slug: 'poliesportiva', label: 'Quadra Poliesportiva' },
-  { slug: 'pilates',       label: 'Espaço Pilates' },
-  { slug: 'salao-festas',  label: 'Salão de Festas' },
-  { slug: 'spa',           label: 'SPA' },
-  { slug: 'lobby',         label: 'Lobby' },
-  { slug: 'delivery',      label: 'Delivery Room' },
-  { slug: 'salao-beleza',  label: 'Salão de Beleza' },
+  { slug: 'piscina',       label: 'Piscina',              description: 'Piscina adulto e infantil para o dia a dia.' },
+  { slug: 'parquinho',     label: 'Parquinho',            description: 'Espaço de brincar para as crianças.' },
+  { slug: 'academia',      label: 'Academia',             description: 'Espaço fitness completo, com vista.' },
+  { slug: 'gourmet',       label: 'Espaço Gourmet',       description: 'Ambiente para receber amigos e família.' },
+  { slug: 'jogos',         label: 'Salão de Jogos',       description: 'Diversão e convivência para todas as idades.' },
+  { slug: 'poliesportiva', label: 'Quadra Poliesportiva', description: 'Quadra para diversas modalidades esportivas.' },
+  { slug: 'pilates',       label: 'Espaço Pilates',       description: 'Bem-estar e equilíbrio dentro de casa.' },
+  { slug: 'salao-festas',  label: 'Salão de Festas',      description: 'Espaço de eventos para celebrar com conforto.' },
+  { slug: 'spa',           label: 'SPA',                  description: 'Relaxamento e cuidado, com crioterapia.' },
+  { slug: 'lobby',         label: 'Lobby',                description: 'Recepção elegante, mobiliada e decorada.' },
+  { slug: 'delivery',      label: 'Delivery Room',        description: 'Espaço dedicado ao recebimento de encomendas.' },
+  { slug: 'salao-beleza',  label: 'Salão de Beleza',      description: 'Cuidados de beleza sem sair do condomínio.' },
 ];
+
+const src = (slug) => `/img/areas/${slug}.avif`;
 
 export default function AreasComuns() {
   const { startTransition } = useTransition();
   const { drawerRef, open: openDrawer, close: closeDrawer } = useNavDrawer();
-  const [lightbox, setLightbox] = useState(null);
+  const [index, setIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState(null);
 
-  const contentRef     = useRef(null);
-  const lightboxRef    = useRef(null);
-  const lightboxImgRef = useRef(null);
+  const contentRef = useRef(null);
+  const indexRef   = useRef(0);
 
   useEffect(() => {
     gsap.fromTo(contentRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' });
   }, []);
 
-  useEffect(() => {
-    if (!lightbox) return;
-    gsap.fromTo(lightboxRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' });
-    gsap.fromTo(lightboxImgRef.current, { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out' });
+  const select = useCallback((i) => {
+    if (i === indexRef.current) return;
+    const img = new Image();
+    const commit = () => {
+      setPrevIndex(indexRef.current);
+      indexRef.current = i;
+      setIndex(i);
+    };
+    img.onload = commit;
+    img.onerror = commit;
+    img.src = src(AREAS[i].slug);
+  }, []);
 
-    const onKey = (e) => { if (e.key === 'Escape') setLightbox(null); };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [lightbox]);
+  const current = AREAS[index];
 
   return (
     <div className={styles.scene}>
@@ -56,7 +63,7 @@ export default function AreasComuns() {
         {/* Top bar */}
         <header className={styles.topBar}>
           <img
-            src="/img/logo.svg"
+            src="/img/logo.webp"
             className={styles.logoSmall}
             alt="Eden Sky"
             draggable={false}
@@ -72,48 +79,40 @@ export default function AreasComuns() {
 
         <NavDrawer drawerRef={drawerRef} onClose={closeDrawer} currentRoute="/modulo/04" />
 
-        {/* Corpo */}
+        {/* Corpo: imagem em tela cheia + lista de espaços */}
         <div className={styles.body}>
-          <div className={styles.grid}>
-            {AREAS.map(area => (
-              <button
-                key={area.slug}
-                className={styles.card}
-                onClick={() => setLightbox(area)}
-              >
-                <img
-                  src={`/img/areas/${area.slug}.avif`}
-                  alt={area.label}
-                  className={styles.cardImg}
-                  draggable={false}
-                />
-                <div className={styles.cardOverlay} />
-                <span className={styles.cardLabel}>{area.label}</span>
-              </button>
-            ))}
+          {prevIndex !== null && (
+            <img key={`prev-${prevIndex}`} className={styles.heroImg} src={src(AREAS[prevIndex].slug)} alt="" draggable={false} />
+          )}
+          <img
+            key={`cur-${index}`}
+            className={`${styles.heroImg} ${prevIndex !== null ? styles.heroFade : ''}`}
+            src={src(current.slug)}
+            alt={current.label}
+            draggable={false}
+          />
+          <div className={styles.vignette} />
+
+          <div className={styles.panelWrap}>
+            <div className={styles.panel}>
+              {AREAS.map((item, i) => (
+                <button
+                  key={item.slug}
+                  className={`${styles.item} ${i === index ? styles.itemActive : ''}`}
+                  onClick={() => select(i)}
+                >
+                  <img className={styles.thumb} src={`/img/areas/thumbs/${item.slug}.avif`} alt="" draggable={false} />
+                  <span className={styles.itemText}>
+                    <span className={styles.itemTitle}>{item.label}</span>
+                    <span className={styles.itemDesc}>{item.description}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
       </div>
-
-      {/* Lightbox */}
-      {lightbox && (
-        <div className={styles.lightbox} ref={lightboxRef} onClick={() => setLightbox(null)}>
-          <button className={styles.lightboxClose} onClick={() => setLightbox(null)}>
-            <IconClose />
-          </button>
-          <figure className={styles.lightboxFigure} onClick={(e) => e.stopPropagation()}>
-            <img
-              ref={lightboxImgRef}
-              src={`/img/areas/${lightbox.slug}.avif`}
-              alt={lightbox.label}
-              className={styles.lightboxImg}
-              draggable={false}
-            />
-            <figcaption className={styles.lightboxCaption}>{lightbox.label}</figcaption>
-          </figure>
-        </div>
-      )}
     </div>
   );
 }

@@ -327,7 +327,8 @@
 @media (max-width: 768px) {
 
   .bg,
-  .leafWrap {
+  .leafWrap,
+  .badge {
     display: none;
   }
 
@@ -337,8 +338,9 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 30% center;
+    object-position: center;
     mix-blend-mode: normal;
+    z-index: 1;
   }
 
   .badge {
@@ -378,10 +380,10 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 6px 14px;
-    padding: 10px 10px;
+    gap: 6px 0;
+    padding: 22px 4px calc(30px + env(safe-area-inset-bottom, 0px));
   }
 
   .navItem {

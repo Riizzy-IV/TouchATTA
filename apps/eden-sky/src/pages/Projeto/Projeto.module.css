@@ -165,17 +165,36 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   .topBar {
-    height: 72px;
+    height: auto;
     min-height: 72px;
-    padding: 0 16px;
+    padding: 10px 16px 8px;
+    flex-wrap: wrap;
+    row-gap: 8px;
   }
 
   .logoSmall {
     width: 64px;
   }
 
+  /* Abas numa linha própria, rolável na horizontal */
   .topTabs {
+    order: 3;
+    flex: 0 0 100%;
+    justify-content: flex-start;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .topTabs::-webkit-scrollbar {
     display: none;
+  }
+
+  .topTab {
+    flex-shrink: 0;
+    padding: 9px 14px;
+    font-size: 10px;
   }
 
   .emBreveSubtitle {

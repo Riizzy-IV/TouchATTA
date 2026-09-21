@@ -1,0 +1,238 @@
+.wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.root {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  background: #0b2216;
+  overflow: hidden;
+}
+
+/* Mãozinha "role para ver mais" — só faz sentido onde a página rola (mobile) */
+.dica {
+  display: none;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 20;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+  transform: scaleX(-1);
+  filter: brightness(0) invert(1);
+  transition: opacity 0.3s ease;
+}
+
+.dicaOculta {
+  opacity: 0;
+}
+
+/* ── Foto ────────────────────────────────────────────────────────────────── */
+.foto {
+  position: relative;
+  flex: 0 0 36%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fotoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 100%;
+  display: block;
+}
+
+.fotoBarra {
+  position: absolute;
+  top: 34px;
+  right: 0;
+  z-index: 2;
+  width: 8px;
+  height: 66%;
+  display: block;
+  background: linear-gradient(to bottom, #b6905a, #e8d09a 45%, #b6905a);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Painel verde ────────────────────────────────────────────────────────── */
+.painel {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 30% 20%, #123322 0%, #0b2216 60%, #08180f 100%);
+}
+
+.folhaA,
+.folhaB {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+.folhaA {
+  right: -60px;
+  bottom: -110px;
+  width: 300px;
+  transform: rotate(8deg);
+}
+
+.folhaB {
+  right: -170px;
+  bottom: -130px;
+  width: 340px;
+  transform: scaleX(-1);
+  opacity: 0.95;
+}
+
+.colunas {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1fr;
+  gap: 34px;
+  padding: 26px 44px 26px 64px;
+}
+
+.col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Título ──────────────────────────────────────────────────────────────── */
+.titulo {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 98px;
+  line-height: 0.9;
+  color: #f0c9a4;
+  margin: 4px 0 0;
+}
+
+.subtitulo {
+  font-family: var(--font-main);
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: 1.5px;
+  color: rgba(244, 239, 228, 0.55);
+  margin: 4px 0 0;
+}
+
+.linhaOuro {
+  display: block;
+  width: 190px;
+  height: 5px;
+  margin: 18px 0 26px -20px;
+  background: linear-gradient(to right, rgba(201, 163, 92, 0.15), #e2c88f);
+  border-radius: 3px;
+}
+
+/* ── Blocos de texto ─────────────────────────────────────────────────────── */
+.bloco {
+  margin-bottom: 20px;
+}
+
+.blocoTitulo {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.2px;
+  color: #f4efe4;
+  margin: 0 0 5px;
+  line-height: 1.2;
+}
+
+.blocoTexto p {
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(244, 239, 228, 0.68);
+  margin: 0;
+}
+
+.col:nth-child(2) .bloco:last-child .blocoTexto p {
+  line-height: 1.32;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .dica {
+    display: block;
+  }
+
+  .root {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .foto {
+    flex: 0 0 210px;
+    width: 100%;
+    height: 210px;
+  }
+
+  .fotoImg {
+    object-position: 50% 45%;
+  }
+
+  .fotoBarra {
+    display: none;
+  }
+
+  .painel {
+    flex: none;
+    height: auto;
+    overflow: visible;
+  }
+
+  .colunas {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 22px 22px 150px;
+    height: auto;
+  }
+
+  .titulo {
+    font-size: 64px;
+  }
+
+  .subtitulo {
+    font-size: 19px;
+  }
+
+  .blocoTitulo {
+    font-size: 17px;
+  }
+
+  .blocoTexto p {
+    font-size: 13.5px;
+  }
+
+  .linhaOuro {
+    margin-left: 0;
+    width: 140px;
+    margin-bottom: 20px;
+  }
+
+  .folhaA {
+    width: 190px;
+    right: -30px;
+    bottom: -60px;
+  }
+
+  .folhaB {
+    width: 210px;
+    right: -100px;
+    bottom: -70px;
+  }
+}

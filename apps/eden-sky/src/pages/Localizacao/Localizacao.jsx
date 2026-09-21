@@ -21,7 +21,7 @@ const logoPinIcon = L.divIcon({
         box-shadow:0 4px 24px rgba(0,0,0,0.25);
         border-radius:4px;
       ">
-        <img src="/img/logo.svg" alt="Eden Sky" style="width:70px;height:auto;display:block;" />
+        <img src="/img/logo.webp" alt="Eden Sky" style="width:70px;height:auto;display:block;" />
       </div>
       <div style="
         width:0;height:0;
@@ -106,7 +106,7 @@ export default function Localizacao() {
         {/* Top bar */}
         <header className={styles.topBar}>
           <img
-            src="/img/logo.svg"
+            src="/img/logo.webp"
             className={styles.logoSmall}
             alt="Eden Sky"
             draggable={false}

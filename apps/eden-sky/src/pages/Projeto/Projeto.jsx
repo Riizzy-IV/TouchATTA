@@ -3,6 +3,7 @@ import { useTransition } from '@showcase/core';
 import NavDrawer, { useNavDrawer } from '../../components/NavDrawer/NavDrawer';
 import Implantacao from '../../components/Implantacao/Implantacao';
 import FachadaInterativa from '../../components/FachadaInterativa/FachadaInterativa';
+import FichaTecnica from '../../components/FichaTecnica/FichaTecnica';
 import styles from './Projeto.module.css';
 
 const IconClose = () => (
@@ -13,11 +14,10 @@ const IconClose = () => (
 );
 
 const TOP_TABS = [
-  { id: 'ficha-tecnica',      label: 'Ficha Técnica' },
+  { id: 'ficha-tecnica',      label: 'Sobre' },
   { id: 'implantacao',        label: 'Implantação' },
   { id: 'fachada-interativa', label: 'Fachada Interativa' },
   { id: 'orientacao-solar',   label: 'Orientação Solar' },
-  { id: 'diferenciais',       label: 'Diferenciais' },
 ];
 
 export default function Projeto() {
@@ -38,7 +38,7 @@ export default function Projeto() {
       {/* Top bar */}
       <header className={styles.topBar}>
         <img
-          src="/img/logo.svg"
+          src="/img/logo.webp"
           className={styles.logoSmall}
           alt="Eden Sky"
           draggable={false}
@@ -64,7 +64,9 @@ export default function Projeto() {
 
       {/* Corpo */}
       <div className={styles.body}>
-        {activeTab === 'implantacao' ? (
+        {activeTab === 'ficha-tecnica' ? (
+          <FichaTecnica />
+        ) : activeTab === 'implantacao' ? (
           <Implantacao />
         ) : activeTab === 'fachada-interativa' ? (
           <FachadaInterativa />

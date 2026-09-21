@@ -47,7 +47,7 @@ export default function Splash({ onStart }) {
         <p className={styles.eyebrow} ref={logoRef}>Seja bem-vindo ao Atta Touch</p>
 
         <div className={styles.brand} ref={btnRef}>
-          <img className={styles.logo} src="/img/logo.svg" alt="Eden Sky" />
+          <img className={styles.logo} src="/img/logo.webp" alt="Eden Sky" />
         </div>
 
         <button className={styles.btn} onClick={handleStart}>

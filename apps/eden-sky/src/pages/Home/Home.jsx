@@ -14,7 +14,7 @@ const NAV_ITEMS = [
     id: '01',
     label: 'VÍDEO',
     isVideo: true,
-    videoSrc: null,
+    videoSrc: '/videos/eden-sky-video.mp4',
     render: () => (
       <>
         <NavCircle />
@@ -124,7 +124,10 @@ export default function Home() {
       <img className={styles.goldCorner} src="/img/dourado.jpg" alt="" />
 
       {/* Torre — fachada noturna, céu preto do render "estourado" via blend screen */}
-      <img ref={towerRef} className={styles.tower} src="/img/home-building.webp" alt="Eden Sky" />
+      <picture>
+        <source media="(max-width: 768px)" srcSet="/img/home-bg-mobile.webp" />
+        <img ref={towerRef} className={styles.tower} src="/img/home-building.webp" alt="Eden Sky" />
+      </picture>
 
       {/* Folhagem decorativa sobre o topo do medalhão */}
       <div ref={leafRef} className={styles.leafWrap}>
