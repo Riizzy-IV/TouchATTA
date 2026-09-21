@@ -12,7 +12,10 @@ const IconClose = () => (
 const TOP_TABS = [
   { id: 'ficha', label: 'Ficha Técnica', enabled: true },
   { id: 'implantacao', label: 'Implantação', enabled: true },
+  { id: 'interativo', label: 'Interativo', enabled: true },
 ];
+
+const EMBED_3D = 'https://editor.atta3d.com.br/projetos/bravia-marina-e-beach-club/embed?embedMode=inline';
 
 const PANEL_TABS = [
   { id: 'empreendimento', label: 'Empreendimento' },
@@ -67,16 +70,19 @@ export default function Projeto() {
   const { startTransition } = useTransition();
   const [topTab, setTopTab] = useState('ficha');
   const [panelTab, setPanelTab] = useState('empreendimento');
+  const isInterativo = topTab === 'interativo';
 
   return (
     <div className={styles.scene}>
-      <div className={`${styles.hero} ${topTab === 'implantacao' ? styles.heroWithPanel : ''}`}>
-        <img
-          src={topTab === 'implantacao' ? '/img/bravia-implantacao.jpg' : '/img/projeto-hero.jpg'}
-          alt=""
-          className={`${styles.heroImg} ${topTab === 'implantacao' ? styles.heroImgContain : ''}`}
-        />
-      </div>
+      {!isInterativo && (
+        <div className={`${styles.hero} ${topTab === 'implantacao' ? styles.heroWithPanel : ''}`}>
+          <img
+            src={topTab === 'implantacao' ? '/img/bravia-implantacao.jpg' : '/img/projeto-hero.jpg'}
+            alt=""
+            className={`${styles.heroImg} ${topTab === 'implantacao' ? styles.heroImgContain : ''}`}
+          />
+        </div>
+      )}
 
       <header className={styles.topBar}>
         <div className={styles.brand} onClick={() => startTransition('/', '')}>
@@ -104,7 +110,20 @@ export default function Projeto() {
         </button>
       </header>
 
-      {topTab === 'implantacao' ? (
+      {isInterativo ? (
+        <div className={styles.embed}>
+          <iframe
+            src={EMBED_3D}
+            title="Experiencia 3D - BRAVIA Marina e Beach Club"
+            className={styles.embedFrame}
+            allow="fullscreen *; autoplay *; screen-wake-lock *; geolocation *; accelerometer *; gyroscope *; xr-spatial-tracking *; vr *; web-share *;"
+            allowFullScreen
+            webkitallowfullscreen="true"
+            mozallowfullscreen="true"
+            loading="lazy"
+          />
+        </div>
+      ) : topTab === 'implantacao' ? (
         <div className={styles.panel}>
           <div className={styles.panelBody}>
             <h3 className={styles.blockTitle}>Legenda</h3>
@@ -138,7 +157,7 @@ export default function Projeto() {
               <h3 className={styles.blockTitle}>Dados do empreendimento</h3>
 
               <p className={styles.fieldLabel}>Projeto</p>
-              <p className={styles.fieldValue}>Marina Velas Blancas</p>
+              <p className={styles.fieldValue}>Bravia Marina &amp; Beach Club</p>
 
               <p className={styles.fieldLabel}>Descrição</p>
               <p className={styles.fieldValue}>Condomínio Horizontal Fechado de Lotes</p>
@@ -148,7 +167,7 @@ export default function Projeto() {
               <p className={styles.fieldSub}>Matrícula 20.385</p>
 
               <p className={styles.fieldLabel}>Proprietário e incorporadora</p>
-              <p className={styles.fieldValue}>Stier Empreendimentos Imobiliários Ltda</p>
+              <p className={styles.fieldValue}>Amis incorporadora e urbanizadora</p>
             </>
           )}
 
