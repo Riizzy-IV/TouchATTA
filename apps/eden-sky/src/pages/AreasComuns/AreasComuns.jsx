@@ -21,7 +21,7 @@ const AREAS = [
   { slug: 'pilates',       label: 'Espaço Pilates',       description: 'Bem-estar e equilíbrio dentro de casa.' },
   { slug: 'salao-festas',  label: 'Salão de Festas',      description: 'Espaço de eventos para celebrar com conforto.' },
   { slug: 'spa',           label: 'SPA',                  description: 'Relaxamento e cuidado, com crioterapia.' },
-  { slug: 'lobby',         label: 'Lobby',                description: 'Recepção elegante, mobiliada e decorada.' },
+  { slug: 'lobby',         label: 'Lobby da Garagem',     description: 'Hall de acesso da garagem, mobiliado e decorado.' },
   { slug: 'delivery',      label: 'Delivery Room',        description: 'Espaço dedicado ao recebimento de encomendas.' },
   { slug: 'salao-beleza',  label: 'Salão de Beleza',      description: 'Cuidados de beleza sem sair do condomínio.' },
 ];

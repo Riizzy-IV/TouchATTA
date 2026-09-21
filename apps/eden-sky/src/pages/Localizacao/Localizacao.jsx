@@ -7,8 +7,8 @@ import { useTransition } from '@showcase/core';
 import NavDrawer, { useNavDrawer } from '../../components/NavDrawer/NavDrawer';
 import styles from './Localizacao.module.css';
 
-const EDEN_LAT = -14.8727456;
-const EDEN_LNG = -40.8144586;
+const EDEN_LAT = -14.87266;
+const EDEN_LNG = -40.81473;
 
 const logoPinIcon = L.divIcon({
   className: '',
