@@ -29,6 +29,9 @@
   border-radius: 4px;
   box-shadow: 0 12px 48px rgba(44, 41, 37, 0.18);
   user-select: none;
+  /* O flicker de troca anima opacity; sem isso o navegador teria que
+     repintar a sombra desfocada a cada passo da animação. */
+  will-change: opacity;
 }
 
 /* ── Seletor de tipologias ─────────────────────────────────────────────────── */

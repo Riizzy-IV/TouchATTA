@@ -17,6 +17,15 @@ export default function FachadaInterativa() {
   const wrapperRef = useRef(null);
   const imageRef   = useRef(null);
 
+  // Pré-carrega as 7 fotos assim que a aba abre, pra trocar de tipologia sem
+  // esperar download + decode (isso que travava a troca em aparelhos mais fracos).
+  useEffect(() => {
+    TYPES.forEach(t => {
+      const img = new Image();
+      img.src = `/img/fachada-interativa/${t.id}.avif`;
+    });
+  }, []);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
