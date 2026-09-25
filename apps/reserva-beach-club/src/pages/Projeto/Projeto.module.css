@@ -212,14 +212,53 @@
    MOBILE  (≤ 768px)
    ═══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
+  /* cabeçalho em 2 linhas: logo + fechar em cima, abas rolando embaixo */
   .topBar {
-    height: 72px;
-    min-height: 72px;
-    padding: 0 16px;
+    height: auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "logo close"
+      "tabs tabs";
+    align-items: center;
+    row-gap: 12px;
+    padding: 14px 16px 14px;
   }
 
   .logoSmall {
+    grid-area: logo;
+    justify-self: start;
     width: 44px;
+  }
+
+  .closeBtn {
+    grid-area: close;
+    width: 44px;
+    height: 44px;
+  }
+
+  .topTabs {
+    grid-area: tabs;
+    flex: none;
+    min-width: 0;
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 2px 16px 4px;
+    margin: 0 -16px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .topTabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .topTab {
+    flex: 0 0 auto;
+    padding: 10px 16px;
+    font-size: 10.5px;
   }
 
   .pageTitle {

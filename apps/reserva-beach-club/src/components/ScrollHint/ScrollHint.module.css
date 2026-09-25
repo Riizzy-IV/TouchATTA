@@ -1,0 +1,24 @@
+/* Mãozinha "role para ver mais" — só faz sentido onde a página rola (mobile) */
+.dica {
+  display: none;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 20;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+  transform: scaleX(-1);
+  filter: brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+  transition: opacity 0.3s ease;
+}
+
+.oculta {
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .dica {
+    display: block;
+  }
+}

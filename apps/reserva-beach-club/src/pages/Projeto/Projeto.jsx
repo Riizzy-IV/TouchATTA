@@ -3,6 +3,7 @@ import { useTransition } from '@showcase/core';
 import NavDrawer, { useNavDrawer } from '../../components/NavDrawer/NavDrawer';
 import Implantacao from '../../components/Implantacao/Implantacao';
 import OrientacaoSolar from '../../components/OrientacaoSolar/OrientacaoSolar';
+import ScrollHint from '../../components/ScrollHint/ScrollHint';
 import styles from './Projeto.module.css';
 
 const IconClose = () => (
@@ -149,6 +150,7 @@ export default function Projeto() {
           </div>
         </div>
         )}
+        <ScrollHint resetKey={activeTab} />
       </div>
     </div>
   );

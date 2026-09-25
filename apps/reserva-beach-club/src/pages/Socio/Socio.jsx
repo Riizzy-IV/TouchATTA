@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useTransition } from '@showcase/core';
 import NavDrawer, { useNavDrawer } from '../../components/NavDrawer/NavDrawer';
+import ScrollHint from '../../components/ScrollHint/ScrollHint';
 import styles from './Socio.module.css';
 
 const IconClose = () => (
@@ -313,9 +314,11 @@ function AbaProjecao() {
   const barsRef = useRef(null);
 
   useEffect(() => {
+    // desktop: barras crescem de baixo p/ cima; mobile (barras horizontais): da esquerda p/ direita
+    const horizontal = window.innerWidth <= 768;
     const ctx = gsap.context(() => {
       gsap.from(`.${styles.barra}`, {
-        scaleY: 0, transformOrigin: 'bottom center',
+        ...(horizontal ? { scaleX: 0, transformOrigin: 'left center' } : { scaleY: 0, transformOrigin: 'bottom center' }),
         duration: 0.9, stagger: 0.07, ease: 'power3.out', delay: 0.15,
       });
       gsap.from(`.${styles.esgotado}`, {
@@ -341,7 +344,7 @@ function AbaProjecao() {
             <div className={styles.areaBarra}>
               <div
                 className={`${styles.barra} ${l.tipo === 'Fundador' ? styles.barraFundador : ''}`}
-                style={{ height: `${l.h}%` }}
+                style={{ '--h': `${l.h}%` }}
               >
                 {l.esgotado && <span className={styles.esgotado}>Esgotado</span>}
               </div>
@@ -405,6 +408,7 @@ export default function Socio() {
         <div key={activeTab} className={styles.abaWrap}>
           <Aba />
         </div>
+        <ScrollHint resetKey={activeTab} />
       </div>
     </div>
   );
