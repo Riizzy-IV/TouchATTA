@@ -27,3 +27,6 @@ apps/eden-sky/public/img/Logo_Siver_Botanique_Sorocaba_Positivo.png
 apps/siver-botanique/public/img/BG SIVER - 2.jpg
 apps/vertice/public/360/
 apps/patio-camino/public/Panoramas Carrilo/
+
+# Reserva Beach Club: renders brutos do cliente (não usados pelo app; ficam só localmente)
+apps/reserva-beach-club/public/img/img/

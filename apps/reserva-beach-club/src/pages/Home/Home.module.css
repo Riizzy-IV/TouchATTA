@@ -1,0 +1,260 @@
+/* ── Scene ─────────────────────────────────────────────────────────────────── */
+/* Canvas de referência: 1440x810 — mesmo formato da Home do Bravia */
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #141412;
+}
+
+/* ── Painel direito — foto aérea escurecida, fica atrás da foto da esquerda ── */
+.rightPhoto {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.rightPhotoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% center;
+  display: block;
+}
+
+.rightPhotoTint {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 18, 0.62);
+}
+
+/* ── Painel esquerdo — piscina de ondas ────────────────────────────────────── */
+.leftPhoto {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 802px;
+  height: 810px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.leftPhotoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 42% center;
+  display: block;
+}
+
+.leftPhotoShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 20, 18, 0.15) 0%, rgba(20, 20, 18, 0) 35%, rgba(20, 20, 18, 0.78) 100%);
+}
+
+.leftPhotoEdge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(to bottom, #6F96D1, #a9c3e6 50%, #6F96D1);
+  box-shadow: 0 0 14px rgba(111, 150, 209, 0.45);
+}
+
+/* ── Símbolo — flutua sobre a foto ─────────────────────────────────────────── */
+.symbolWrap {
+  position: absolute;
+  left: 60px;
+  top: 56px;
+  width: 132px;
+  z-index: 2;
+}
+
+.symbol {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.35));
+}
+
+/* ── Nome ──────────────────────────────────────────────────────────────────── */
+.wordmark {
+  position: absolute;
+  left: 60px;
+  bottom: 62px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.wordmarkMain {
+  margin: 0;
+  font-family: var(--font-main, 'Manrope', sans-serif);
+  font-weight: 700;
+  font-size: 92px;
+  line-height: 1;
+  letter-spacing: 12px;
+  color: #fff;
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+
+.wordmarkSub {
+  margin: 8px 0 0 4px;
+  font-family: var(--font-main, 'Manrope', sans-serif);
+  font-weight: 400;
+  font-size: 30px;
+  letter-spacing: 15px;
+  color: #a9c3e6;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Menu lateral ──────────────────────────────────────────────────────────── */
+.nav {
+  position: absolute;
+  right: 46px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.navBtn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 24px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: not-allowed;
+}
+
+.navLabel {
+  font-family: var(--font-main, 'Manrope', sans-serif);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  color: #fff;
+  transition: letter-spacing 0.25s ease;
+  white-space: nowrap;
+}
+
+.navIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 97px;
+  height: 97px;
+  border-radius: 50%;
+  background: #6F96D1;
+  border: 3px solid #fff;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.navIcon > svg {
+  width: 46%;
+  height: 46%;
+}
+
+.navBtnActive {
+  cursor: pointer;
+}
+
+.navBtnActive:hover .navIcon {
+  transform: scale(1.06);
+  background: #86a9dc;
+}
+
+.navBtnActive:active .navIcon {
+  transform: scale(0.92);
+  transition: transform 0.08s ease;
+}
+
+.navBtnActive:hover .navLabel,
+.navBtnActive:active .navLabel {
+  letter-spacing: 3.6px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .leftPhoto {
+    width: 100%;
+    height: 100%;
+  }
+
+  .leftPhotoEdge {
+    display: none;
+  }
+
+  .rightPhoto {
+    display: none;
+  }
+
+  .symbolWrap {
+    left: 50%;
+    top: 40px;
+    width: 96px;
+    transform: translateX(-50%);
+  }
+
+  .wordmark {
+    left: 0;
+    right: 0;
+    bottom: 128px;
+    text-align: center;
+  }
+
+  .wordmarkMain {
+    font-size: 44px;
+    letter-spacing: 7px;
+  }
+
+  .wordmarkSub {
+    font-size: 15px;
+    letter-spacing: 8px;
+    margin-left: 0;
+  }
+
+  .nav {
+    right: auto;
+    left: 0;
+    bottom: 0;
+    top: auto;
+    transform: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 8px 18px;
+    padding: 14px 12px;
+    background: #141412;
+  }
+
+  .navBtn {
+    flex-direction: column-reverse;
+    gap: 6px;
+  }
+
+  .navIcon {
+    width: 46px;
+    height: 46px;
+    border-width: 2px;
+  }
+
+  .navLabel {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+}

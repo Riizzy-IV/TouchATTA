@@ -1,0 +1,629 @@
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #141412;
+  font-family: 'Manrope', sans-serif;
+}
+
+/* ── Top bar (mesmo padrão de Projeto) ───────────────────────────────────── */
+.topBar {
+  height: 100px;
+  min-height: 100px;
+  width: 100%;
+  background: #141412;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.logoSmall {
+  width: 56px;
+  height: auto;
+  cursor: pointer;
+}
+
+.topTabs {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.topTab {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 3px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 10px 16px;
+  white-space: nowrap;
+}
+
+.topTab:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.topTabActive {
+  background: #6F96D1 !important;
+  border-color: #6F96D1 !important;
+  color: #141412 !important;
+}
+
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-radius: 3px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.closeBtn:hover {
+  color: #fff;
+  border-color: var(--color-gold);
+}
+
+.body {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.abaWrap {
+  position: absolute;
+  inset: 0;
+  animation: entrar 0.45s ease both;
+}
+
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Painel base ─────────────────────────────────────────────────────────── */
+.painel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.bgNavy  { background: #2e405b; }
+.bgAzul  { background: #6F96D1; }
+.bgCreme { background: #f3efe9; }
+
+.centro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.duasColunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 40px 72px;
+}
+
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+.card {
+  position: relative;
+  border-radius: 28px;
+  padding: 44px 52px 48px;
+  overflow: hidden;
+}
+
+.cardNavy  { background: #2e405b; color: #fff; }
+.cardPreto {
+  background: radial-gradient(120% 90% at 20% 0%, #1c1c20 0%, #0b0b0d 65%);
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.cardTitulo {
+  font-weight: 600;
+  font-size: 34px;
+  letter-spacing: 0.3px;
+  color: #d9e4f5;
+  margin-bottom: 26px;
+}
+
+.lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lista li {
+  position: relative;
+  padding-left: 34px;
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.lista li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: #fff;
+  transform: rotate(-9deg);
+}
+
+.listaCompacta { gap: 11px; }
+.listaCompacta li { font-size: 14.5px; }
+
+.listaVermelha li::before { background: #e10a0a; }
+
+.notas {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 26px;
+  font-size: 8.5px;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.onda {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 130px;
+  height: 50px;
+}
+
+/* ── Aba: Título ─────────────────────────────────────────────────────────── */
+.tituloCentro {
+  text-align: center;
+  font-weight: 600;
+  font-size: 40px;
+  color: #fff;
+  padding-top: 44px;
+}
+
+.fitasStage {
+  position: absolute;
+  left: 50%;
+  top: 170px;
+  width: 1000px;
+  height: 440px;
+  transform: translateX(-50%);
+}
+
+.fitasSvg {
+  position: absolute;
+  left: 200px;
+  top: 0;
+  width: 600px;
+  height: 440px;
+  overflow: visible;
+}
+
+.fitaTexto {
+  position: absolute;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 12.5px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.fitaTexto strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+}
+
+.fitaTextoEsq { text-align: right; }
+
+/* ── Aba: Sócio Patrimonial ──────────────────────────────────────────────── */
+.textoCorrido {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.textoCorrido p {
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* ── Aba: Comparativo ────────────────────────────────────────────────────── */
+.comparativo {
+  gap: 48px;
+  padding: 40px 64px;
+  align-items: stretch;
+}
+
+.comparativo .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.seloMembership {
+  align-self: flex-start;
+  background: #e10a0a;
+  color: #fff;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.1;
+  padding: 6px 20px 8px;
+  margin-bottom: 26px;
+  border-radius: 6px;
+  box-shadow: 0 6px 22px rgba(225, 10, 10, 0.35);
+}
+
+/* mesma cadência do card da esquerda: itens preenchem a altura, com filete entre eles */
+.cardPreto .lista {
+  gap: 0;
+}
+
+.cardPreto .lista li {
+  padding: 9px 0 9px 36px;
+  font-size: 15.5px;
+  color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cardPreto .lista li:last-child { border-bottom: none; }
+
+.comparativo .cardNavy .lista { gap: 0; }
+
+.comparativo .cardNavy .lista li {
+  padding: 10px 0 10px 36px;
+  font-size: 15.5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comparativo .cardNavy .lista li:last-child { border-bottom: none; }
+
+.comparativo .cardNavy .lista li::before {
+  top: 50%;
+  margin-top: -1.5px;
+}
+
+.cardPreto .lista li::before {
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border-radius: 0;
+  transform: none;
+  background:
+    linear-gradient(45deg, transparent 43%, #e10a0a 43%, #e10a0a 57%, transparent 57%),
+    linear-gradient(-45deg, transparent 43%, #e10a0a 43%, #e10a0a 57%, transparent 57%);
+}
+
+/* ── Aba: Categorias ─────────────────────────────────────────────────────── */
+.categorias {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.categoria {
+  display: flex;
+  flex-direction: column;
+  padding: 56px 44px 30px;
+}
+
+.cat_individual { background: #f3efe9; color: #2e405b; }
+.cat_familiar   { background: #6F96D1; color: #fff; }
+.cat_galacticos { background: #7a2333; color: #fff; }
+
+.catTitulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 34px;
+  line-height: 1.08;
+}
+
+.catTitulo span { font-weight: 500; }
+.catTitulo strong { font-weight: 800; }
+
+.cat_galacticos .catTitulo { color: #c9a86a; letter-spacing: 1px; }
+.cat_galacticos .catTitulo span,
+.cat_galacticos .catTitulo strong { font-weight: 800; font-size: 38px; }
+
+.catSelo {
+  align-self: center;
+  margin-top: 16px;
+  padding: 6px 22px;
+  border-radius: 20px;
+  background: #cdb587;
+  color: #7a2333;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.catLista {
+  margin-top: auto;
+  margin-bottom: 26px;
+  gap: 15px;
+}
+
+.cat_individual .lista li { color: #2e405b; }
+.cat_individual .lista li::before { background: #6F96D1; }
+.cat_familiar .lista li::before { background: #f3efe9; }
+.cat_galacticos .lista li::before {
+  width: 8px;
+  height: 8px;
+  top: 0.45em;
+  left: 4px;
+  border-radius: 0;
+  background: #c9a86a;
+  transform: rotate(45deg);
+}
+.cat_galacticos .lista li { padding-left: 34px; }
+
+.categoria .notas { margin-top: 0; color: inherit; opacity: 0.7; }
+.notasVazio { min-height: 24px; }
+
+/* ── Aba: Investimento ───────────────────────────────────────────────────── */
+.cardLargo {
+  width: 1040px;
+  padding: 52px 64px 60px;
+}
+
+.investTitulo {
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 40px;
+}
+
+.investTitulo em { font-style: italic; font-weight: 700; }
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 19px;
+}
+
+.tabela th,
+.tabela td {
+  padding: 15px 24px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.tabela th:first-child,
+.tabela td:first-child { padding-left: 0; }
+
+.tabela th { font-weight: 500; }
+.tabela em { font-style: italic; font-weight: 700; }
+
+.tabela th + th,
+.tabela td + td { border-left: 2px solid rgba(255, 255, 255, 0.85); }
+
+.tabela thead tr { border-bottom: 2px solid rgba(255, 255, 255, 0.85); }
+.tabela tfoot tr { border-top: 2px solid rgba(255, 255, 255, 0.85); }
+.tabela tfoot td { height: 112px; vertical-align: top; }
+.tabela tbody td { padding-top: 12px; padding-bottom: 12px; }
+
+/* ── Aba: Projeção ───────────────────────────────────────────────────────── */
+.projecao { padding: 40px 44px 26px 74px; display: flex; flex-direction: column; }
+
+.projCabecalho {
+  position: relative;
+  z-index: 1;
+  padding-left: 96px;
+}
+
+.projTitulo {
+  display: flex;
+  flex-direction: column;
+  font-size: 38px;
+  line-height: 1.12;
+  color: #2e405b;
+}
+
+.projTitulo span { font-weight: 400; }
+.projTitulo strong { font-weight: 800; }
+
+.projDestaque {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #2e405b;
+}
+
+.projDestaque strong { font-weight: 800; }
+
+/* colchete: do centro da 1ª barra (Fundador) ao centro da última (spread) */
+.chave {
+  position: absolute;
+  left: 126px;
+  right: 96px;
+  top: 14px;
+  height: 130px;
+  border-top: 1.5px dashed rgba(46, 64, 91, 0.5);
+  border-right: 1.5px dashed rgba(46, 64, 91, 0.5);
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  pointer-events: none;
+}
+
+.chave::before {
+  content: '';
+  position: absolute;
+  left: -1.5px;
+  top: 0;
+  height: 468px;
+  border-left: 1.5px dashed rgba(46, 64, 91, 0.5);
+}
+
+.grafico {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 18px;
+  margin-top: 8px;
+  padding-top: 10px;
+  min-height: 0;
+}
+
+.colunaBarra {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.areaBarra {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  border-bottom: 2px solid #2e405b;
+  min-height: 0;
+}
+
+.barra {
+  position: relative;
+  width: 44px;
+  background: #2e405b;
+  border-radius: 3px 3px 0 0;
+}
+
+.barraFundador { background: #d3e2f7; }
+
+.esgotado {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #9b1c1c;
+  color: #fff;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.rotulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 11.5px;
+  line-height: 1.25;
+  color: #2e405b;
+}
+
+.rotulo strong { font-weight: 800; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .topBar {
+    height: 72px;
+    min-height: 72px;
+    padding: 0 16px;
+  }
+
+  .logoSmall { width: 44px; }
+
+  .topTabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 10px;
+  }
+
+  .topTabs::-webkit-scrollbar { display: none; }
+
+  .painel {
+    overflow-y: auto;
+  }
+
+  .duasColunas,
+  .comparativo {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 22px 18px 60px;
+    align-items: start;
+  }
+
+  .card { padding: 30px 26px 44px; }
+  .cardTitulo { font-size: 26px; }
+  .textoCorrido p { font-size: 15px; }
+
+  .categorias { grid-template-columns: 1fr; }
+  .categoria { padding: 36px 26px 28px; }
+  .catLista { margin-top: 26px; }
+
+  .cardLargo { width: 100%; padding: 32px 22px 40px; }
+  .investTitulo { font-size: 24px; margin-bottom: 26px; }
+  .tabela { font-size: 13px; }
+  .tabela th, .tabela td { padding: 10px 8px; }
+  .tabela tfoot td { height: 56px; }
+  .centro { align-items: flex-start; padding: 20px 14px 60px; }
+
+  .tituloCentro { font-size: 26px; padding: 26px 18px 0; }
+  .fitasStage {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    transform: none;
+    padding: 20px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .fitasSvg { display: none; }
+  .fitaTexto {
+    position: static !important;
+    width: 100%;
+    text-align: left;
+    padding-left: 14px;
+    border-left: 3px solid #c89b45;
+  }
+
+  .projecao { padding: 24px 18px 40px; overflow-x: auto; }
+  .chave { display: none; }
+  .grafico { min-width: 780px; min-height: 340px; }
+}
