@@ -17,12 +17,6 @@ const TOP_TABS = [
 
 const EMBED_3D = 'https://editor.atta3d.com.br/projetos/bravia-marina-e-beach-club/embed?embedMode=inline';
 
-const PANEL_TABS = [
-  { id: 'empreendimento', label: 'Empreendimento' },
-  { id: 'areas', label: 'Áreas' },
-  { id: 'zoneamento', label: 'Zoneamento' },
-];
-
 const AREAS = [
   { value: '499.344,24 m²', label: 'Área total do empreendimento' },
   { value: '403.923,96 m²', label: 'Área utilizada' },
@@ -69,12 +63,12 @@ const LEGEND = [
 export default function Projeto() {
   const { startTransition } = useTransition();
   const [topTab, setTopTab] = useState('ficha');
-  const [panelTab, setPanelTab] = useState('empreendimento');
   const isInterativo = topTab === 'interativo';
+  const isFicha = topTab === 'ficha';
 
   return (
     <div className={styles.scene}>
-      {!isInterativo && (
+      {!isInterativo && !isFicha && (
         <div className={`${styles.hero} ${topTab === 'implantacao' ? styles.heroWithPanel : ''}`}>
           <img
             src={topTab === 'implantacao' ? '/img/bravia-implantacao.jpg' : '/img/projeto-hero.jpg'}
@@ -138,70 +132,67 @@ export default function Projeto() {
           </div>
         </div>
       ) : (
-      <div className={styles.panel}>
-        <nav className={styles.panelTabs}>
-          {PANEL_TABS.map(t => (
-            <button
-              key={t.id}
-              className={`${styles.panelTab} ${panelTab === t.id ? styles.panelTabActive : ''}`}
-              onClick={() => setPanelTab(t.id)}
-            >
-              {t.label}
-            </button>
-          ))}
-        </nav>
+      <div className={styles.sobreRoot}>
+        <div className={styles.sobreFoto}>
+          <img src="/img/projeto-hero.jpg" alt="" className={styles.sobreFotoImg} draggable={false} />
+          <span className={styles.sobreFotoBarra} />
+        </div>
 
-        <div className={styles.panelBody}>
-          {panelTab === 'empreendimento' && (
-            <>
-              <h3 className={styles.blockTitle}>Dados do empreendimento</h3>
+        <div className={styles.sobrePainel}>
+          <div className={styles.sobreColunas}>
+            <div className={styles.sobreCol}>
+              <h2 className={styles.sobreTitulo}>Sobre</h2>
+              <p className={styles.sobreSubtitulo}>o BRAVIA MARINA</p>
+              <span className={styles.sobreLinha} />
 
-              <p className={styles.fieldLabel}>Projeto</p>
-              <p className={styles.fieldValue}>Bravia Marina &amp; Beach Club</p>
+              <div className={styles.bloco}>
+                <h3 className={styles.blocoTitulo}>Projeto</h3>
+                <p className={styles.blocoTexto}>Bravia Marina &amp; Beach Club</p>
+              </div>
+              <div className={styles.bloco}>
+                <h3 className={styles.blocoTitulo}>Descrição</h3>
+                <p className={styles.blocoTexto}>Condomínio Horizontal Fechado de Lotes</p>
+              </div>
+              <div className={styles.bloco}>
+                <h3 className={styles.blocoTitulo}>Endereço</h3>
+                <p className={styles.blocoTexto}>Estrada RS-407, s/n · Bairro Morro Alto · Maquiné/RS</p>
+                <p className={styles.blocoTextoSub}>Matrícula 20.385</p>
+              </div>
+              <div className={styles.bloco}>
+                <h3 className={styles.blocoTitulo}>Proprietário e Incorporadora</h3>
+                <p className={styles.blocoTexto}>Amis incorporadora e urbanizadora</p>
+              </div>
+            </div>
 
-              <p className={styles.fieldLabel}>Descrição</p>
-              <p className={styles.fieldValue}>Condomínio Horizontal Fechado de Lotes</p>
-
-              <p className={styles.fieldLabel}>Endereço</p>
-              <p className={styles.fieldValue}>Estrada RS-407, s/n · Bairro Morro Alto · Maquiné/RS</p>
-              <p className={styles.fieldSub}>Matrícula 20.385</p>
-
-              <p className={styles.fieldLabel}>Proprietário e incorporadora</p>
-              <p className={styles.fieldValue}>Amis incorporadora e urbanizadora</p>
-            </>
-          )}
-
-          {panelTab === 'areas' && (
-            <>
-              <h3 className={styles.blockTitle}>Dados técnicos</h3>
-              <div className={styles.statsGrid}>
+            <div className={styles.sobreCol}>
+              <div className={styles.bloco}>
+                <h3 className={styles.blocoTitulo}>Dados Técnicos</h3>
                 {AREAS.map(a => (
-                  <div key={a.label} className={styles.stat}>
-                    <span className={styles.statValue}>{a.value}</span>
-                    <span className={styles.statLabel}>{a.label}</span>
-                  </div>
+                  <p key={a.label} className={styles.blocoTexto}>
+                    <b>{a.value}</b> — {a.label}
+                  </p>
                 ))}
               </div>
-            </>
-          )}
+            </div>
 
-          {panelTab === 'zoneamento' && (
-            <>
-              <h3 className={styles.blockTitle}>Zoneamento</h3>
-              <p className={styles.paragraph}>
-                A área do empreendimento encontra-se na ZEU — Zona de Expansão Urbana de Maquiné.
-                Em referência à Estruturação Espacial do Planejamento, abrange parcialmente a Zona
-                Mista 1 — ZM1 (200 m perpendiculares à ERS-407), e Área Predominantemente
-                Residencial — APR (a partir de 200 m perpendiculares à ERS-407), onde a atividade
-                é aceita.
-              </p>
-              <p className={styles.paragraph}>
-                Fica mantida externa e sem nenhum tipo de intervenção uma parcela nos fundos da
-                área a oeste, além de 0,9341 ha destinados à doação para criação de vias
-                municipais.
-              </p>
-            </>
-          )}
+            <div className={styles.sobreCol}>
+              <div className={styles.bloco}>
+                <h3 className={styles.blocoTitulo}>Zoneamento</h3>
+                <p className={styles.blocoTexto}>
+                  A área do empreendimento encontra-se na ZEU — Zona de Expansão Urbana de Maquiné.
+                  Em referência à Estruturação Espacial do Planejamento, abrange parcialmente a Zona
+                  Mista 1 — ZM1 (200 m perpendiculares à ERS-407), e Área Predominantemente
+                  Residencial — APR (a partir de 200 m perpendiculares à ERS-407), onde a atividade
+                  é aceita.
+                </p>
+                <p className={styles.blocoTexto}>
+                  Fica mantida externa e sem nenhum tipo de intervenção uma parcela nos fundos da
+                  área a oeste, além de 0,9341 ha destinados à doação para criação de vias
+                  municipais.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       )}

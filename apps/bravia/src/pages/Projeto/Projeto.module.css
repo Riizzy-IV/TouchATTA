@@ -177,37 +177,6 @@
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
 }
 
-.panelTabs {
-  flex-shrink: 0;
-  display: flex;
-  gap: 6px;
-  padding: 18px 20px 0;
-}
-
-.panelTab {
-  background: rgba(229, 226, 221, 0.05);
-  border: 1px solid rgba(229, 226, 221, 0.12);
-  border-radius: 4px;
-  padding: 10px 14px;
-  font-family: var(--font-main);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: rgba(229, 226, 221, 0.55);
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-  flex: 1;
-}
-
-.panelTab:hover { color: rgba(229, 226, 221, 0.85); }
-
-.panelTabActive {
-  background: rgba(229, 226, 221, 0.1);
-  border-color: rgba(159, 151, 132, 0.5);
-  color: #fff;
-}
-
 .panelBody {
   flex: 1;
   min-height: 0;
@@ -227,65 +196,124 @@
   margin: 0 0 18px;
 }
 
-.fieldLabel {
-  font-family: var(--font-main);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1.3px;
-  text-transform: uppercase;
-  color: rgba(229, 226, 221, 0.4);
-  margin: 16px 0 4px;
+/* ── Sobre (ficha técnica) — foto + painel de colunas ─────────────────────── */
+.sobreRoot {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  background: #0A192C;
+  overflow: hidden;
 }
 
-.fieldLabel:first-of-type { margin-top: 0; }
-
-.fieldValue {
-  font-family: var(--font-main-normal);
-  font-size: 14px;
-  color: #fff;
-  margin: 0;
-  line-height: 1.4;
+.sobreFoto {
+  position: relative;
+  flex: 0 0 36%;
+  height: 100%;
+  overflow: hidden;
 }
 
-.fieldSub {
-  font-family: var(--font-main-normal);
-  font-size: 12px;
-  color: rgba(229, 226, 221, 0.5);
-  margin: 2px 0 0;
+.sobreFotoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+  display: block;
 }
 
-/* ── Stats grid ────────────────────────────────────────────────────────────── */
-.statsGrid {
+.sobreFotoBarra {
+  position: absolute;
+  top: 34px;
+  right: 0;
+  z-index: 2;
+  width: 8px;
+  height: 66%;
+  display: block;
+  background: linear-gradient(to bottom, #9F9784, #cfc6ae 45%, #9F9784);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.sobrePainel {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;
+  background: radial-gradient(120% 90% at 30% 20%, #10233b 0%, #0A192C 60%, #071322 100%);
+}
+
+.sobreColunas {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: rgba(229, 226, 221, 0.1);
-  border: 1px solid rgba(229, 226, 221, 0.1);
+  grid-template-columns: 1.05fr 1fr 1fr;
+  gap: 34px;
+  padding: 76px 44px 26px 64px;
 }
 
-.stat {
+.sobreCol {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  background: rgba(8, 20, 36, 0.9);
-  padding: 16px 14px;
 }
 
-.statValue {
-  font-family: var(--font-main-normal);
-  font-size: 16px;
-  font-weight: 500;
-  color: #fff;
-}
-
-.statLabel {
+.sobreTitulo {
   font-family: var(--font-main);
-  font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
+  font-size: 58px;
+  line-height: 1;
   color: #9F9784;
-  line-height: 1.4;
+  margin: 4px 0 0;
+}
+
+.sobreSubtitulo {
+  font-family: var(--font-main);
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  color: rgba(229, 226, 221, 0.55);
+  margin: 4px 0 0;
+}
+
+.sobreLinha {
+  display: block;
+  width: 190px;
+  height: 5px;
+  margin: 18px 0 26px -20px;
+  background: linear-gradient(to right, rgba(159, 151, 132, 0.15), #cfc6ae);
+  border-radius: 3px;
+}
+
+.bloco { margin-bottom: 20px; }
+
+.blocoTitulo {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  color: #fff;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+.blocoTexto {
+  font-family: var(--font-main-normal);
+  font-weight: 400;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(229, 226, 221, 0.7);
+  margin: 0 0 4px;
+}
+
+.blocoTexto b {
+  color: #fff;
+  font-weight: 600;
+}
+
+.blocoTextoSub {
+  font-family: var(--font-main-normal);
+  font-size: 12px;
+  color: rgba(229, 226, 221, 0.45);
+  margin: 2px 0 0;
 }
 
 /* ── Implantação legend ────────────────────────────────────────────────────── */
@@ -381,5 +409,51 @@
     bottom: 62%;
     left: 16px;
     height: auto;
+  }
+
+  .sobreRoot {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .sobreFoto {
+    flex: 0 0 180px;
+    width: 100%;
+    height: 180px;
+  }
+
+  .sobreFotoImg {
+    object-position: 50% 35%;
+  }
+
+  .sobreFotoBarra {
+    display: none;
+  }
+
+  .sobrePainel {
+    flex: none;
+    height: auto;
+    overflow: visible;
+  }
+
+  .sobreColunas {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 22px 22px 60px;
+    min-height: 0;
+  }
+
+  .sobreTitulo {
+    font-size: 40px;
+  }
+
+  .sobreSubtitulo {
+    font-size: 16px;
+  }
+
+  .sobreLinha {
+    margin-left: 0;
+    width: 140px;
+    margin-bottom: 20px;
   }
 }
